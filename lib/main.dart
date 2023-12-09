@@ -1,4 +1,5 @@
 import 'package:figma/Signup_page.dart';
+import 'package:figma/signin_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue
       ),
-      home: const SignUpPage()
+      home: const SignInPage()
     );
   }
 }

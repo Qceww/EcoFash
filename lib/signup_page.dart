@@ -11,73 +11,125 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          color: Colors.red,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Center(
           child: Column(
             children: [
-              const SizedBox(
-                width: double.infinity,
-                height: 70,
-              ),
-              Container(
-                color: Colors.white,
-                child: Center(
-                  child: Text(
-                    "EcoFash",
-                    style: GoogleFonts.zenAntique(
-                      textStyle: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 30,
-                      ),
-                    ),
+              const SizedBox(height: 50),
+
+              //Logo
+              Text(
+                "EcoFash",
+                style: GoogleFonts.zenAntique(
+                  textStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 30,
                   ),
                 ),
               ),
-              const SizedBox(
-                width: double.infinity,
-                height: 70,
+
+              const SizedBox(height: 50),
+
+              //Sign Up
+              Text(
+                "Sign Up",
+                style: GoogleFonts.tenorSans(
+                  textStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                  ),
+                ),
               ),
-              Container(
-                color: Colors.white,
-                child: Column(
+
+              //divider
+              const Divider(
+                indent: 130,
+                endIndent: 130,
+              ),
+
+              const SizedBox(height: 20),
+
+              //First Last Name
+              const Padding(
+                padding: EdgeInsetsDirectional.symmetric(horizontal: 25.0),
+                child: Row(
                   children: [
-                    Text(
-                      "Sign Up",
-                      style: GoogleFonts.tenorSans(
-                        textStyle: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
+                    Flexible(
+                      child: TextField(
+                        decoration: InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: "First name"),
                       ),
                     ),
-                    const Divider(
-                      color: Colors.black,
-                      indent: 130,
-                      endIndent: 130,
-                    )
+                    SizedBox(width: 25),
+                    Flexible(
+                      child: TextField(
+                        decoration: InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: "Last name"),
+                      ),
+                    ),
                   ],
                 ),
               ),
-              // const SizedBox(
-              //   child: Row(
-              //     children: [
-              //       TextField(
-              //         decoration: InputDecoration(
-              //           border: UnderlineInputBorder(),
-              //           labelText: "First Name"
-              //         ),
-              //       ),
-              //       TextField(
-              //         decoration: InputDecoration(
-              //           border: UnderlineInputBorder(),
-              //           labelText: "Last Name"
-              //         ),
-              //       )
-              //     ],
-              //   ),
-              // )
+
+              //Email
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: "Email",
+                  ),
+                ),
+              ),
+
+              //Phone Number
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: "Phone number",
+                  ),
+                ),
+              ),
+
+              //Password
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                child: TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: "Password",
+                  ),
+                ),
+              ),
+
+              //Confirm Password
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                child: TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: "Confirm password",
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 20.0),
+
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black
+                ),
+                child: const Text("Sign In"),
+              )
             ],
           ),
         ),
