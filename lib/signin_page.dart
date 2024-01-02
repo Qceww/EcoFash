@@ -1,5 +1,5 @@
-import 'dart:ffi';
-
+import 'package:figma/Signup_page.dart';
+import 'package:figma/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -95,7 +95,13 @@ class _SignInPageState extends State<SignInPage> {
               const SizedBox(height: 20.0),
 
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const HomePage(),
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
                 child: const Text("Sign In"),
               ),
@@ -143,23 +149,34 @@ class _SignInPageState extends State<SignInPage> {
                 ],
               ),
 
-              const SizedBox(height: 90,),
+              const SizedBox(
+                height: 90,
+              ),
 
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "Not a member?",
+                  const Text(
+                    "Not a member? ",
                     style: TextStyle(
                       color: Colors.grey,
                     ),
                   ),
-                  Text(
-                    " Sign up",
-                    style: TextStyle(
-                        color: Colors.grey,
-                        decoration: TextDecoration.underline),
-                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => SignUpPage(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      "Sign up",
+                      style: TextStyle(
+                          color: Colors.grey,
+                          decoration: TextDecoration.underline),
+                    ),
+                  )
                 ],
               )
             ],

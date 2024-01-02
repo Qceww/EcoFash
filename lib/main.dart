@@ -1,4 +1,4 @@
-import 'package:figma/Signup_page.dart';
+import 'package:figma/home_page.dart';
 import 'package:figma/signin_page.dart';
 import 'package:flutter/material.dart';
 
@@ -22,20 +22,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue
       ),
-      home: const SignInPage()
+      home: const HomePage()
     );
   }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar:  AppBar(
-        title: const Text("Figma"),
-      ),
-    );
-  }
-}
+} 
