@@ -1,4 +1,4 @@
-# figma
+# EcoFash
 
 A new Flutter project.
 
