@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                   alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height - 100,
+                  // height: MediaQuery.of(context).size.height - 100,
                   child: Center(
                     child: Column(
                       children: [
@@ -179,97 +179,96 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        Column(
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  child: const Center(
-                                    child: Column(
-                                      children: [
-                                        Image(
-                                          image: AssetImage(
-                                              'images/Home_page_new_arrival_1.png'),
-                                        ),
-                                        Text(
-                                          '21WN reversible angora cardigan',
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        Text('\$120')
-                                      ],
-                                    ),
+                        Container(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 2,
+                                child: const Center(
+                                  child: Column(
+                                    children: [
+                                      Image(
+                                        image: AssetImage(
+                                            'images/Home_page_new_arrival_1.png'),
+                                      ),
+                                      Text(
+                                        '21WN reversible angora cardigan',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Text('\$120')
+                                    ],
                                   ),
                                 ),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  child: const Center(
-                                    child: Column(
-                                      children: [
-                                        Image(
-                                          image: AssetImage(
-                                              'images/Home_page_new_arrival_1.png'),
-                                        ),
-                                        Text(
-                                          '21WN reversible angora cardigan',
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        Text('\$120'),
-                                      ],
-                                    ),
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 2,
+                                child: const Center(
+                                  child: Column(
+                                    children: [
+                                      Image(
+                                        image: AssetImage(
+                                            'images/Home_page_new_arrival_1.png'),
+                                      ),
+                                      Text(
+                                        '21WN reversible angora cardigan',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Text('\$120'),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  child: const Center(
-                                    child: Column(
-                                      children: [
-                                        Image(
-                                          image: AssetImage(
-                                              'images/Home_page_new_arrival_1.png'),
-                                        ),
-                                        Text(
-                                          '21WN reversible angora cardigan',
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        Text('\$120')
-                                      ],
-                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 2,
+                                child: const Center(
+                                  child: Column(
+                                    children: [
+                                      Image(
+                                        image: AssetImage(
+                                            'images/Home_page_new_arrival_1.png'),
+                                      ),
+                                      Text(
+                                        '21WN reversible angora cardigan',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Text('\$120')
+                                    ],
                                   ),
                                 ),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  child: const Center(
-                                    child: Column(
-                                      children: [
-                                        Image(
-                                          image: AssetImage(
-                                              'images/Home_page_new_arrival_1.png'),
-                                        ),
-                                        Text(
-                                          '21WN reversible angora cardigan',
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        Text('\$120'),
-                                      ],
-                                    ),
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 2,
+                                child: const Center(
+                                  child: Column(
+                                    children: [
+                                      Image(
+                                        image: AssetImage(
+                                            'images/Home_page_new_arrival_1.png'),
+                                      ),
+                                      Text(
+                                        '21WN reversible angora cardigan',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Text('\$120'),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          ],
-                        )
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
-                
               ],
             ),
           ),
