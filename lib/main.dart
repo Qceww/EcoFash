@@ -6,6 +6,7 @@ void main() {
   runApp(const MyApp());
 }
 
+// test ms
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -17,12 +18,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Figma',
-      theme: ThemeData(
-        primarySwatch: Colors.blue
-      ),
-      home: const HomePage()
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Figma',
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: const HomePage());
   }
-} 
+}
