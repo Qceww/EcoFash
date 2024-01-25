@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -36,7 +38,7 @@ class _HomePageState extends State<HomePage> {
                           style: GoogleFonts.zenAntique(
                             textStyle: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 30,
+                                fontSize: 40,
                                 fontWeight: FontWeight.w300),
                           ),
                         ),
@@ -45,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                           style: GoogleFonts.zenAntique(
                             textStyle: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 30,
+                                fontSize: 40,
                                 fontWeight: FontWeight.w300),
                           ),
                         ),
@@ -54,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                           style: GoogleFonts.zenAntique(
                             textStyle: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 30,
+                                fontSize: 40,
                                 fontWeight: FontWeight.w300),
                           ),
                         ),
@@ -90,138 +92,184 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Container(
-                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height - 100,
-                    child: Center(
-                      child: Column(
-                        children: [
-                          Text(
-                            'NEW ARRIVAL',
-                            style: GoogleFonts.tenorSans(
-                              textStyle: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 26,
-                                  fontWeight: FontWeight.w300),
-                            ),
+                  padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height - 100,
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          'NEW ARRIVAL',
+                          style: GoogleFonts.tenorSans(
+                            textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 26,
+                                fontWeight: FontWeight.w300),
                           ),
-                          const Image(
-                            image: AssetImage('images/Home_page_garis.png'),
+                        ),
+                        const Image(
+                          image: AssetImage('images/Home_page_garis.png'),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'All',
+                                style: GoogleFonts.tenorSans(
+                                  textStyle: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'Apparel',
+                                style: GoogleFonts.tenorSans(
+                                  textStyle: const TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'Dress',
+                                style: GoogleFonts.tenorSans(
+                                  textStyle: const TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'Tshirt',
+                                style: GoogleFonts.tenorSans(
+                                  textStyle: const TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'Bag',
+                                style: GoogleFonts.tenorSans(
+                                  textStyle: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                            ],
                           ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                        ),
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
                               children: [
-                                Text(
-                                  'All',
-                                  style: GoogleFonts.tenorSans(
-                                    textStyle: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.w300),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width / 2,
+                                  child: const Center(
+                                    child: Column(
+                                      children: [
+                                        Image(
+                                          image: AssetImage(
+                                              'images/Home_page_new_arrival_1.png'),
+                                        ),
+                                        Text(
+                                          '21WN reversible angora cardigan',
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        Text('\$120')
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  'Apparel',
-                                  style: GoogleFonts.tenorSans(
-                                    textStyle: const TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.w300),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width / 2,
+                                  child: const Center(
+                                    child: Column(
+                                      children: [
+                                        Image(
+                                          image: AssetImage(
+                                              'images/Home_page_new_arrival_1.png'),
+                                        ),
+                                        Text(
+                                          '21WN reversible angora cardigan',
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        Text('\$120'),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  'Dress',
-                                  style: GoogleFonts.tenorSans(
-                                    textStyle: const TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.w300),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  'Tshirt',
-                                  style: GoogleFonts.tenorSans(
-                                    textStyle: const TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.w300),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  'Bag',
-                                  style: GoogleFonts.tenorSans(
-                                    textStyle: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.w300),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
                                 ),
                               ],
                             ),
-                          ),
-                           Column(
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width / 2,
-                                    child: const Center(
-                                      child: Column(
-                                        children: [
-                                          Image(
-                                            image: AssetImage(
-                                                'images/Home_page_new_arrival_1.png'),
-                                          ),
-                                          Text(
-                                              '21WN reversible angora cardigan', textAlign: TextAlign.center,),
-                                          Text('\$120')
-                                        ],
-                                      ),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width / 2,
+                                  child: const Center(
+                                    child: Column(
+                                      children: [
+                                        Image(
+                                          image: AssetImage(
+                                              'images/Home_page_new_arrival_1.png'),
+                                        ),
+                                        Text(
+                                          '21WN reversible angora cardigan',
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        Text('\$120')
+                                      ],
                                     ),
                                   ),
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width / 2,
-                                    child: const Center(
-                                      child: Column(
-                                        children: [
-                                          Image(
-                                            image: AssetImage(
-                                                'images/Home_page_new_arrival_1.png'),
-                                          ),
-                                          Text(
-                                              '21WN reversible angora cardigan', textAlign: TextAlign.center,),
-                                          Text('\$120'),
-                                        ],
-                                      ),
+                                ),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width / 2,
+                                  child: const Center(
+                                    child: Column(
+                                      children: [
+                                        Image(
+                                          image: AssetImage(
+                                              'images/Home_page_new_arrival_1.png'),
+                                        ),
+                                        Text(
+                                          '21WN reversible angora cardigan',
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        Text('\$120'),
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ),
-                              Row(),
-                            ],
-                          )
-                        ],
-                      ),
-                    )),
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                
               ],
             ),
           ),
