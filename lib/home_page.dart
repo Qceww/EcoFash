@@ -266,13 +266,12 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        const Row(
+                        Row(
                           children: [
                             Text('Learn More'),
-                            Image(image: AssetImage('images/Home_page_arrow.png'))
-                          ]
-                        
-                        )
+                            Image.asset('images/Home_page_arrow.png')
+                          ],
+                        ),
                       ],
                     ),
                   ),
