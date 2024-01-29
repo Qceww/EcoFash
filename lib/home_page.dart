@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -178,49 +180,76 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
+
                         const SizedBox(
                           height: 10,
                         ),
+
                         Container(
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               SizedBox(
                                 width: MediaQuery.of(context).size.width / 2,
+
                                 child: Center(
                                   child: Column(
                                     children: [
                                       const Image(
+
+                                child: const Center(
+                                  child: Column(
+                                    children: [
+                                      Image(
                                         image: AssetImage(
                                             'images/Home_page_new_arrival_1.png'),
                                       ),
                                       Text(
                                         '21WN reversible angora cardigan',
+
                                         style: GoogleFonts.tenorSans(),
                                         textAlign: TextAlign.center,
                                       ),
                                       Text('\$120',
                                           style: GoogleFonts.tenorSans())
+
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Text('\$120')
+
                                     ],
                                   ),
                                 ),
                               ),
                               SizedBox(
                                 width: MediaQuery.of(context).size.width / 2,
+
                                 child: Center(
                                   child: Column(
                                     children: [
                                       const Image(
+
+                                child: const Center(
+                                  child: Column(
+                                    children: [
+                                      Image(
+
                                         image: AssetImage(
                                             'images/Home_page_new_arrival_1.png'),
                                       ),
                                       Text(
                                         '21WN reversible angora cardigan',
+
                                         style: GoogleFonts.tenorSans(),
                                         textAlign: TextAlign.center,
                                       ),
                                       Text('\$120',
                                           style: GoogleFonts.tenorSans()),
+
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Text('\$120'),
+
                                     ],
                                   ),
                                 ),
@@ -234,35 +263,56 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               SizedBox(
                                 width: MediaQuery.of(context).size.width / 2,
+
                                 child: Center(
                                   child: Column(
                                     children: [
                                       const Image(
+
+                                child: const Center(
+                                  child: Column(
+                                    children: [
+                                      Image(
+
                                         image: AssetImage(
                                             'images/Home_page_new_arrival_1.png'),
                                       ),
                                       Text(
                                         '21WN reversible angora cardigan',
+
                                         style: GoogleFonts.tenorSans(),
                                         textAlign: TextAlign.center,
                                       ),
                                       Text('\$120',
                                           style: GoogleFonts.tenorSans())
+
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Text('\$120')
+
                                     ],
                                   ),
                                 ),
                               ),
                               SizedBox(
                                 width: MediaQuery.of(context).size.width / 2,
+
                                 child: Center(
                                   child: Column(
                                     children: [
                                       const Image(
+
+                                child: const Center(
+                                  child: Column(
+                                    children: [
+                                      Image(
+
                                         image: AssetImage(
                                             'images/Home_page_new_arrival_1.png'),
                                       ),
                                       Text(
                                         '21WN reversible angora cardigan',
+
                                         style: GoogleFonts.tenorSans(),
                                         textAlign: TextAlign.center,
                                       ),
@@ -737,6 +787,21 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 const SizedBox(height: 40)
+
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Text('\$120'),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
