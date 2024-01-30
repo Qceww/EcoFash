@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class GridView extends StatelessWidget {
+// ignore: must_be_immutable
+class GridViews extends StatelessWidget {
   String name;
   int price;
   String url;
-  GridView(
+  GridViews(
       {super.key, required this.name, required this.price, required this.url});
+  // const GridViews({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +17,29 @@ class GridView extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
-            const Image(
-              image: AssetImage('images/Home_page_new_arrival_1.png'),
+            Container(
+              width: MediaQuery.of(context).size.width / 2 - 25,
+              height: 240,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('images/$url'), fit: BoxFit.cover),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.fromLTRB(0,0,5,5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Icon(
+                      Icons.favorite_border,
+                      color: Colors.red,
+                    )
+                  ],
+                ),
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+              padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -29,13 +49,17 @@ class GridView extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                   Text(
-                    'reversible angora cardigan',
+                    name,
                     style: GoogleFonts.tenorSans(),
                     textAlign: TextAlign.left,
                   ),
+                  const SizedBox(
+                    height: 5,
+                  ),
                   Text(
-                    '\$120',
-                    style: GoogleFonts.tenorSans(),
+                    '\$$price',
+                    style: GoogleFonts.tenorSans(
+                        textStyle: const TextStyle(color: Colors.red)),
                     textAlign: TextAlign.left,
                   ),
                 ],
