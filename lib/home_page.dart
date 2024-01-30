@@ -291,7 +291,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Image(
                                   image:
-                                      AssetImage('images/Home_page_arrow.png'),
+                                      AssetImage('images/Home_page_Arrow.png'),
                                   width: 25,
                                   height: 25,
                                   fit: BoxFit.fill)
