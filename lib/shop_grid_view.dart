@@ -1,4 +1,4 @@
-import 'package:figma/grid_view.dart';
+import 'package:figma/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

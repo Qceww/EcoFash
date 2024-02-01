@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:figma/Shop_grid_view.dart';
-import 'package:figma/grid_view.dart';
+import 'package:figma/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,6 +13,9 @@ class ShopDetailedView extends StatefulWidget {
 }
 
 class _ShopDetailedView extends State<ShopDetailedView> {
+  bool shippingDropDown = false;
+  bool codDropDown = false;
+  bool returnDropDown = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,73 +28,17 @@ class _ShopDetailedView extends State<ShopDetailedView> {
           child: Center(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 0.65,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('images/Home_page_1.png'),
-                            fit: BoxFit.cover)),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 0.0),
-                  child: Container(
-                    // color: Colors.red,
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'MOHAN',
-                          textAlign: TextAlign.left,
-                          style: GoogleFonts.tenorSans(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 22,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 6.0,
-                        ),
-                        Text(
-                          'Recycle Boucle Knit Cardigan Pink',
-                          textAlign: TextAlign.left,
-                          style: GoogleFonts.tenorSans(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 6.0,
-                        ),
-                        Text(
-                          '\$120',
-                          textAlign: TextAlign.left,
-                          style: GoogleFonts.tenorSans(
-                            textStyle: const TextStyle(
-                                color: Colors.red,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                ProductDetailedView(
+                    productName: 'MOHAN',
+                    productDescription: 'Recycle Boucle Knit Cardigan Pink',
+                    productPrice: 120),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
                   child: Container(
                     child: Row(
                       children: [
                         Text(
-                          'Color',
+                          'Size',
                           textAlign: TextAlign.left,
                           style: GoogleFonts.tenorSans(
                             textStyle: const TextStyle(
@@ -103,42 +50,15 @@ class _ShopDetailedView extends State<ShopDetailedView> {
                         SizedBox(
                           width: 10.0,
                         ),
-                        Container(
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 20.0,
-                                height: 20.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 8.0,
-                              ),
-                              Container(
-                                width: 20.0,
-                                height: 20.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 8.0,
-                              ),
-                              Container(
-                                width: 20.0,
-                                height: 20.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.brown,
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                            ],
-                          ),
+                        ProductColor(productColor: 'FFF0456'),
+                        SizedBox(
+                          width: 8.0,
                         ),
+                        ProductColor(productColor: 'FFF0123F'),
+                        SizedBox(
+                          width: 8.0,
+                        ),
+                        ProductColor(productColor: 'FFFFF000F'),
                         SizedBox(
                           width: 30.0,
                         ),
@@ -237,105 +157,18 @@ class _ShopDetailedView extends State<ShopDetailedView> {
                     ),
                   ),
                 ),
-                Padding(
-                    padding: const EdgeInsets.fromLTRB(20.0, 100.0, 20.0, 0.0),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'MATERIALS',
-                            textAlign: TextAlign.left,
-                            style: GoogleFonts.tenorSans(
-                              textStyle: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          Text(
-                            'Crafted from 100% certified organic cotton fabric, this black coat exemplifies our commitment to sustainability. Our organic cotton is sourced responsibly, free from harmful chemicals, and produced in accordance with the highest environmental and ethical standards.',
-                            textAlign: TextAlign.left,
-                            style: GoogleFonts.tenorSans(
-                              textStyle: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w300),
-                            ),
-                          )
-                        ],
-                      ),
-                    )),
-                Padding(
-                    padding: const EdgeInsets.fromLTRB(20.0, 25.0, 20.0, 0.0),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'PRODUCT CARE',
-                            textAlign: TextAlign.left,
-                            style: GoogleFonts.tenorSans(
-                              textStyle: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          Text(
-                            'To ensure the longevity of this organic cotton coat, we recommend washing it in cold or warm water using a gentle cycle. For eco-conscious care, consider line-drying it in a shaded area. Avoid ironing, and if the need arises to use a dryer, opt for a low-heat setting. Please refrain from dry cleaning, as our commitment to sustainability extends to discouraging practices that may weaken the organic fibers.',
-                            textAlign: TextAlign.left,
-                            style: GoogleFonts.tenorSans(
-                              textStyle: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w300),
-                            ),
-                          )
-                        ],
-                      ),
-                    )),
-                Padding(
-                    padding: const EdgeInsets.fromLTRB(20.0, 25.0, 20.0, 0.0),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'FINISHING',
-                            textAlign: TextAlign.left,
-                            style: GoogleFonts.tenorSans(
-                              textStyle: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          Text(
-                            'The fabric has been carefully stone-washed to achieve maximum softness, providing you not only with a stylish black coat but also one that prioritizes comfort and ethical craftsmanship.',
-                            textAlign: TextAlign.left,
-                            style: GoogleFonts.tenorSans(
-                              textStyle: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w300),
-                            ),
-                          )
-                        ],
-                      ),
-                    )),
+                ProductInformation(
+                    title: 'MATERIALS',
+                    content:
+                        'Crafted from 100% certified organic cotton fabric, this black coat exemplifies our commitment to sustainability. Our organic cotton is sourced responsibly, free from harmful chemicals, and produced in accordance with the highest environmental and ethical standards.'),
+                ProductInformation(
+                    title: 'PRODUCT CARE',
+                    content:
+                        'To ensure the longevity of this organic cotton coat, we recommend washing it in cold or warm water using a gentle cycle. For eco-conscious care, consider line-drying it in a shaded area. Avoid ironing, and if the need arises to use a dryer, opt for a low-heat setting. Please refrain from dry cleaning, as our commitment to sustainability extends to discouraging practices that may weaken the organic fibers.'),
+                ProductInformation(
+                    title: 'FINISHING',
+                    content:
+                        'The fabric has been carefully stone-washed to achieve maximum softness, providing you not only with a stylish black coat but also one that prioritizes comfort and ethical craftsmanship.'),
                 Padding(
                   padding: EdgeInsets.fromLTRB(20.0, 75.0, 20.0, 0.0),
                   // ignore: sized_box_for_whitespace
@@ -452,8 +285,9 @@ class _ShopDetailedView extends State<ShopDetailedView> {
                         Row(
                           children: [
                             Image(
-                                image: AssetImage(
-                                    'images/Shop_Detailed_View_Shipping.png')),
+                              image: AssetImage(
+                                  'images/Shop_Detailed_View_Shipping.png'),
+                            ),
                             SizedBox(
                               width: 20.0,
                             ),
@@ -462,26 +296,59 @@ class _ShopDetailedView extends State<ShopDetailedView> {
                               textAlign: TextAlign.left,
                               style: GoogleFonts.tenorSans(
                                 textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400),
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                             ),
                             Spacer(),
-                            Image(
-                              image: AssetImage(
-                                  'images/Shop_Detailed_View_Forward.png'),
-                            )
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  shippingDropDown = !shippingDropDown;
+                                });
+                              },
+                              child: Image(
+                                image: AssetImage(
+                                  shippingDropDown
+                                      ? 'images/Shop_Detailed_View_Backward.png'
+                                      : 'images/Shop_Detailed_View_Forward.png',
+                                ),
+                              ),
+                            ),
                           ],
                         ),
+                        if (shippingDropDown)
+                          Container(
+                            padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 40.0,
+                                ),
+                                Text(
+                                  'Can be checked in out website',
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.tenorSans(
+                                    textStyle: const TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         SizedBox(
                           height: 10.0,
                         ),
                         Row(
                           children: [
                             Image(
-                                image: AssetImage(
-                                    'images/Shop_Detailed_View_Tag.png')),
+                              image: AssetImage(
+                                  'images/Shop_Detailed_View_Tag.png'),
+                            ),
                             SizedBox(
                               width: 20.0,
                             ),
@@ -490,26 +357,59 @@ class _ShopDetailedView extends State<ShopDetailedView> {
                               textAlign: TextAlign.left,
                               style: GoogleFonts.tenorSans(
                                 textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400),
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                             ),
                             Spacer(),
-                            Image(
-                              image: AssetImage(
-                                  'images/Shop_Detailed_View_Forward.png'),
-                            )
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  codDropDown = !codDropDown;
+                                });
+                              },
+                              child: Image(
+                                image: AssetImage(
+                                  codDropDown
+                                      ? 'images/Shop_Detailed_View_Backward.png'
+                                      : 'images/Shop_Detailed_View_Forward.png',
+                                ),
+                              ),
+                            ),
                           ],
                         ),
+                        if (codDropDown)
+                          Container(
+                            padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 40.0,
+                                ),
+                                Text(
+                                  'Can be checked in out website',
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.tenorSans(
+                                    textStyle: const TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         SizedBox(
                           height: 10.0,
                         ),
                         Row(
                           children: [
                             Image(
-                                image: AssetImage(
-                                    'images/Shop_Detailed_View_Refresh.png')),
+                              image: AssetImage(
+                                  'images/Shop_Detailed_View_Refresh.png'),
+                            ),
                             SizedBox(
                               width: 20.0,
                             ),
@@ -518,18 +418,50 @@ class _ShopDetailedView extends State<ShopDetailedView> {
                               textAlign: TextAlign.left,
                               style: GoogleFonts.tenorSans(
                                 textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400),
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                             ),
                             Spacer(),
-                            Image(
-                              image: AssetImage(
-                                  'images/Shop_Detailed_View_Forward.png'),
-                            )
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  returnDropDown = !returnDropDown;
+                                });
+                              },
+                              child: Image(
+                                image: AssetImage(
+                                  returnDropDown
+                                      ? 'images/Shop_Detailed_View_Backward.png'
+                                      : 'images/Shop_Detailed_View_Forward.png',
+                                ),
+                              ),
+                            ),
                           ],
                         ),
+                        if (returnDropDown)
+                          Container(
+                            padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 40.0,
+                                ),
+                                Text(
+                                  'Can be checked in out website',
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.tenorSans(
+                                    textStyle: const TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                       ],
                     ),
                   ),
@@ -550,83 +482,14 @@ class _ShopDetailedView extends State<ShopDetailedView> {
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    // SizedBox(
-                    //   width: MediaQuery.of(context).size.width / 2,
-                    //   child: Center(
-                    //     child: Column(
-                    //       children: [
-                    //         const Image(
-                    //           image: AssetImage(
-                    //               'images/Home_page_new_arrival_1.png'),
-                    //         ),
-                    //         Padding(
-                    //           padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
-                    //           child: Column(
-                    //             crossAxisAlignment: CrossAxisAlignment.start,
-                    //             children: [
-                    //               Text(
-                    //                 '21WN',
-                    //                 style: GoogleFonts.tenorSans(),
-                    //                 textAlign: TextAlign.left,
-                    //               ),
-                    //               Text(
-                    //                 'reversible angora cardigan',
-                    //                 style: GoogleFonts.tenorSans(),
-                    //                 textAlign: TextAlign.left,
-                    //               ),
-                    //               Text(
-                    //                 '\$120',
-                    //                 style: GoogleFonts.tenorSans(),
-                    //                 textAlign: TextAlign.left,
-                    //               ),
-                    //             ],
-                    //           ),
-                    //         )
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
                     GridViews(
                         name: 'reversible angora cardigan',
                         price: 120,
                         url: 'Home_page_new_arrival_1.png'),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 2,
-                      child: Center(
-                        child: Column(
-                          children: [
-                            const Image(
-                              image: AssetImage(
-                                  'images/Home_page_new_arrival_1.png'),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '21WN',
-                                    style: GoogleFonts.tenorSans(),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                  Text(
-                                    'reversible angora cardigan',
-                                    style: GoogleFonts.tenorSans(),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                  Text(
-                                    '\$120',
-                                    style: GoogleFonts.tenorSans(),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                    GridViews(
+                        name: 'reversible angora cardigan',
+                        price: 120,
+                        url: 'Home_page_new_arrival_1.png'),
                   ],
                 ),
                 SizedBox(
@@ -635,80 +498,14 @@ class _ShopDetailedView extends State<ShopDetailedView> {
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 2,
-                      child: Center(
-                        child: Column(
-                          children: [
-                            const Image(
-                              image: AssetImage(
-                                  'images/Home_page_new_arrival_1.png'),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '21WN',
-                                    style: GoogleFonts.tenorSans(),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                  Text(
-                                    'reversible angora cardigan',
-                                    style: GoogleFonts.tenorSans(),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                  Text(
-                                    '\$120',
-                                    style: GoogleFonts.tenorSans(),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 2,
-                      child: Center(
-                        child: Column(
-                          children: [
-                            const Image(
-                              image: AssetImage(
-                                  'images/Home_page_new_arrival_1.png'),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '21WN',
-                                    style: GoogleFonts.tenorSans(),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                  Text(
-                                    'reversible angora cardigan',
-                                    style: GoogleFonts.tenorSans(),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                  Text(
-                                    '\$120',
-                                    style: GoogleFonts.tenorSans(),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                    GridViews(
+                        name: 'reversible angora cardigan',
+                        price: 120,
+                        url: 'Home_page_new_arrival_1.png'),
+                    GridViews(
+                        name: 'reversible angora cardigan',
+                        price: 120,
+                        url: 'Home_page_new_arrival_1.png'),
                   ],
                 ),
                 const SizedBox(
@@ -802,6 +599,34 @@ class _ShopDetailedView extends State<ShopDetailedView> {
             ),
           ),
         ),
+      ),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
+        color: Colors.black,
+        child: Row(children: [
+          const Image(
+            image: AssetImage('images/Shop_Detailed_View_Plus.png'),
+          ),
+          SizedBox(
+            width: 20.0,
+          ),
+          Text(
+            'ADD TO BASKET',
+            textAlign: TextAlign.left,
+            style: GoogleFonts.tenorSans(
+              textStyle: const TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+          Spacer(),
+          Icon(
+            Icons.favorite_border,
+            color: Colors.white,
+          )
+        ]),
       ),
     );
   }
