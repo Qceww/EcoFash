@@ -11,18 +11,23 @@ class _BloglistviewState extends State<Bloglistview> {
   final List<Map<String, String>> blogTitles = [
     {
       'title': 'Blog Title 1',
+      'tag': 'News',
     },
     {
       'title': 'Blog Title 2',
+      'tag': 'Fact',
     },
     {
       'title': 'Blog Title 3',
+      'tag': 'Opinion',
     },
     {
       'title': 'Blog Title 4',
+      'tag': 'Review',
     },
     {
       'title': 'Blog Title 5',
+      'tag': 'Tips',
     },
   ];
 
@@ -34,32 +39,54 @@ class _BloglistviewState extends State<Bloglistview> {
         child: SingleChildScrollView(
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: blogTitles.map((blog) {
                 return Container(
-                  margin: const EdgeInsets.only(
-                      bottom:
-                          16), // Adjust margin for spacing between containers
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  padding: const EdgeInsets.all(20),
+                  child: Stack(
                     children: [
                       Container(
-                        height: 200,
-                        width: 350,
-                        decoration: const BoxDecoration(color: Colors.blue),
-                      ),
-                      Container(
-                        padding:
-                            const EdgeInsets.only(top: 5, bottom: 16, left: 0),
-                        child: Text(
-                          blog['title']!,
-                          style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                      ),
+                        child: const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'RD',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            SizedBox(height: 4),
+                            Text(
+                              '#Fashion #Tips',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 14,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'EST THE BIEN 2021 STYLE GUIDE : THE BIGGEST FALL TRENDS',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              '¯ 4 days ago',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 );
