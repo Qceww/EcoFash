@@ -193,7 +193,7 @@ class ProductInformation extends StatelessWidget {
                       fontWeight: FontWeight.w400),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10.0,
               ),
               Text(
@@ -209,5 +209,81 @@ class ProductInformation extends StatelessWidget {
             ],
           ),
         ));
+  }
+}
+
+class WishlistEmpty extends StatelessWidget {
+  const WishlistEmpty({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            const Row(
+              children: [
+                Icon(
+                  Icons.close,
+                  size: 30,
+                ),
+              ],
+            ),
+            Text(
+              'WISHLIST',
+              style: GoogleFonts.tenorSans(
+                textStyle: const TextStyle(fontSize: 24),
+              ),
+            ),
+            const Image(
+              image: AssetImage('images/Home_page_garis.png'),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Text(
+              '0 ITEM(S)',
+              style: GoogleFonts.tenorSans(
+                textStyle: const TextStyle(fontSize: 12, color: Colors.grey),
+              ),
+            ),
+            const Spacer(),
+            Column(
+              children: [
+                Text(
+                  "THERE'S NO WISHLIST",
+                  style: GoogleFonts.tenorSans(
+                    textStyle: const TextStyle(),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                  ),
+                  child: Text(
+                    'SELECT PRODUCT',
+                    style: GoogleFonts.tenorSans(
+                      textStyle: const TextStyle(color: Colors.white),
+                    ),
+                  ),
+                )
+              ],
+            ),
+            const Spacer(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class WishlistItems extends StatelessWidget {
+  const WishlistItems({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
