@@ -41,7 +41,7 @@ class _BloglistviewState extends State<Bloglistview> {
           child: Center(
             child: Column(
               children: [
-                // Navbar Container
+                //=========================== Navbar Container=============================
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   width: double.infinity,
@@ -163,8 +163,7 @@ class _BloglistviewState extends State<Bloglistview> {
                                 ],
                               ),
                             ),
-                            const SizedBox(
-                                height: 30), // Add a gap between each set
+                            const SizedBox(height: 30),
                           ],
                         ),
                     ],
@@ -173,8 +172,9 @@ class _BloglistviewState extends State<Bloglistview> {
 
                 // =============Pencetan Load more================
                 Container(
-                  width: 270, // Set your desired width
-                  height: 57, // Set your desired height
+                  // Ukuran container Buttonnya
+                  width: 270,
+                  height: 57,
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
@@ -185,40 +185,32 @@ class _BloglistviewState extends State<Bloglistview> {
                         borderRadius: BorderRadius.circular(0),
                       ),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                          10, 0, 10, 0), // Adjust the horizontal padding
-                      child: Row(
-                        mainAxisAlignment:
-                            MainAxisAlignment.center, // Center horizontally
-                        crossAxisAlignment:
-                            CrossAxisAlignment.center, // Center vertically
-                        children: <Widget>[
-                          Text(
-                            "LOAD MORE",
-                            style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                              ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "LOAD MORE",
+                          style: GoogleFonts.poppins(
+                            textStyle: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
-                          const SizedBox(
-                              width:
-                                  10), // Add space between "LOAD MORE" and "+"
-                          Text(
-                            "+",
-                            style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 40,
-                                fontWeight: FontWeight.w200,
-                              ),
+                        ),
+                        const SizedBox(
+                            width: 10), // Add space between "LOAD MORE" and "+"
+                        Text(
+                          "+",
+                          style: GoogleFonts.poppins(
+                            textStyle: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 40,
+                              fontWeight: FontWeight.w200,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
