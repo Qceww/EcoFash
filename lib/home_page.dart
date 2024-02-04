@@ -1,4 +1,5 @@
-
+import 'package:figma/Ecofash_bar.dart';
+import 'package:figma/burger_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,6 +14,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const Navbar(),
+      appBar: EcofashBar(),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -291,7 +294,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Image(
                                   image:
-                                      AssetImage('images/Home_page_Arrow.png'),
+                                      AssetImage('images/Home_page_arrow.png'),
                                   width: 25,
                                   height: 25,
                                   fit: BoxFit.fill)
