@@ -58,11 +58,76 @@ class _BloglistviewState extends State<Bloglistview> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      // Add your navbar icons or other widgets here
                     ],
                   ),
                 ),
-
+                SizedBox(height: 10),
+                //=============================Judul================================
+                Container(
+                  // padding: EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'BLOG',
+                        style: GoogleFonts.tenorSans(
+                          textStyle: TextStyle(
+                            fontSize: 24, // Adjust the font size as needed
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Image(image: AssetImage('images/Home_page_garis.png')),
+                      SizedBox(height: 5),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            for (var tag in [
+                              'Tag 1',
+                              'Tag 2',
+                              'Tag 3',
+                              'Tag 4',
+                              'Tag 5',
+                              'Tag 6'
+                            ])
+                              Container(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 5),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    // munculin berita yang sesuai
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 0,
+                                    shadowColor: Colors.transparent,
+                                    primary: Colors.black12,
+                                    onPrimary: Colors.black,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    tag,
+                                    style: GoogleFonts.tenorSans(
+                                      textStyle: TextStyle(
+                                        fontSize:
+                                            15, // Adjust the font size as needed
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // ====================================Isi==========================================
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -178,6 +243,8 @@ class _BloglistviewState extends State<Bloglistview> {
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      shadowColor: Colors.transparent,
                       primary: Colors.white,
                       onPrimary: Colors.black,
                       side: BorderSide(color: Colors.grey, width: 2.0),
