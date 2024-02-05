@@ -25,6 +25,6 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Figma',
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: const Bloglistview());
+        home: const HomePage());
   }
 }
