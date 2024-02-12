@@ -4,6 +4,7 @@ import 'package:figma/Shop_grid_view.dart';
 import 'package:figma/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:figma/Ecofash_bar.dart';
 
 class ShopDetailedView extends StatefulWidget {
   const ShopDetailedView({super.key});
@@ -20,9 +21,7 @@ class _ShopDetailedView extends State<ShopDetailedView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white10,
-      ),
+      appBar: EcofashBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
