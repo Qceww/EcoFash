@@ -1,6 +1,8 @@
+import 'package:figma/Ecofash_bar.dart';
 import 'package:figma/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:figma/Ecofash_bar.dart';
 
 class TextGoogle extends StatelessWidget {
   String name;
@@ -31,7 +33,7 @@ class _ShopGridViewState extends State<ShopGridView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: EcofashBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
