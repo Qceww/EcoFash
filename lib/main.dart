@@ -1,4 +1,3 @@
-
 import 'package:figma/Shop_grid_view.dart';
 import 'package:figma/blog_detailed_view.dart';
 import 'package:figma/blog_list_view.dart';
@@ -30,10 +29,6 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Figma',
         theme: ThemeData(primarySwatch: Colors.blue),
-
         home: const Blogdetailedview());
-
-        home:  CartPage());
-
   }
 }
