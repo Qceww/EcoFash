@@ -1,5 +1,5 @@
-import 'package:figma/Signup_page.dart';
 import 'package:figma/pages/home_page.dart';
+import 'package:figma/pages/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
