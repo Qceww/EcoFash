@@ -506,7 +506,7 @@ class CartItem extends StatelessWidget {
               image: AssetImage('images/Cart_page_1.png'),
               fit: BoxFit.fill,
             ),
-            SizedBox(width: 10),
+            SizedBox(width: 8),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -515,9 +515,12 @@ class CartItem extends StatelessWidget {
                   style: TextStyle(fontSize: 20),
                 ),
                 SizedBox(height: 5),
-                Text(
-                  product.productDescription,
-                  style: TextStyle(color: Colors.grey, fontSize: 13),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: Text(
+                    product.productDescription,
+                    style: TextStyle(color: Colors.grey, fontSize: 13),
+                  ),
                 ),
                 SizedBox(height: 5),
                 Row(
@@ -571,7 +574,6 @@ class CartItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 30),
                 Text(
                   '\$${product.productPrice}',
                   style: TextStyle(

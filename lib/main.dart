@@ -1,5 +1,4 @@
-import 'package:figma/Cart_page.dart';
-import 'package:figma/Shop_grid_view.dart';
+import 'package:figma/pages/cart_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {

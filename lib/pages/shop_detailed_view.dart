@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-import 'package:figma/Shop_grid_view.dart';
 import 'package:figma/widgets/Ecofash_bar.dart';
 import 'package:figma/widgets/widgets.dart';
 import 'package:flutter/material.dart';
