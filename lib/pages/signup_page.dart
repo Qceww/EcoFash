@@ -11,7 +11,6 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _phoneController = TextEditingController();
@@ -29,7 +28,7 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Column(
               children: [
                 const SizedBox(height: 50),
-        
+
                 //Logo
                 Text(
                   "EcoFash",
@@ -40,9 +39,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                 ),
-        
+
                 const SizedBox(height: 50),
-        
+
                 //Sign Up
                 Text(
                   "Sign Up",
@@ -53,31 +52,33 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                 ),
-        
+
                 //divider
                 const Divider(
                   indent: 130,
                   endIndent: 130,
                 ),
-        
+
                 const SizedBox(height: 20),
-        
+
                 //First Last Name
-                const Padding(
-                  padding: EdgeInsetsDirectional.symmetric(horizontal: 25.0),
+                Padding(
+                  padding: const EdgeInsetsDirectional.symmetric(horizontal: 25.0),
                   child: Row(
                     children: [
                       Flexible(
                         child: TextField(
-                          decoration: InputDecoration(
+                          controller: _firstNameController,
+                          decoration: const InputDecoration(
                               border: UnderlineInputBorder(),
                               labelText: "First name"),
                         ),
                       ),
-                      SizedBox(width: 25),
+                      const SizedBox(width: 25),
                       Flexible(
                         child: TextField(
-                          decoration: InputDecoration(
+                          controller: _lastNameController,
+                          decoration: const InputDecoration(
                               border: UnderlineInputBorder(),
                               labelText: "Last name"),
                         ),
@@ -85,73 +86,74 @@ class _SignUpPageState extends State<SignUpPage> {
                     ],
                   ),
                 ),
-        
+
                 //Email
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: TextField(
-                    decoration: InputDecoration(
+                    controller: _emailController,
+                    decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
                       labelText: "Email",
                     ),
                   ),
                 ),
-        
+
                 //Phone Number
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: TextField(
-                    decoration: InputDecoration(
+                    controller: _phoneController,
+                    decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
                       labelText: "Phone number",
                     ),
                   ),
                 ),
-        
+
                 //Password
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: TextField(
+                    controller: _passwordController,
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
                       labelText: "Password",
                     ),
                   ),
                 ),
-        
+
                 //Confirm Password
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: TextField(
+                    controller: _confirmPasswordController,
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
                       labelText: "Confirm password",
                     ),
                   ),
                 ),
-        
+
                 const SizedBox(height: 20.0),
-        
+
                 ElevatedButton(
                   onPressed: () async {
-                  
-                  final firstName = _firstNameController.text;
-                  final lastName = _lastNameController.text;
-                  final email = _emailController.text;
-                  final phone = _phoneController.text;
-                  final password = _passwordController.text;
-                  final confirmPassword = _confirmPasswordController.text;
+                    final firstName = _firstNameController.text;
+                    final lastName = _lastNameController.text;
+                    final email = _emailController.text;
+                    final phone = _phoneController.text;
+                    final password = _passwordController.text;
+                    final confirmPassword = _confirmPasswordController.text;
 
+                    print('$firstName - $lastName - $email - $phone - $password - $confirmPassword');
 
-                  registerUser(firstName, lastName, email, phone, password, confirmPassword);
-
-                  
+                    // registerUser(firstName, lastName, email, phone, password, confirmPassword);
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black
-                  ),
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
                   child: const Text("Sign In"),
                 )
               ],
