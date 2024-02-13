@@ -1,5 +1,6 @@
 import 'package:figma/classes/user.dart';
 import 'package:figma/functions/functions.dart';
+import 'package:figma/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -150,7 +151,18 @@ class _SignUpPageState extends State<SignUpPage> {
 
                     print('$firstName - $lastName - $email - $phone - $password - $confirmPassword');
 
-                    // registerUser(firstName, lastName, email, phone, password, confirmPassword);
+                    User? user = await registerUser(firstName, lastName, email, phone, password, confirmPassword);
+                  
+                    if(user is User){
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => const HomePage(),
+                          ),
+                        );
+                    } else {
+                      print("Registration Failed!");
+                    }
+
                   },
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.black),

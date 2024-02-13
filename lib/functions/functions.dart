@@ -1,7 +1,8 @@
 import 'package:figma/classes/user.dart';
 import 'package:figma/services/http_services.dart';
 
-Future<String?> registerUser(firstName, lastName, email, phone, password, confirmPassword) async {
+Future<dynamic> registerUser(firstName, lastName, email, phone, password, confirmPassword) async {
+  print("aman");
   if(password != confirmPassword){
     print("Password Wrong");
     return "Password doesn't match";
@@ -9,7 +10,15 @@ Future<String?> registerUser(firstName, lastName, email, phone, password, confir
 
   User user = User(firstName, lastName, email, phone, password);
 
-  int request = createUser(user) as int;
+  int? request = await createUser(user);
 
+  if(200 == request){
+    print("User Registered Successfully");
+    return user;
+  } else {
+    print("Failed to Register!");
+    return 0;
+  }
   
+
 }

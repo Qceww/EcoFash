@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-String url = "http:/10.0.2.2:8000/api";
+String url = "http://10.0.2.2:8000/api";
 
 Future<int?> createUser(user) async {
   final response = await http.post(
@@ -15,11 +15,8 @@ Future<int?> createUser(user) async {
   );
 
   if (response.statusCode == 200){
-    print(user);
-    return 0;
-    // return 200;
+    return 200;
   }
 
-  print("Request Failed!");
-  return 0;
+  return 400;
 }
