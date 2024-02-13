@@ -287,3 +287,303 @@ class WishlistItems extends StatelessWidget {
     return Container();
   }
 }
+
+class CartEmpty extends StatelessWidget {
+  const CartEmpty({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                const Row(
+                  children: [
+                    Icon(
+                      Icons.close,
+                      size: 30,
+                    ),
+                  ],
+                ),
+                Text(
+                  'CART',
+                  style: GoogleFonts.tenorSans(
+                    textStyle: const TextStyle(fontSize: 24),
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                const Spacer(),
+                Text(
+                  "You have no items in your Shopping Bag.",
+                  style: GoogleFonts.tenorSans(
+                    textStyle: const TextStyle(),
+                  ),
+                ),
+                const Spacer(),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Product {
+  String productName;
+  String productDescription;
+  int productQuantity;
+  int productPrice;
+
+  Product({
+    required this.productName,
+    required this.productDescription,
+    required this.productQuantity,
+    required this.productPrice,
+  });
+}
+
+class CartNoEmpty extends StatefulWidget {
+  CartNoEmpty({Key? key}) : super(key: key);
+
+  @override
+  State<CartNoEmpty> createState() => _CartNoEmptyState();
+}
+
+class _CartNoEmptyState extends State<CartNoEmpty> {
+  final List<Product> products = [
+    Product(
+      productName: 'L A M E R E I',
+      productDescription: 'Recycle Boucle Knit Cardigan Pink',
+      productQuantity: 2,
+      productPrice: 120,
+    ),
+    Product(
+      productName: 'L A M A K A L I',
+      productDescription: 'Recycle Boucle Knit Cardigan Orange',
+      productQuantity: 2,
+      productPrice: 100,
+    ),
+  ];
+
+  void _showDeleteConfirmationDialog(int index) {
+    setState(() {
+      products.removeAt(index);
+      if (products.isEmpty) {
+        
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CartEmpty()),
+          
+        );
+        // Navigator.pop(context);
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    double subtotal = 0;
+
+    for (var product in products) {
+      subtotal += product.productPrice * product.productQuantity;
+    }
+
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //  actions: [
+              IconButton(
+                onPressed: () {
+                  // Handle closing the cart
+                },
+                icon: Icon(
+                  Icons.close,
+                  size: 30,
+                ),
+              ),
+              // ],
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
+                child: Text(
+                  'CART',
+                  style: TextStyle(fontSize: 24),
+                ),
+              ),
+              SizedBox(height: 15),
+              Expanded(
+      
+                
+      
+                child: ListView.builder(
+                  itemCount: products.length,
+                  itemBuilder: (context, index) {
+                    
+                  
+      
+                    final product = products[index];
+                    return CartItem(
+                      product: product,
+                      onQuantityChanged: (value) {
+                        setState(() {
+                          product.productQuantity = value;
+                        });
+                      },
+                      onDelete: () {
+                        _showDeleteConfirmationDialog(index);
+                      },
+                    
+                    );
+                  },
+                ),
+              ),
+              Divider(thickness: 2),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'SUBTOTAL',
+                    style: TextStyle(fontSize: 25),
+                  ),
+                  Text(
+                    '\$${subtotal.toStringAsFixed(2)}',
+                    style: TextStyle(color: Colors.orange, fontSize: 25),
+                  )
+                ],
+              ),
+              SizedBox(height: 10),
+              Text(
+                '*shipping charges, taxes and discount codes ',
+                style: TextStyle(color: Colors.grey),
+              ),
+              Text(
+                'are calculated at the time of accounting.',
+                style: TextStyle(color: Colors.grey),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CartItem extends StatelessWidget {
+  final Product product;
+  final ValueChanged<int> onQuantityChanged;
+  final VoidCallback onDelete;
+
+  const CartItem({
+    Key? key,
+    required this.product,
+    required this.onQuantityChanged,
+    required this.onDelete,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Container(
+        height: 150,
+        margin: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+        padding: EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          color: Colors.white,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image(
+              image: AssetImage('images/Cart_page_1.png'),
+              fit: BoxFit.fill,
+            ),
+            SizedBox(width: 10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  product.productName,
+                  style: TextStyle(fontSize: 20),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  product.productDescription,
+                  style: TextStyle(color: Colors.grey, fontSize: 13),
+                ),
+                SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        if (product.productQuantity > 0) {
+                          onQuantityChanged(product.productQuantity - 1);
+                          if (product.productQuantity == 0) {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Remove Item'),
+                                  content: Text(
+                                      'Are you sure you want to remove this item from the cart?'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pop(); // Tutup dialog
+                                      },
+                                      child: Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pop(); // Tutup dialog
+                                        onDelete(); // Hapus item dari daftar
+                                      },
+                                      child: Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
+                        }
+                      },
+                      child: Image(image: AssetImage('images/minus.png')),
+                    ),
+                    SizedBox(width: 5),
+                    Text(product.productQuantity.toString()),
+                    SizedBox(width: 5),
+                    GestureDetector(
+                      onTap: () {
+                        onQuantityChanged(product.productQuantity + 1);
+                      },
+                      child: Image(image: AssetImage('images/Plus.png')),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 30),
+                Text(
+                  '\$${product.productPrice}',
+                  style: TextStyle(
+                    color: Colors.orange,
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
