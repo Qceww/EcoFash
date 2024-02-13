@@ -1,8 +1,11 @@
+import 'package:figma/Cart_page.dart';
 import 'package:figma/Shop_grid_view.dart';
 import 'package:figma/blog_list_view.dart';
+import 'package:figma/cobacoba.dart';
 import 'package:figma/home_page.dart';
 import 'package:figma/shop_detailed_view.dart';
 import 'package:figma/signin_page.dart';
+import 'package:figma/widgets.dart';
 import 'package:figma/wishlist_page.dart';
 import 'package:flutter/material.dart';
 
@@ -25,6 +28,6 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Figma',
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: const Bloglistview());
+        home:  CartPage());
   }
 }
