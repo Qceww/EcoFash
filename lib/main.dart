@@ -1,4 +1,5 @@
 import 'package:figma/pages/blog_detailed_view.dart';
+import 'package:figma/pages/blog_list_view.dart';
 import 'package:figma/pages/cart_page.dart';
 import 'package:figma/pages/reward.dart';
 import 'package:figma/pages/signin_page.dart';
@@ -24,6 +25,6 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Figma',
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: const Reward());
+        home: const Bloglistview());
   }
 }
