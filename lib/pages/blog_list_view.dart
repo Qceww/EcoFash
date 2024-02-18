@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:figma/widgets/Ecofash_bar.dart';
+import 'package:figma/widgets/burger_menu.dart';
+import 'package:figma/widgets/Blog_List_Widget.dart';
+import 'package:figma/widgets/Tags_Widget.dart';
+import 'package:figma/widgets/Footer.dart';
 
 class Bloglistview extends StatefulWidget {
   const Bloglistview({Key? key}) : super(key: key);
@@ -36,31 +41,13 @@ class _BloglistviewState extends State<Bloglistview> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      drawer: const Navbar(),
+      appBar: EcofashBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
-                //=========================== Navbar Container=============================
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  width: double.infinity,
-                  color: Colors.grey, // Set your desired navbar color
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Eco Fash',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
                 SizedBox(height: 10),
                 //=============================Judul================================
                 Container(
@@ -135,51 +122,7 @@ class _BloglistviewState extends State<Bloglistview> {
                       for (var blog in blogEntries)
                         Column(
                           children: [
-                            Container(
-                              height: 200,
-                              width: 340,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image:
-                                      AssetImage('images/Blog_grid_view_1.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Container(
-                                    width: 340,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                        end: Alignment.bottomCenter,
-                                        begin: Alignment.topCenter,
-                                        colors: [
-                                          Colors.black.withOpacity(0),
-                                          Colors.black,
-                                        ],
-                                      ),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            blog['title'] ?? '',
-                                            style: GoogleFonts.tenorSans(
-                                              textStyle:
-                                                  const TextStyle(fontSize: 16),
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            Blog_List_Widget(blog: blog),
                             Container(
                               padding: EdgeInsets.fromLTRB(0, 10, 5, 0),
                               width: 340,
@@ -187,33 +130,7 @@ class _BloglistviewState extends State<Bloglistview> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Row(
-                                    children: [
-                                      for (var tag in blog['tags'])
-                                        Container(
-                                          padding: const EdgeInsets.all(3),
-                                          margin:
-                                              const EdgeInsets.only(right: 10),
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            border: Border.all(
-                                              color:
-                                                  Colors.black.withOpacity(0.5),
-                                              width: 0.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          child: Text(
-                                            '#$tag',
-                                            style: GoogleFonts.tenorSans(
-                                              textStyle: const TextStyle(
-                                                  color: Colors.grey),
-                                            ),
-                                          ),
-                                        ),
-                                    ],
-                                  ),
+                                  Tags(blog: blog),
                                   Row(
                                     children: [
                                       Text(
@@ -285,90 +202,7 @@ class _BloglistviewState extends State<Bloglistview> {
                 const SizedBox(height: 40),
 
                 // ============================Footer===============================
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image(
-                      image: AssetImage('images/Twitter.png'),
-                    ),
-                    SizedBox(
-                      width: 60,
-                    ),
-                    Image(
-                      image: AssetImage('images/Instagram.png'),
-                    ),
-                    SizedBox(
-                      width: 60,
-                    ),
-                    Image(
-                      image: AssetImage('images/YouTube.png'),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Image(
-                  image: AssetImage('images/Home_page_garis.png'),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Column(
-                  children: [
-                    Text(
-                      'support@ecofash',
-                      style: GoogleFonts.tenorSans(),
-                    ),
-                    Text(
-                      '+12 123 456 7896',
-                      style: GoogleFonts.tenorSans(),
-                    ),
-                    Text(
-                      '08.00 - 22.00 - Everday',
-                      style: GoogleFonts.tenorSans(),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Image(
-                  image: AssetImage('images/Home_page_garis.png'),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'About',
-                      style: GoogleFonts.tenorSans(
-                        textStyle: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 80,
-                    ),
-                    Text(
-                      'Contact',
-                      style: GoogleFonts.tenorSans(
-                        textStyle: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 80,
-                    ),
-                    Text(
-                      'Blog',
-                      style: GoogleFonts.tenorSans(
-                        textStyle: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 40)
+                Footer()
               ],
             ),
           ),
