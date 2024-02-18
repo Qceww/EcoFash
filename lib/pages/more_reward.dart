@@ -16,7 +16,7 @@ class _MorerewardState extends State<Morereward> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(196, 196, 196, 1),
+      backgroundColor: Color.fromRGBO(230, 233, 238, 1),
       drawer: Navbar(),
       appBar: EcofashBar(),
       body: SafeArea(
