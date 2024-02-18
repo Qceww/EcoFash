@@ -1,8 +1,12 @@
 import 'package:figma/pages/blog_detailed_view.dart';
+import 'package:figma/pages/blog_grid_view.dart';
+import 'package:figma/pages/blog_grid_view_2.dart';
 import 'package:figma/pages/blog_list_view.dart';
 import 'package:figma/pages/cart_page.dart';
 import 'package:figma/pages/more_reward.dart';
 import 'package:figma/pages/reward.dart';
+import 'package:figma/pages/reward_detail.dart';
+import 'package:figma/pages/shop_detailed_view.dart';
 import 'package:figma/pages/signin_page.dart';
 
 import 'package:flutter/material.dart';
@@ -26,6 +30,6 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Figma',
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: const Morereward());
+        home: const RewardDetail());
   }
 }
