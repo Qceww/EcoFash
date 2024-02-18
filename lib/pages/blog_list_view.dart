@@ -199,8 +199,6 @@ class _BloglistviewState extends State<Bloglistview> {
                   ),
                 ),
 
-                const SizedBox(height: 40),
-
                 // ============================Footer===============================
                 Footer()
               ],

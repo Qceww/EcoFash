@@ -52,7 +52,7 @@ class Reward extends StatelessWidget {
                                 style: GoogleFonts.tenorSans(
                                   textStyle: const TextStyle(
                                     color: Color.fromRGBO(221, 133, 96, 1),
-                                    fontSize: 24,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -86,7 +86,7 @@ class Reward extends StatelessWidget {
                                 style: GoogleFonts.tenorSans(
                                   textStyle: const TextStyle(
                                     color: Colors.black,
-                                    fontSize: 18,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -107,7 +107,7 @@ class Reward extends StatelessWidget {
                                 style: GoogleFonts.tenorSans(
                                   textStyle: const TextStyle(
                                     color: Colors.black,
-                                    fontSize: 18,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -128,7 +128,7 @@ class Reward extends StatelessWidget {
                   style: GoogleFonts.tenorSans(
                     textStyle: const TextStyle(
                       color: Colors.black,
-                      fontSize: 24,
+                      fontSize: 20,
                       fontWeight: FontWeight.w500,
                     ),
                   ),

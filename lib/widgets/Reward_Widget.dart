@@ -18,8 +18,17 @@ class Reward_widget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Image(
-              image: AssetImage("images/Reward_image.png"),
+            Container(
+              height: 120,
+              width: 100,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage('images/Reward_image.png')),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    bottomLeft: Radius.circular(15)),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(10),
@@ -31,7 +40,7 @@ class Reward_widget extends StatelessWidget {
                     style: GoogleFonts.tenorSans(
                       textStyle: const TextStyle(
                         color: Colors.black,
-                        fontSize: 24,
+                        fontSize: 20,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 5,
                       ),
@@ -45,7 +54,7 @@ class Reward_widget extends StatelessWidget {
                     style: GoogleFonts.tenorSans(
                       textStyle: const TextStyle(
                         color: Colors.grey,
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -57,7 +66,7 @@ class Reward_widget extends StatelessWidget {
                     style: GoogleFonts.tenorSans(
                       textStyle: const TextStyle(
                         color: Color.fromRGBO(221, 133, 96, 1),
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
