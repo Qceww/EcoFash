@@ -12,8 +12,8 @@ class Reward extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: Navbar(),
-      appBar: EcofashBar(),
+      drawer: const Navbar(),
+      appBar: const EcofashBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -24,7 +24,7 @@ class Reward extends StatelessWidget {
                 children: [
                   Container(
                     height: 200,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage("images/Reward_header_image.png"),
                         fit: BoxFit.cover,

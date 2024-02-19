@@ -24,12 +24,15 @@ class _RewardDetailState extends State<RewardDetail> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: Stack(
-                  clipBehavior: Clip.none,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround  ,
+                  // clipBehavior: Clip.none,
                   children: [
-                    Positioned(
-                      left: -50,
-                      child: Image(
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Image(
                         image: AssetImage("images/Backward_arrow.png"),
                       ),
                     ),
@@ -40,9 +43,15 @@ class _RewardDetailState extends State<RewardDetail> {
                             color: Colors.black,
                             fontSize: 24,
                             fontWeight: FontWeight.w500,
-                            letterSpacing: 5),
+                            letterSpacing: 5),  
                       ),
                     ),
+                      const Opacity(
+                        opacity: 0,
+                        child: Image(
+                          image: AssetImage("images/Backward_arrow.png"),
+                        ),
+                      ),
                   ],
                 ),
               ),

@@ -1,11 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:figma/widgets/Ecofash_bar.dart';
+import 'package:figma/widgets/burger_menu.dart';
 import 'package:figma/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ShopDetailedView extends StatefulWidget {
-  const ShopDetailedView({super.key});
+  int productId;
+
+  ShopDetailedView({super.key, required this.productId});
 
   @override
   State<ShopDetailedView> createState() => _ShopDetailedView();
@@ -18,6 +21,7 @@ class _ShopDetailedView extends State<ShopDetailedView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Navbar(),
       backgroundColor: Colors.white,
       appBar: EcofashBar(),
       body: SafeArea(
@@ -36,6 +40,7 @@ class _ShopDetailedView extends State<ShopDetailedView> {
                       children: [
                         Text(
                           'Size',
+                          // widget.orderId.toString(),
                           textAlign: TextAlign.left,
                           style: GoogleFonts.tenorSans(
                             textStyle: const TextStyle(
@@ -480,10 +485,12 @@ class _ShopDetailedView extends State<ShopDetailedView> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     GridViews(
+                        productId: 1,
                         name: 'reversible angora cardigan',
                         price: 120,
                         url: 'Home_page_new_arrival_1.png'),
                     GridViews(
+                        productId: 1,
                         name: 'reversible angora cardigan',
                         price: 120,
                         url: 'Home_page_new_arrival_1.png'),
@@ -496,10 +503,12 @@ class _ShopDetailedView extends State<ShopDetailedView> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     GridViews(
+                        productId: 1,
                         name: 'reversible angora cardigan',
                         price: 120,
                         url: 'Home_page_new_arrival_1.png'),
                     GridViews(
+                        productId: 1,
                         name: 'reversible angora cardigan',
                         price: 120,
                         url: 'Home_page_new_arrival_1.png'),

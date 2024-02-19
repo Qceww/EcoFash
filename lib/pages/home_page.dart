@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const Navbar(),
-      appBar: EcofashBar(),
+      appBar: const EcofashBar(),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(

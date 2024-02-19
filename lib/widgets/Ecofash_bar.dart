@@ -1,3 +1,4 @@
+import 'package:figma/pages/cart_page.dart';
 import 'package:figma/pages/qr_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,8 +24,8 @@ class EcofashBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => QRScanner()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => QRScanner()));
                 },
                 child: Container(
                   width: 40,
@@ -38,8 +39,17 @@ class EcofashBar extends StatelessWidget implements PreferredSizeWidget {
                 image: AssetImage('images/Appbar_search.png'),
               ),
               SizedBox(width: 4.5),
-              Image(
-                image: AssetImage('images/Appbar_cart.png'),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const CartPage(),
+                    ),
+                  );
+                },
+                child: Image(
+                  image: AssetImage('images/Appbar_cart.png'),
+                ),
               ),
             ],
           ),

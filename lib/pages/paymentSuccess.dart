@@ -1,5 +1,7 @@
 import 'dart:ffi';
 
+import 'package:figma/pages/home_page.dart';
+import 'package:figma/pages/shop_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -25,14 +27,20 @@ class _PaymentSuccessState extends State<PaymentSuccess> {
                   height: 50,
                 ),
                 // ARROW
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
-                    child: Image(
-                      image: AssetImage('images/Paymen_Success_arrow.png'),
-                      width: MediaQuery.of(context).size.width * 0.08,
-                      height: MediaQuery.of(context).size.height * 0.05,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (BuildContext context) => const HomePage()));
+                  },
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: Image(
+                        image: AssetImage('images/Paymen_Success_arrow.png'),
+                        width: MediaQuery.of(context).size.width * 0.08,
+                        height: MediaQuery.of(context).size.height * 0.05,
+                      ),
                     ),
                   ),
                 ),
@@ -134,7 +142,10 @@ class _PaymentSuccessState extends State<PaymentSuccess> {
                         width: MediaQuery.of(context).size.width * 0.47,
                         child: ElevatedButton(
                           onPressed: () {
-                            // Implement your action here
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        const ShopGridView()));
                           },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.black, // Background color

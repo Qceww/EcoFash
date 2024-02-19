@@ -1,4 +1,5 @@
 import 'package:figma/widgets/Ecofash_bar.dart';
+import 'package:figma/widgets/reward_detail_widget.dart';
 import 'package:figma/widgets/burger_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,88 +37,9 @@ class _BlogdetailedviewState extends State<Blogdetailedview> {
                 // SizedBox(
                 //   height: 10,
                 // ),
-                Container(
-                  // color: Colors.amber,
-                  padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          '2021 Style Guide: The Biggest Fall Trends'
-                              .toUpperCase(),
-                          textAlign: TextAlign.left,
-                          style: GoogleFonts.tenorSans(
-                            textStyle: TextStyle(
-                              fontSize: 20, // Adjust the font size as needed
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                RewardDetailWidget(title: "2021 Style Guide: The Biggest Fall Trends", content: "You guys know how much I love mixing high and low-end – it’s the best way to get the most bang for your buck while still elevating your wardrobe. The same goes for handbags! And honestly they are probably the best pieces to mix and match. I truly think the key to completing a look is with a great bag and I found so many this year that I wanted to share a round-up of my most worn handbags.",),
 
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  // color: Colors.red,
-                  padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          'You guys know how much I love mixing high and low-end – it’s the best way to get the most bang for your buck while still elevating your wardrobe. The same goes for handbags! And honestly they are probably the best pieces to mix and match. I truly think the key to completing a look is with a great bag and I found so many this year that I wanted to share a round-up of my most worn handbags.',
-                          textAlign: TextAlign.justify,
-                          style: GoogleFonts.tenorSans(
-                            textStyle: TextStyle(
-                              fontSize: 18, // Adjust the font size as needed
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.all(15),
-                  width: MediaQuery.of(context).size.width - 30,
-                  height: MediaQuery.of(context).size.height - 300,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image:
-                            AssetImage('images/Blog_Detailed_View_Image_2.png'),
-                        fit: BoxFit.cover),
-                  ),
-                ),
-
-                Container(
-                  // color: Colors.red,
-                  padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          'I found this Saint Laurent canvas handbag this summer and immediately fell in love. The neutral fabrics are so beautiful and I like how this handbag can also carry into fall. The mini Fendi bucket bag with the sheer fabric is so fun and such a statement bag. Also this DeMellier off white bag is so cute to carry to a dinner with you or going out, it’s small but not too small to fit your phone and keys still.',
-                          textAlign: TextAlign.justify,
-                          style: GoogleFonts.tenorSans(
-                            textStyle: TextStyle(
-                              fontSize: 18, // Adjust the font size as needed
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                
 
                 SizedBox(
                   height: 15,

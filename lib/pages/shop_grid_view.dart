@@ -1,4 +1,5 @@
 import 'package:figma/widgets/Ecofash_bar.dart';
+import 'package:figma/widgets/burger_menu.dart';
 import 'package:figma/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,7 +33,8 @@ class _ShopGridViewState extends State<ShopGridView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: EcofashBar(),
+      drawer: const Navbar(),
+      appBar: const EcofashBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
@@ -54,19 +56,28 @@ class _ShopGridViewState extends State<ShopGridView> {
                       Text(
                         'Men',
                         style: GoogleFonts.tenorSans(
-                          textStyle: const TextStyle(fontSize: 16, color: Colors.grey,),
+                          textStyle: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
                       Text(
                         'Women',
                         style: GoogleFonts.tenorSans(
-                          textStyle: const TextStyle(fontSize: 16, color: Colors.grey,),
+                          textStyle: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
                       Text(
                         'Kids',
                         style: GoogleFonts.tenorSans(
-                          textStyle: const TextStyle(fontSize: 16, color: Colors.grey,),
+                          textStyle: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
                     ],
@@ -90,10 +101,12 @@ class _ShopGridViewState extends State<ShopGridView> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         GridViews(
+                            productId: 1,
                             name: 'reversible angora cardigan',
                             price: 120,
                             url: 'Home_page_new_arrival_1.png'),
                         GridViews(
+                            productId: 1,
                             name: 'reversible angora cardigan',
                             price: 120,
                             url: 'Home_page_new_arrival_1.png'),
@@ -107,10 +120,12 @@ class _ShopGridViewState extends State<ShopGridView> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         GridViews(
+                            productId: 1,
                             name: 'reversible angora cardigan',
                             price: 120,
                             url: 'Home_page_new_arrival_1.png'),
                         GridViews(
+                            productId: 1,
                             name: 'reversible angora cardigan',
                             price: 120,
                             url: 'Home_page_new_arrival_1.png'),
@@ -153,23 +168,12 @@ class _ShopGridViewState extends State<ShopGridView> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         GridViews(
+                            productId: 1,
                             name: 'reversible angora cardigan',
                             price: 120,
                             url: 'Home_page_new_arrival_1.png'),
                         GridViews(
-                            name: 'reversible angora cardigan',
-                            price: 120,
-                            url: 'Home_page_new_arrival_1.png'),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        GridViews(
-                            name: 'reversible angora cardigan',
-                            price: 120,
-                            url: 'Home_page_new_arrival_1.png'),
-                        GridViews(
+                            productId: 1,
                             name: 'reversible angora cardigan',
                             price: 120,
                             url: 'Home_page_new_arrival_1.png'),
@@ -179,10 +183,27 @@ class _ShopGridViewState extends State<ShopGridView> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         GridViews(
+                            productId: 1,
                             name: 'reversible angora cardigan',
                             price: 120,
                             url: 'Home_page_new_arrival_1.png'),
                         GridViews(
+                            productId: 1,
+                            name: 'reversible angora cardigan',
+                            price: 120,
+                            url: 'Home_page_new_arrival_1.png'),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        GridViews(
+                            productId: 1,
+                            name: 'reversible angora cardigan',
+                            price: 120,
+                            url: 'Home_page_new_arrival_1.png'),
+                        GridViews(
+                            productId: 1,
                             name: 'reversible angora cardigan',
                             price: 120,
                             url: 'Home_page_new_arrival_1.png'),

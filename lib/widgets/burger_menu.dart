@@ -1,9 +1,13 @@
+import 'package:figma/pages/blog_list_view.dart';
+import 'package:figma/pages/home_page.dart';
+import 'package:figma/pages/reward.dart';
+import 'package:figma/pages/shop_grid_view.dart';
+import 'package:figma/pages/wishlist_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Navbar extends StatelessWidget {
   const Navbar({super.key});
-  
 
   @override
   Widget build(BuildContext context) {
@@ -40,29 +44,70 @@ class Navbar extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Image(image: AssetImage('images/Navbar_discover.png'),),
+            leading: const Image(
+              image: AssetImage('images/Navbar_discover.png'),
+            ),
             title: const Text('Discover'),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => const HomePage(),
+                ),
+              );
+            },
           ),
           ListTile(
-            leading: Image(image: AssetImage('images/Navbar_shop.png'),),
+            leading: const Image(
+              image: AssetImage('images/Navbar_shop.png'),
+            ),
             title: const Text('Shop'),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => const ShopGridView(),
+                ),
+              );
+            },
           ),
           ListTile(
-            leading: Image(image: AssetImage('images/Navbar_blog.png'),),
+            leading: const Image(
+              image: AssetImage('images/Navbar_blog.png'),
+            ),
             title: const Text('Blog'),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => const Bloglistview(),
+                ),
+              );
+            },
           ),
           ListTile(
-            leading: Image(image: AssetImage('images/Navbar_reward.png'),),
+            leading: const Image(
+              image: AssetImage('images/Navbar_reward.png'),
+            ),
             title: const Text('Reward'),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => const Reward(),
+                ),
+              );
+            },
           ),
           ListTile(
-            leading: Image(image: AssetImage('images/Navbar_wishlist.png'),),
+            leading: const Image(
+              image: AssetImage('images/Navbar_wishlist.png'),
+            ),
             title: const Text('Wishlist'),
-            onTap: () {},
+            onTap: () {
+
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => WishlistPage(),
+                ),
+              );
+            },
           ),
         ],
       ),
