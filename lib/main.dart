@@ -1,21 +1,12 @@
-import 'package:figma/pages/blog_detailed_view.dart';
-import 'package:figma/pages/blog_grid_view.dart';
-import 'package:figma/pages/blog_grid_view_2.dart';
-import 'package:figma/pages/blog_list_view.dart';
-import 'package:figma/pages/cart_page.dart';
-import 'package:figma/pages/more_reward.dart';
-import 'package:figma/pages/reward.dart';
-import 'package:figma/pages/reward_detail.dart';
-import 'package:figma/pages/shop_detailed_view.dart';
-import 'package:figma/pages/signin_page.dart';
-
+// import 'package:figma/pages/cart_page.dart';
+import 'package:figma/pages/checkout_page.dart';
+import 'package:figma/pages/paymentSuccess.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-// test ms
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -30,6 +21,6 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Figma',
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: const RewardDetail());
+        home: PaymentSuccess());
   }
 }

@@ -375,11 +375,9 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
     setState(() {
       products.removeAt(index);
       if (products.isEmpty) {
-        
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => CartEmpty()),
-          
         );
         // Navigator.pop(context);
       }
@@ -421,15 +419,9 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
               ),
               SizedBox(height: 15),
               Expanded(
-      
-                
-      
                 child: ListView.builder(
                   itemCount: products.length,
                   itemBuilder: (context, index) {
-                    
-                  
-      
                     final product = products[index];
                     return CartItem(
                       product: product,
@@ -441,7 +433,6 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
                       onDelete: () {
                         _showDeleteConfirmationDialog(index);
                       },
-                    
                     );
                   },
                 ),
@@ -472,6 +463,78 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class CheckOutDetail extends StatefulWidget {
+  CheckOutDetail({Key? key}) : super(key: key);
+
+  @override
+  State<CheckOutDetail> createState() => _CheckOutDetailState();
+}
+
+class _CheckOutDetailState extends State<CheckOutDetail> {
+  final List<Product> products = [
+    Product(
+      productName: 'L A M E R E I',
+      productDescription: 'Recycle Boucle Knit Cardigan Pink',
+      productQuantity: 2,
+      productPrice: 120,
+    ),
+    Product(
+      productName: 'L A M A K A L I',
+      productDescription: 'Recycle Boucle Knit Cardigan Orange',
+      productQuantity: 2,
+      productPrice: 100,
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    double total = 0;
+
+    for (var product in products) {
+      total += product.productPrice * product.productQuantity;
+    }
+
+    return SingleChildScrollView(
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.375,
+        child: Column(children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                final product = products[index];
+                return CheckOutItem(
+                  product: product,
+                );
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 0.0),
+            child: Image(image: AssetImage('images/Checkout_page_line.png')),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'TOTAL',
+                  style: TextStyle(fontSize: 25),
+                ),
+                Text(
+                  '\$${total.toStringAsFixed(2)}',
+                  style: TextStyle(color: Colors.orange, fontSize: 25),
+                )
+              ],
+            ),
+          ),
+        ]),
       ),
     );
   }
@@ -574,6 +637,70 @@ class CartItem extends StatelessWidget {
                     ),
                   ],
                 ),
+                Text(
+                  '\$${product.productPrice}',
+                  style: TextStyle(
+                    color: Colors.orange,
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CheckOutItem extends StatelessWidget {
+  final Product product;
+
+  const CheckOutItem({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Container(
+        height: 150,
+        margin: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+        padding: EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          color: Colors.white,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image(
+              image: AssetImage('images/Cart_page_1.png'),
+              fit: BoxFit.fill,
+            ),
+            SizedBox(width: 8),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  product.productName,
+                  style: TextStyle(fontSize: 20),
+                ),
+                SizedBox(height: 5),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: Text(
+                    product.productDescription,
+                    style: TextStyle(color: Colors.grey, fontSize: 13),
+                  ),
+                ),
+                SizedBox(height: 5),
+
+                
+                  Text(product.productQuantity.toString() + ' Pcs'),
+                  
+                
+                   
                 Text(
                   '\$${product.productPrice}',
                   style: TextStyle(
