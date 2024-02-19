@@ -8,6 +8,7 @@ import 'package:figma/pages/signin_page.dart';
 
 
 // import 'package:figma/pages/cart_page.dart';
+import 'package:figma/pages/cart_page.dart';
 import 'package:figma/pages/checkout_page.dart';
 import 'package:figma/pages/paymentSuccess.dart';
 import 'package:flutter/material.dart';
@@ -29,10 +30,9 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Figma',
-        theme: ThemeData(primarySwatch: Colors.blue),
-
-
+        theme: ThemeData(primarySwatch: Colors.blue)
         home: OrderPage(customerId: 1));
+
 
 
 

@@ -339,12 +339,14 @@ class Product {
   String productDescription;
   int productQuantity;
   int productPrice;
+  bool isChecked;
 
   Product({
     required this.productName,
     required this.productDescription,
     required this.productQuantity,
     required this.productPrice,
+    required this.isChecked,
   });
 }
 
@@ -362,12 +364,14 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
       productDescription: 'Recycle Boucle Knit Cardigan Pink',
       productQuantity: 2,
       productPrice: 120,
+      isChecked: true,
     ),
     Product(
       productName: 'L A M A K A L I',
       productDescription: 'Recycle Boucle Knit Cardigan Orange',
       productQuantity: 2,
       productPrice: 100,
+      isChecked: true,
     ),
   ];
 
@@ -379,7 +383,6 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
           context,
           MaterialPageRoute(builder: (context) => CartEmpty()),
         );
-        // Navigator.pop(context);
       }
     });
   }
@@ -389,7 +392,12 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
     double subtotal = 0;
 
     for (var product in products) {
-      subtotal += product.productPrice * product.productQuantity;
+      // Tambahkan produk ke subtotal hanya jika checkbox tercentang
+      if (product.productQuantity > 0) {
+        if (product.isChecked == true) {
+          subtotal += product.productPrice * product.productQuantity;
+        }
+      }
     }
 
     return Scaffold(
@@ -399,7 +407,6 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //  actions: [
               IconButton(
                 onPressed: () {
                   // Handle closing the cart
@@ -409,7 +416,6 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
                   size: 30,
                 ),
               ),
-              // ],
               Padding(
                 padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
                 child: Text(
@@ -428,6 +434,11 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
                       onQuantityChanged: (value) {
                         setState(() {
                           product.productQuantity = value;
+                        });
+                      },
+                      onCheckedChanged: (value) {
+                        setState(() {
+                          product.isChecked = value;
                         });
                       },
                       onDelete: () {
@@ -478,16 +489,17 @@ class CheckOutDetail extends StatefulWidget {
 class _CheckOutDetailState extends State<CheckOutDetail> {
   final List<Product> products = [
     Product(
-      productName: 'L A M E R E I',
-      productDescription: 'Recycle Boucle Knit Cardigan Pink',
-      productQuantity: 2,
-      productPrice: 120,
-    ),
+        productName: 'L A M E R E I',
+        productDescription: 'Recycle Boucle Knit Cardigan Pink',
+        productQuantity: 2,
+        productPrice: 120,
+        isChecked: true),
     Product(
       productName: 'L A M A K A L I',
       productDescription: 'Recycle Boucle Knit Cardigan Orange',
       productQuantity: 2,
       productPrice: 100,
+      isChecked: true,
     ),
   ];
 
@@ -540,31 +552,49 @@ class _CheckOutDetailState extends State<CheckOutDetail> {
   }
 }
 
-class CartItem extends StatelessWidget {
+class CartItem extends StatefulWidget {
   final Product product;
   final ValueChanged<int> onQuantityChanged;
   final VoidCallback onDelete;
+  final ValueChanged<bool> onCheckedChanged;
 
   const CartItem({
     Key? key,
     required this.product,
     required this.onQuantityChanged,
     required this.onDelete,
+    required this.onCheckedChanged,
   }) : super(key: key);
 
+  @override
+  State<CartItem> createState() => _CartItemState();
+}
+
+class _CartItemState extends State<CartItem> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Container(
         height: 150,
-        margin: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-        padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
-          color: Colors.white,
+        color: Colors.white,
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0.0, 50.0, 10.0, 10.0),
+              child: SizedBox(
+                width: 20,
+                height: 20,
+                child: Checkbox(
+                  value: widget.product.isChecked,
+                  onChanged: (bool? value) {
+                    widget.onCheckedChanged(!widget.product.isChecked);
+                  },
+                ),
+              ),
+            ),
             Image(
               image: AssetImage('images/Cart_page_1.png'),
               fit: BoxFit.fill,
@@ -574,14 +604,14 @@ class CartItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  product.productName,
+                  widget.product.productName,
                   style: TextStyle(fontSize: 20),
                 ),
                 SizedBox(height: 5),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.5,
                   child: Text(
-                    product.productDescription,
+                    widget.product.productDescription,
                     style: TextStyle(color: Colors.grey, fontSize: 13),
                   ),
                 ),
@@ -591,9 +621,10 @@ class CartItem extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        if (product.productQuantity > 0) {
-                          onQuantityChanged(product.productQuantity - 1);
-                          if (product.productQuantity == 0) {
+                        if (widget.product.productQuantity > 0) {
+                          widget.onQuantityChanged(
+                              widget.product.productQuantity - 1);
+                          if (widget.product.productQuantity == 0) {
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -604,16 +635,14 @@ class CartItem extends StatelessWidget {
                                   actions: <Widget>[
                                     TextButton(
                                       onPressed: () {
-                                        Navigator.of(context)
-                                            .pop(); // Tutup dialog
+                                        Navigator.of(context).pop();
                                       },
                                       child: Text('Cancel'),
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        Navigator.of(context)
-                                            .pop(); // Tutup dialog
-                                        onDelete(); // Hapus item dari daftar
+                                        Navigator.of(context).pop();
+                                        widget.onDelete();
                                       },
                                       child: Text('OK'),
                                     ),
@@ -627,18 +656,19 @@ class CartItem extends StatelessWidget {
                       child: Image(image: AssetImage('images/minus.png')),
                     ),
                     SizedBox(width: 5),
-                    Text(product.productQuantity.toString()),
+                    Text(widget.product.productQuantity.toString()),
                     SizedBox(width: 5),
                     GestureDetector(
                       onTap: () {
-                        onQuantityChanged(product.productQuantity + 1);
+                        widget.onQuantityChanged(
+                            widget.product.productQuantity + 1);
                       },
                       child: Image(image: AssetImage('images/Plus.png')),
                     ),
                   ],
                 ),
                 Text(
-                  '\$${product.productPrice}',
+                  '\$${widget.product.productPrice}',
                   style: TextStyle(
                     color: Colors.orange,
                     fontSize: 20,
@@ -947,12 +977,7 @@ class CheckOutItem extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 5),
-
-                
-                  Text(product.productQuantity.toString() + ' Pcs'),
-                  
-                
-                   
+                Text(product.productQuantity.toString() + ' Pcs'),
                 Text(
                   '\$${product.productPrice}',
                   style: TextStyle(
@@ -968,4 +993,3 @@ class CheckOutItem extends StatelessWidget {
     );
   }
 }
-
