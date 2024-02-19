@@ -1,4 +1,5 @@
 // import 'package:figma/pages/cart_page.dart';
+import 'package:figma/pages/cart_page.dart';
 import 'package:figma/pages/checkout_page.dart';
 import 'package:figma/pages/paymentSuccess.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,6 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Figma',
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: PaymentSuccess());
+        home: CartPage());
   }
 }
