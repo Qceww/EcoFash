@@ -5,8 +5,18 @@ import 'package:google_fonts/google_fonts.dart';
 class OrderPage extends StatelessWidget {
   int customerId = -1;
   final List<Order> orders = [
-    Order(orderId: 123, recipientName: 'Joeliardo', recipientAddress: 'Jalan Senam', createdDate: '12/10/2024', status: 'completed'),
-    Order(orderId: 123, recipientName: 'Joeliardo', recipientAddress: 'Jalan Senam', createdDate: '12/10/2024', status: 'pending'),
+    Order(
+        orderId: 123,
+        recipientName: 'Joeliardo',
+        recipientAddress: 'Jalan Senam',
+        createdDate: '12/10/2024',
+        status: 'completed'),
+    Order(
+        orderId: 123,
+        recipientName: 'Joeliardo',
+        recipientAddress: 'Jalan Senam',
+        createdDate: '12/10/2024',
+        status: 'pending'),
   ];
   OrderPage({Key? key, required this.customerId}) : super(key: key);
 
@@ -25,6 +35,7 @@ class OrderPage extends StatelessWidget {
                     child: IconButton(
                       onPressed: () {
                         // Handle closing the cart
+                        Navigator.of(context).pop();
                       },
                       icon: Icon(
                         Icons.arrow_back_sharp,
@@ -56,7 +67,10 @@ class OrderPage extends StatelessWidget {
                   itemCount: orders.length,
                   itemBuilder: (context, index) {
                     final order = orders[index];
-                    return OrderDetail(order: order, customerId: customerId,);
+                    return OrderDetail(
+                      order: order,
+                      customerId: customerId,
+                    );
                   },
                 ),
               ),

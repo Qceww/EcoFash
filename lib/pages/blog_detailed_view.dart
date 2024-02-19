@@ -15,7 +15,7 @@ class _BlogdetailedviewState extends State<Blogdetailedview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Navbar(),
+      drawer: Navbar(),
       appBar: EcofashBar(),
       backgroundColor: Colors.white,
       body: SafeArea(

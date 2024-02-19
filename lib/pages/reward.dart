@@ -12,7 +12,7 @@ class Reward extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: const Navbar(),
+      drawer: Navbar(),
       appBar: const EcofashBar(),
       body: SafeArea(
         child: SingleChildScrollView(

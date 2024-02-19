@@ -1,5 +1,6 @@
 import 'package:figma/pages/blog_list_view.dart';
 import 'package:figma/pages/home_page.dart';
+import 'package:figma/pages/order_page.dart';
 import 'package:figma/pages/reward.dart';
 import 'package:figma/pages/shop_grid_view.dart';
 import 'package:figma/pages/wishlist_page.dart';
@@ -7,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Navbar extends StatelessWidget {
-  const Navbar({super.key});
+  int customerId = -1;
+  Navbar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +107,20 @@ class Navbar extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (BuildContext context) => WishlistPage(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Image(
+              image: AssetImage('images/Navbar_orders.png'),
+            ),
+            title: const Text('Order'),
+            onTap: () {
+
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => OrderPage(customerId: customerId,),
                 ),
               );
             },

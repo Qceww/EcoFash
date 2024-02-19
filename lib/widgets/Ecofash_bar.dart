@@ -35,10 +35,6 @@ class EcofashBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               SizedBox(width: 4.5),
-              Image(
-                image: AssetImage('images/Appbar_search.png'),
-              ),
-              SizedBox(width: 4.5),
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(

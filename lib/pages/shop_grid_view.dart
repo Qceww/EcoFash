@@ -33,7 +33,7 @@ class _ShopGridViewState extends State<ShopGridView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Navbar(),
+      drawer: Navbar(),
       appBar: const EcofashBar(),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -81,6 +81,36 @@ class _ShopGridViewState extends State<ShopGridView> {
                         ),
                       ),
                     ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 235, 232, 232),
+                      borderRadius: BorderRadius.circular(20.0),
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 0,
+                      ),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            focusedErrorBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            icon: Icon(
+                              Icons.search_sharp,
+                              size: 30,
+                            ),
+                            hintText: 'Search items'),
+                      ),
+                    ),
                   ),
                 ),
                 Column(

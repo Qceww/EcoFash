@@ -41,7 +41,7 @@ class _BloglistviewState extends State<Bloglistview> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: const Navbar(),
+      drawer: Navbar(),
       appBar: EcofashBar(),
       body: SafeArea(
         child: SingleChildScrollView(
