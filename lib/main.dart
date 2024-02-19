@@ -2,6 +2,7 @@
 
 import 'package:figma/pages/blog_detailed_view.dart';
 import 'package:figma/pages/cart_page.dart';
+import 'package:figma/pages/order_page.dart';
 import 'package:figma/pages/signin_page.dart';
 
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class _MyAppState extends State<MyApp> {
         title: 'Figma',
         theme: ThemeData(primarySwatch: Colors.blue),
 
-        home: const SignInPage());
+        home: OrderPage(customerId: 1));
 
 
   }
