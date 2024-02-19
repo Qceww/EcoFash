@@ -1,3 +1,4 @@
+import 'package:figma/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -113,34 +114,7 @@ class _CheckOut extends State<CheckOut> {
             padding: const EdgeInsets.all(25.0),
             child: Image(image: AssetImage('images/Checkout_page_line.png')),
           ),
-          Spacer(),
-          Padding(
-            padding: const EdgeInsets.all(25.0),
-            child: Image(image: AssetImage('images/Checkout_page_line.png')),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 25.0),
-            child: Row(
-              children: [
-                Text(
-                  "Total",
-                  textAlign: TextAlign.left,
-                  style: GoogleFonts.tenorSans(
-                    textStyle:
-                        const TextStyle(color: Colors.grey, fontSize: 18),
-                  ),
-                ),
-                Spacer(),
-                Text(
-                  "\$120",
-                  textAlign: TextAlign.left,
-                  style: GoogleFonts.tenorSans(
-                    textStyle: const TextStyle(color: Colors.red, fontSize: 18),
-                  ),
-                ),
-              ],
-            ),
-          )
+          CheckOutDetail(),
         ]),
       )),
       bottomNavigationBar: BottomAppBar(
@@ -165,12 +139,13 @@ class _CheckOut extends State<CheckOut> {
                 children: [
                   SizedBox(height: 5),
                   Text(
-                      "Checkout",
-                      textAlign: TextAlign.left,
-                      style: GoogleFonts.tenorSans(
-                        textStyle: const TextStyle(color: Colors.white, fontSize: 22),
-                      ),
+                    "Checkout",
+                    textAlign: TextAlign.left,
+                    style: GoogleFonts.tenorSans(
+                      textStyle:
+                          const TextStyle(color: Colors.white, fontSize: 22),
                     ),
+                  ),
                 ],
               ),
             ],
