@@ -23,9 +23,6 @@ class _PaymentSuccessState extends State<PaymentSuccess> {
           child: Center(
             child: Column(
               children: [
-                SizedBox(
-                  height: 50,
-                ),
                 // ARROW
                 GestureDetector(
                   onTap: () {

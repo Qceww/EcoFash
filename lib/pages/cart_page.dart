@@ -37,7 +37,7 @@ class CartPage extends StatelessWidget {
       ),
       bottomNavigationBar: GestureDetector(
         onTap: () {
-          Navigator.of(context).pushReplacement(
+          Navigator.of(context).push(
             MaterialPageRoute(builder: (BuildContext context) => const CheckOut()
             ) 
           );
