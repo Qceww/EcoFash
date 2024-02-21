@@ -1,7 +1,9 @@
 import 'package:figma/widgets/Ecofash_bar.dart';
 import 'package:figma/widgets/burger_menu.dart';
+import 'package:figma/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:video_player/video_player.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,76 +24,105 @@ class _HomePageState extends State<HomePage> {
           child: Center(
             child: Column(
               children: [
-                Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height - 100,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('images/Home_page_1.png'),
-                        fit: BoxFit.cover),
-                  ),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          "Luxury",
-                          style: GoogleFonts.zenAntique(
-                            textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 40,
-                                fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                        Text(
-                          "Fashion",
-                          style: GoogleFonts.zenAntique(
-                            textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 40,
-                                fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                        Text(
-                          "Series",
-                          style: GoogleFonts.zenAntique(
-                            textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 40,
-                                fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.black.withOpacity(0.5),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: const BorderSide(),
-                              )),
-                          child: Text(
-                            "EXPLORE COLLECTION",
-                            style: GoogleFonts.tenorSans(
-                              textStyle: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w300),
+                Stack(
+                  children: [
+                    BackgroundVideo(),
+                    Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height - 100,
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              "Luxury",
+                              style: GoogleFonts.zenAntique(
+                                textStyle: const TextStyle(
+                                    shadows: <Shadow>[
+                                      Shadow(
+                                        offset: Offset(5.0, 5.0),
+                                        blurRadius: 3.0,
+                                        color: Color.fromARGB(100, 0, 0, 0),
+                                      ),
+                                      Shadow(
+                                        offset: Offset(5.0, 5.0),
+                                        blurRadius: 8.0,
+                                        color: Color.fromARGB(100, 0, 0, 0),
+                                      ),
+                                    ],
+                                    color: Colors.white,
+                                    fontSize: 40,
+                                    fontWeight: FontWeight.w300),
+                              ),
                             ),
-                          ),
+                            Text(
+                              "Fashion",
+                              style: GoogleFonts.zenAntique(
+                                textStyle: const TextStyle(
+                                    shadows: <Shadow>[
+                                      Shadow(
+                                        offset: Offset(5.0, 5.0),
+                                        blurRadius: 3.0,
+                                        color: Color.fromARGB(100, 0, 0, 0),
+                                      ),
+                                      Shadow(
+                                        offset: Offset(5.0, 5.0),
+                                        blurRadius: 8.0,
+                                        color: Color.fromARGB(100, 0, 0, 0),
+                                      ),
+                                    ],
+                                    color: Colors.white,
+                                    fontSize: 40,
+                                    fontWeight: FontWeight.w300),
+                              ),
+                            ),
+                            Text(
+                              "Series",
+                              style: GoogleFonts.zenAntique(
+                                textStyle: const TextStyle(
+                                    shadows: <Shadow>[
+                                      Shadow(
+                                        offset: Offset(5.0, 5.0),
+                                        blurRadius: 3.0,
+                                        color: Color.fromARGB(100, 0, 0, 0),
+                                      ),
+                                      Shadow(
+                                        offset: Offset(5.0, 5.0),
+                                        blurRadius: 8.0,
+                                        color: Color.fromARGB(100, 0, 0, 0),
+                                      ),
+                                    ],
+                                    color: Colors.white,
+                                    fontSize: 40,
+                                    fontWeight: FontWeight.w300),
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      Colors.black.withOpacity(0.5),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    side: const BorderSide(),
+                                  )),
+                              child: Text(
+                                "EXPLORE COLLECTION",
+                                style: GoogleFonts.tenorSans(
+                                  textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 40),
+                          ],
                         ),
-                        const Image(
-                            image: AssetImage(
-                                'images/Home_page_1_Indicator_1.png')),
-                        const SizedBox(
-                          height: 10,
-                          child: Padding(
-                            padding: EdgeInsets.all(10),
-                          ),
-                        )
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
