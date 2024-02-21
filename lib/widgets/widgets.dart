@@ -4,19 +4,27 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
-class GridViews extends StatelessWidget {
+class GridViews extends StatefulWidget {
   int productId;
   String name;
   int price;
   String url;
+
   GridViews(
       {super.key,
       required this.productId,
       required this.name,
       required this.price,
       required this.url});
-  // const GridViews({super.key});
 
+  @override
+  State<GridViews> createState() => _GridViewsState();
+}
+
+class _GridViewsState extends State<GridViews> {
+  IconData wishlist = Icons.favorite_border;
+
+  // const GridViews({super.key});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -24,7 +32,7 @@ class GridViews extends StatelessWidget {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (BuildContext context) => ShopDetailedView(
-              productId: productId,
+              productId: widget.productId,
             ),
           ),
         );
@@ -39,17 +47,29 @@ class GridViews extends StatelessWidget {
                 height: 240,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('images/$url'), fit: BoxFit.cover),
+                      image: AssetImage('images/${widget.url}'),
+                      fit: BoxFit.cover),
                 ),
-                child: const Padding(
+                child: Padding(
                   padding: EdgeInsets.fromLTRB(0, 0, 5, 5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Icon(
-                        Icons.favorite_border,
-                        color: Colors.red,
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (wishlist == Icons.favorite) {
+                              wishlist = Icons.favorite_border;
+                            } else {
+                              wishlist = Icons.favorite;
+                            }
+                          });
+                        },
+                        child: Icon(
+                          wishlist,
+                          color: Colors.red,
+                        ),
                       )
                     ],
                   ),
@@ -66,7 +86,7 @@ class GridViews extends StatelessWidget {
                       textAlign: TextAlign.left,
                     ),
                     Text(
-                      name,
+                      widget.name,
                       style: GoogleFonts.tenorSans(),
                       textAlign: TextAlign.left,
                     ),
@@ -74,7 +94,7 @@ class GridViews extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      '\$$price',
+                      '\$${widget.price}',
                       style: GoogleFonts.tenorSans(
                           textStyle: const TextStyle(color: Colors.red)),
                       textAlign: TextAlign.left,
@@ -88,6 +108,41 @@ class GridViews extends StatelessWidget {
       ),
     );
   }
+}
+
+class Product {
+  int productId;
+  int colorId1;
+  int colorId2;
+  int colorId3;
+  String productName;
+  String productDescription;
+  int productQuantity;
+  int productPrice;
+  String productImage1;
+  String productImage2;
+  String productImage3;
+
+  Product({
+    required this.productId,
+    required this.colorId1,
+    required this.colorId2,
+    required this.colorId3,
+    required this.productName,
+    required this.productDescription,
+    required this.productQuantity,
+    required this.productPrice,
+    required this.productImage1,
+    required this.productImage2,
+    required this.productImage3,
+  });
+}
+
+class ColorClass {
+  int colorId;
+  String colorHex;
+
+  ColorClass({required this.colorId, required this.colorHex});
 }
 
 class ProductColor extends StatelessWidget {
@@ -108,30 +163,120 @@ class ProductColor extends StatelessWidget {
   }
 }
 
-class ProductDetailedView extends StatelessWidget {
-  String productName = '';
-  String productDescription = '';
-  int productPrice = 0;
-  ProductDetailedView(
-      {super.key,
-      required this.productName,
-      required this.productDescription,
-      required this.productPrice});
+class ProductColorBorder extends StatelessWidget {
+  String productColor = '';
+  int hexToInteger(String hex) => int.parse(hex, radix: 16);
+  ProductColorBorder({super.key, required this.productColor});
 
   @override
   Widget build(BuildContext context) {
+    return Container(
+      width: 20.0,
+      height: 20.0,
+      decoration: BoxDecoration(
+        color: Color(hexToInteger(productColor)),
+        shape: BoxShape.circle,
+        border: Border.all(color: Colors.black),
+      ),
+    );
+  }
+}
+
+class ProductSize extends StatelessWidget {
+  String Size = '';
+  int hexToInteger(String hex) => int.parse(hex, radix: 16);
+  ProductSize({super.key, required this.Size});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 20.0,
+      height: 20.0,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.black,
+          width: 0.5,
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Center(
+        child: Text(
+          Size,
+          textAlign: TextAlign.center,
+          style: GoogleFonts.tenorSans(
+            textStyle: const TextStyle(
+                color: Colors.black, fontSize: 14, fontWeight: FontWeight.w300),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ProductSizeSelected extends StatelessWidget {
+  String Size = '';
+  int hexToInteger(String hex) => int.parse(hex, radix: 16);
+  ProductSizeSelected({super.key, required this.Size});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 20.0,
+      height: 20.0,
+      decoration: BoxDecoration(
+        color: Colors.black,
+        border: Border.all(
+          color: Colors.black,
+          width: 0.5,
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Center(
+        child: Text(
+          Size,
+          textAlign: TextAlign.center,
+          style: GoogleFonts.tenorSans(
+            textStyle: const TextStyle(
+                color: Colors.white, fontSize: 14, fontWeight: FontWeight.w300),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ProductDetailedView extends StatelessWidget {
+  Product product;
+
+  ProductDetailedView({super.key, required this.product});
+
+  @override
+  Widget build(BuildContext context) {
+    List<String> images = [
+      product.productImage1,
+      product.productImage2,
+      product.productImage3,
+    ];
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
           child: Container(
             alignment: Alignment.center,
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.65,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('images/Home_page_1.png'),
-                    fit: BoxFit.cover)),
+            child: PageView.builder(
+                itemCount: 3,
+                pageSnapping: true,
+                itemBuilder: (context, pagePosition) {
+                  return Container(
+                    margin: EdgeInsets.all(10),
+                    child: Image(
+                      image: AssetImage(images[pagePosition]),
+                      fit: BoxFit.cover,
+                    ),
+                  );
+                }),
           ),
         ),
         Padding(
@@ -143,7 +288,7 @@ class ProductDetailedView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  productName,
+                  product.productName,
                   textAlign: TextAlign.left,
                   style: GoogleFonts.tenorSans(
                     textStyle: const TextStyle(
@@ -156,7 +301,7 @@ class ProductDetailedView extends StatelessWidget {
                   height: 6.0,
                 ),
                 Text(
-                  productDescription,
+                  product.productDescription,
                   textAlign: TextAlign.left,
                   style: GoogleFonts.tenorSans(
                     textStyle: const TextStyle(
@@ -169,7 +314,7 @@ class ProductDetailedView extends StatelessWidget {
                   height: 6.0,
                 ),
                 Text(
-                  '\$$productPrice',
+                  '\$${product.productPrice}',
                   textAlign: TextAlign.left,
                   style: GoogleFonts.tenorSans(
                     textStyle: const TextStyle(
@@ -363,14 +508,14 @@ class CartEmpty extends StatelessWidget {
   }
 }
 
-class Product {
+class CartProduct {
   String productName;
   String productDescription;
   int productQuantity;
   int productPrice;
   bool isChecked;
 
-  Product({
+  CartProduct({
     required this.productName,
     required this.productDescription,
     required this.productQuantity,
@@ -387,15 +532,15 @@ class CartNoEmpty extends StatefulWidget {
 }
 
 class _CartNoEmptyState extends State<CartNoEmpty> {
-  final List<Product> products = [
-    Product(
+  final List<CartProduct> cartProducts = [
+    CartProduct(
       productName: 'L A M E R E I',
       productDescription: 'Recycle Boucle Knit Cardigan Pink',
       productQuantity: 2,
       productPrice: 120,
       isChecked: true,
     ),
-    Product(
+    CartProduct(
       productName: 'L A M A K A L I',
       productDescription: 'Recycle Boucle Knit Cardigan Orange',
       productQuantity: 2,
@@ -406,8 +551,8 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
 
   void _showDeleteConfirmationDialog(int index) {
     setState(() {
-      products.removeAt(index);
-      if (products.isEmpty) {
+      cartProducts.removeAt(index);
+      if (cartProducts.isEmpty) {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => CartEmpty()),
@@ -420,7 +565,7 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
   Widget build(BuildContext context) {
     double subtotal = 0;
 
-    for (var product in products) {
+    for (var product in cartProducts) {
       // Tambahkan produk ke subtotal hanya jika checkbox tercentang
       if (product.productQuantity > 0) {
         if (product.isChecked == true) {
@@ -456,19 +601,19 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
               SizedBox(height: 15),
               Expanded(
                 child: ListView.builder(
-                  itemCount: products.length,
+                  itemCount: cartProducts.length,
                   itemBuilder: (context, index) {
-                    final product = products[index];
+                    final cartProduct = cartProducts[index];
                     return CartItem(
-                      product: product,
+                      product: cartProduct,
                       onQuantityChanged: (value) {
                         setState(() {
-                          product.productQuantity = value;
+                          cartProduct.productQuantity = value;
                         });
                       },
                       onCheckedChanged: (value) {
                         setState(() {
-                          product.isChecked = value;
+                          cartProduct.isChecked = value;
                         });
                       },
                       onDelete: () {
@@ -509,6 +654,20 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
   }
 }
 
+class CheckOutProduct {
+  String productName;
+  String productDescription;
+  int productQuantity;
+  int productPrice;
+
+  CheckOutProduct({
+    required this.productName,
+    required this.productDescription,
+    required this.productQuantity,
+    required this.productPrice,
+  });
+}
+
 class CheckOutDetail extends StatefulWidget {
   CheckOutDetail({Key? key}) : super(key: key);
 
@@ -517,19 +676,18 @@ class CheckOutDetail extends StatefulWidget {
 }
 
 class _CheckOutDetailState extends State<CheckOutDetail> {
-  final List<Product> products = [
-    Product(
-        productName: 'L A M E R E I',
-        productDescription: 'Recycle Boucle Knit Cardigan Pink',
-        productQuantity: 2,
-        productPrice: 120,
-        isChecked: true),
-    Product(
+  final List<CheckOutProduct> checkOutProducts = [
+    CheckOutProduct(
+      productName: 'L A M E R E I',
+      productDescription: 'Recycle Boucle Knit Cardigan Pink',
+      productQuantity: 2,
+      productPrice: 120,
+    ),
+    CheckOutProduct(
       productName: 'L A M A K A L I',
       productDescription: 'Recycle Boucle Knit Cardigan Orange',
       productQuantity: 2,
       productPrice: 100,
-      isChecked: true,
     ),
   ];
 
@@ -537,7 +695,7 @@ class _CheckOutDetailState extends State<CheckOutDetail> {
   Widget build(BuildContext context) {
     double total = 0;
 
-    for (var product in products) {
+    for (var product in checkOutProducts) {
       total += product.productPrice * product.productQuantity;
     }
 
@@ -547,12 +705,10 @@ class _CheckOutDetailState extends State<CheckOutDetail> {
         child: Column(children: [
           Expanded(
             child: ListView.builder(
-              itemCount: products.length,
+              itemCount: checkOutProducts.length,
               itemBuilder: (context, index) {
-                final product = products[index];
-                return CheckOutItem(
-                  product: product,
-                );
+                final checkOutProduct = checkOutProducts[index];
+                return CheckOutItem(product: checkOutProduct);
               },
             ),
           ),
@@ -583,7 +739,7 @@ class _CheckOutDetailState extends State<CheckOutDetail> {
 }
 
 class CartItem extends StatefulWidget {
-  final Product product;
+  final CartProduct product;
   final ValueChanged<int> onQuantityChanged;
   final VoidCallback onDelete;
   final ValueChanged<bool> onCheckedChanged;
@@ -966,7 +1122,7 @@ class OrderDetail extends StatelessWidget {
 }
 
 class CheckOutItem extends StatelessWidget {
-  final Product product;
+  final CheckOutProduct product;
 
   const CheckOutItem({
     Key? key,
@@ -1007,7 +1163,7 @@ class CheckOutItem extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 5),
-                Text(product.productQuantity.toString() + ' Pcs'),
+                Text(product.productQuantity.toString() + ' Pc(s)'),
                 Text(
                   '\$${product.productPrice}',
                   style: TextStyle(

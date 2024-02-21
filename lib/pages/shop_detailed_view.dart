@@ -15,9 +15,34 @@ class ShopDetailedView extends StatefulWidget {
 }
 
 class _ShopDetailedView extends State<ShopDetailedView> {
+  String added = 'ADD TO BASKET';
   bool shippingDropDown = false;
   bool codDropDown = false;
   bool returnDropDown = false;
+
+  Product product = Product(
+      productId: 1,
+      colorId1: 1,
+      colorId2: 2,
+      colorId3: 3,
+      productName: 'MOHAN',
+      productDescription: 'Recycle Boucle Knit Cardigan Pink',
+      productQuantity: 100,
+      productPrice: 120,
+      productImage1: 'images/Home_page_1.png',
+      productImage2: 'images/Home_page_1.png',
+      productImage3: 'images/Home_page_1.png');
+
+  List<ColorClass> colors = [
+    ColorClass(colorId: 1, colorHex: 'FFF0456'),
+    ColorClass(colorId: 1, colorHex: 'FFF0123F'),
+    ColorClass(colorId: 1, colorHex: 'FFFFF000F'),
+  ];
+
+  List<String> sizes = ['S', 'M', 'L'];
+
+  int selectedIndex = -1;
+  int selectedIndex2 = -1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,10 +54,7 @@ class _ShopDetailedView extends State<ShopDetailedView> {
           child: Center(
             child: Column(
               children: [
-                ProductDetailedView(
-                    productName: 'MOHAN',
-                    productDescription: 'Recycle Boucle Knit Cardigan Pink',
-                    productPrice: 120),
+                ProductDetailedView(product: product),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
                   child: Container(
@@ -52,17 +74,25 @@ class _ShopDetailedView extends State<ShopDetailedView> {
                         SizedBox(
                           width: 10.0,
                         ),
-                        ProductColor(productColor: 'FFF0456'),
-                        SizedBox(
-                          width: 8.0,
-                        ),
-                        ProductColor(productColor: 'FFF0123F'),
-                        SizedBox(
-                          width: 8.0,
-                        ),
-                        ProductColor(productColor: 'FFFFF000F'),
-                        SizedBox(
-                          width: 30.0,
+                        Wrap(
+                          direction: Axis.horizontal,
+                          children: List.generate(3, (index) {
+                            return InkWell(
+                              onTap: () {
+                                setState(() {
+                                  selectedIndex = index;
+                                });
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.only(right: 10),
+                                child: selectedIndex == index
+                                    ? ProductColorBorder(
+                                        productColor: colors[index].colorHex)
+                                    : ProductColor(
+                                        productColor: colors[index].colorHex),
+                              ),
+                            );
+                          }),
                         ),
                         Text(
                           'Size',
@@ -80,78 +110,97 @@ class _ShopDetailedView extends State<ShopDetailedView> {
                         Container(
                           child: Row(
                             children: [
-                              Container(
-                                width: 20.0,
-                                height: 20.0,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.black,
-                                    width: 0.5,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Center(
-                                    child: Text(
-                                  "S",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.tenorSans(
-                                    textStyle: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w300),
-                                  ),
-                                )),
+                              Wrap(
+                                direction: Axis.horizontal,
+                                children: List.generate(3, (index2) {
+                                  return InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        selectedIndex2 = index2;
+                                      });
+                                    },
+                                    child: Container(
+                                      margin: const EdgeInsets.only(right: 10),
+                                      child: selectedIndex2 == index2
+                                          ? ProductSizeSelected(
+                                              Size: sizes[index2])
+                                          : ProductSize(Size: sizes[index2]),
+                                    ),
+                                  );
+                                }),
                               ),
-                              SizedBox(
-                                width: 8.0,
-                              ),
-                              Container(
-                                width: 20.0,
-                                height: 20.0,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.black,
-                                    width: 0.5,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Center(
-                                    child: Text(
-                                  "M",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.tenorSans(
-                                    textStyle: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w300),
-                                  ),
-                                )),
-                              ),
-                              SizedBox(
-                                width: 8.0,
-                              ),
-                              Container(
-                                width: 20.0,
-                                height: 20.0,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.black,
-                                    width: 0.5,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Center(
-                                    child: Text(
-                                  "L",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.tenorSans(
-                                    textStyle: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w300),
-                                  ),
-                                )),
-                              ),
+                              // Container(
+                              //   width: 20.0,
+                              //   height: 20.0,
+                              //   decoration: BoxDecoration(
+                              //     border: Border.all(
+                              //       color: Colors.black,
+                              //       width: 0.5,
+                              //     ),
+                              //     borderRadius: BorderRadius.circular(10),
+                              //   ),
+                              //   child: Center(
+                              //       child: Text(
+                              //     "S",
+                              //     textAlign: TextAlign.center,
+                              //     style: GoogleFonts.tenorSans(
+                              //       textStyle: const TextStyle(
+                              //           color: Colors.black,
+                              //           fontSize: 14,
+                              //           fontWeight: FontWeight.w300),
+                              //     ),
+                              //   )),
+                              // ),
+                              // SizedBox(
+                              //   width: 8.0,
+                              // ),
+                              // Container(
+                              //   width: 20.0,
+                              //   height: 20.0,
+                              //   decoration: BoxDecoration(
+                              //     border: Border.all(
+                              //       color: Colors.black,
+                              //       width: 0.5,
+                              //     ),
+                              //     borderRadius: BorderRadius.circular(10),
+                              //   ),
+                              //   child: Center(
+                              //       child: Text(
+                              //     "M",
+                              //     textAlign: TextAlign.center,
+                              //     style: GoogleFonts.tenorSans(
+                              //       textStyle: const TextStyle(
+                              //           color: Colors.black,
+                              //           fontSize: 14,
+                              //           fontWeight: FontWeight.w300),
+                              //     ),
+                              //   )),
+                              // ),
+                              // SizedBox(
+                              //   width: 8.0,
+                              // ),
+                              // Container(
+                              //   width: 20.0,
+                              //   height: 20.0,
+                              //   decoration: BoxDecoration(
+                              //     border: Border.all(
+                              //       color: Colors.black,
+                              //       width: 0.5,
+                              //     ),
+                              //     borderRadius: BorderRadius.circular(10),
+                              //   ),
+                              //   child: Center(
+                              //       child: Text(
+                              //     "L",
+                              //     textAlign: TextAlign.center,
+                              //     style: GoogleFonts.tenorSans(
+                              //       textStyle: const TextStyle(
+                              //           color: Colors.black,
+                              //           fontSize: 14,
+                              //           fontWeight: FontWeight.w300),
+                              //     ),
+                              //   )),
+                              // ),
                             ],
                           ),
                         )
@@ -610,21 +659,32 @@ class _ShopDetailedView extends State<ShopDetailedView> {
         padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
         color: Colors.black,
         child: Row(children: [
-          const Image(
-            image: AssetImage('images/Shop_Detailed_View_Plus.png'),
-          ),
-          SizedBox(
-            width: 20.0,
-          ),
-          Text(
-            'ADD TO BASKET',
-            textAlign: TextAlign.left,
-            style: GoogleFonts.tenorSans(
-              textStyle: const TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                added = 'ADDED TO BASKET';
+              });
+            },
+            child: Row(
+              children: [
+                Image(
+                  image: AssetImage('images/Shop_Detailed_View_Plus.png'),
+                ),
+                SizedBox(
+                  width: 20.0,
+                ),
+                Text(
+                  added,
+                  textAlign: TextAlign.left,
+                  style: GoogleFonts.tenorSans(
+                    textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           Spacer(),

@@ -37,10 +37,8 @@ class CartPage extends StatelessWidget {
       ),
       bottomNavigationBar: GestureDetector(
         onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (BuildContext context) => const CheckOut()
-            ) 
-          );
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) => const CheckOut()));
         },
         child: BottomAppBar(
           height: 60.0,
@@ -58,7 +56,6 @@ class CartPage extends StatelessWidget {
                         Icons.shopping_bag_outlined,
                         color: Colors.white,
                         size: 25,
-                        
                       ),
                       onPressed: () {
                         Navigator.pop(context);
@@ -71,8 +68,8 @@ class CartPage extends StatelessWidget {
                           "BUY NOW",
                           textAlign: TextAlign.left,
                           style: GoogleFonts.tenorSans(
-                            textStyle:
-                                const TextStyle(color: Colors.white, fontSize: 22),
+                            textStyle: const TextStyle(
+                                color: Colors.white, fontSize: 22),
                           ),
                         ),
                       ],
