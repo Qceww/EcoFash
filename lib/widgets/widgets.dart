@@ -23,7 +23,9 @@ class GridViews extends StatelessWidget {
       onTap: () {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (BuildContext context) => ShopDetailedView(productId: productId,),
+            builder: (BuildContext context) => ShopDetailedView(
+              productId: productId,
+            ),
           ),
         );
       },
@@ -541,7 +543,7 @@ class _CheckOutDetailState extends State<CheckOutDetail> {
 
     return SingleChildScrollView(
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.375,
+        height: MediaQuery.of(context).size.height * 0.3,
         child: Column(children: [
           Expanded(
             child: ListView.builder(
@@ -605,7 +607,7 @@ class _CartItemState extends State<CartItem> {
       title: Container(
         height: 150,
         decoration: BoxDecoration(
-        color: Colors.white,
+          color: Colors.white,
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1019,5 +1021,83 @@ class CheckOutItem extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class Reward {
+  int rewardId;
+  String rewardName;
+  dynamic rewardExpiry;
+  String rewardLocation;
+
+  Reward(
+      {required this.rewardId,
+      required this.rewardName,
+      required this.rewardExpiry,
+      required this.rewardLocation});
+}
+
+class RewardDetail extends StatelessWidget {
+  Reward reward;
+  int customerId;
+
+  RewardDetail({Key? key, required this.reward, required this.customerId})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.875,
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 235, 232, 232),
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0.0),
+                child: Text(
+                  "${reward.rewardName}",
+                  style: GoogleFonts.zenAntique(
+                    textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w200,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10.0, 4.0, 10.0, 4.0),
+                child: Text(
+                  "Expiry Date : ${reward.rewardExpiry}",
+                  style: GoogleFonts.zenAntique(
+                    textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w200,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10.0, 4.0, 10.0, 20.0),
+                child: Text(
+                  "Location : ${reward.rewardLocation}",
+                  style: GoogleFonts.zenAntique(
+                    textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w200,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }

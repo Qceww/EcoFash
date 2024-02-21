@@ -1,4 +1,5 @@
 import 'package:figma/pages/paymentSuccess.dart';
+import 'package:figma/pages/reward_page.dart';
 import 'package:figma/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,14 +16,27 @@ class _CheckOut extends State<CheckOut> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.grey,
-      ),
       body: SafeArea(
           child: Center(
         child: Column(children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20.0),
+                child: Image(
+                  image: AssetImage('images/Paymen_Success_arrow.png'),
+                  width: MediaQuery.of(context).size.width * 0.08,
+                  height: MediaQuery.of(context).size.height * 0.05,
+                ),
+              ),
+            ),
+          ),
           Padding(
-            padding: EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 40.0),
+            padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 40.0),
             child: Column(
               children: [
                 Text(
@@ -108,6 +122,34 @@ class _CheckOut extends State<CheckOut> {
                 ),
                 Spacer(),
                 Image(image: AssetImage('images/Checkout_page_arrow.png')),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(25.0),
+            child: Image(image: AssetImage('images/Checkout_page_line.png')),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+            child: Row(
+              children: [
+                Text(
+                  "Apply voucher before you check out",
+                  textAlign: TextAlign.left,
+                  style: GoogleFonts.tenorSans(
+                    textStyle:
+                        const TextStyle(color: Colors.grey, fontSize: 18),
+                  ),
+                ),
+                Spacer(),
+                GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              RewardPage(customerId: 1)));
+                    },
+                    child: Image(
+                        image: AssetImage('images/Checkout_page_arrow.png'))),
               ],
             ),
           ),
