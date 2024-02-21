@@ -43,6 +43,7 @@ class _ShopDetailedView extends State<ShopDetailedView> {
 
   int selectedIndex = -1;
   int selectedIndex2 = -1;
+  IconData wishlist = Icons.favorite_border;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -688,9 +689,20 @@ class _ShopDetailedView extends State<ShopDetailedView> {
             ),
           ),
           Spacer(),
-          Icon(
-            Icons.favorite_border,
-            color: Colors.white,
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                if (wishlist == Icons.favorite) {
+                  wishlist = Icons.favorite_border;
+                } else {
+                  wishlist = Icons.favorite;
+                }
+              });
+            },
+            child: Icon(
+              wishlist,
+              color: Colors.white,
+            ),
           )
         ]),
       ),
