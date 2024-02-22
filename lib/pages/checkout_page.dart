@@ -13,11 +13,12 @@ class CheckOut extends StatefulWidget {
 }
 
 class _CheckOut extends State<CheckOut> {
-  AudioPlayer player = AudioPlayer();
+  final player = AudioPlayer();
 
-  Future<void> playSound() async {
-    String soundPath = "assets/Payment_Success.mp3"; //You don't need to include assets/ because AssetSource assume that you have sound in your assets folder.
-    await player.play(AssetSource(soundPath));
+  Future<void> playSound() async{
+    String soundPath = "Success_Payment.mp3"; 
+    // await player.play(AssetSource(soundPath));
+    player.play(AssetSource(soundPath));
   }
 
   @override
@@ -36,7 +37,7 @@ class _CheckOut extends State<CheckOut> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 20.0),
                 child: Image(
-                  image: AssetImage('images/Paymen_Success_arrow.png'),
+                  image: const AssetImage('images/Paymen_Success_arrow.png'),
                   width: MediaQuery.of(context).size.width * 0.08,
                   height: MediaQuery.of(context).size.height * 0.05,
                 ),
@@ -57,7 +58,8 @@ class _CheckOut extends State<CheckOut> {
                         fontWeight: FontWeight.w400),
                   ),
                 ),
-                Image(image: AssetImage('images/Checkout_page_title.png')),
+                const Image(
+                    image: AssetImage('images/Checkout_page_title.png')),
               ],
             ),
           ),
@@ -100,12 +102,13 @@ class _CheckOut extends State<CheckOut> {
                       ]),
                 ),
                 Spacer(),
-                Image(image: AssetImage('images/Checkout_page_arrow.png')),
+                const Image(
+                    image: AssetImage('images/Checkout_page_arrow.png')),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(25.0),
+          const Padding(
+            padding: EdgeInsets.all(25.0),
             child: Image(image: AssetImage('images/Checkout_page_line.png')),
           ),
           Padding(
@@ -114,7 +117,7 @@ class _CheckOut extends State<CheckOut> {
               children: [
                 Container(
                     width: 60.0,
-                    child: Image(
+                    child: const Image(
                         image:
                             AssetImage('images/Checkout_page_masterCard.png'))),
                 SizedBox(
@@ -129,12 +132,13 @@ class _CheckOut extends State<CheckOut> {
                   ),
                 ),
                 Spacer(),
-                Image(image: AssetImage('images/Checkout_page_arrow.png')),
+                const Image(
+                    image: AssetImage('images/Checkout_page_arrow.png')),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(25.0),
+          const Padding(
+            padding: EdgeInsets.all(25.0),
             child: Image(image: AssetImage('images/Checkout_page_line.png')),
           ),
           Padding(
@@ -149,28 +153,29 @@ class _CheckOut extends State<CheckOut> {
                         const TextStyle(color: Colors.grey, fontSize: 18),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (BuildContext context) =>
                               RewardPage(customerId: 1)));
                     },
-                    child: Image(
+                    child: const Image(
                         image: AssetImage('images/Checkout_page_arrow.png'))),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(25.0),
+          const Padding(
+            padding: EdgeInsets.all(25.0),
             child: Image(image: AssetImage('images/Checkout_page_line.png')),
           ),
           CheckOutDetail(),
         ]),
       )),
       bottomNavigationBar: GestureDetector(
-        onTap: () async {
-          await playSound();
+        onTap: () {
+          playSound();
+
           Navigator.of(context).pushReplacement(MaterialPageRoute(
               builder: (BuildContext context) => const PaymentSuccess()));
         },
@@ -186,7 +191,7 @@ class _CheckOut extends State<CheckOut> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.shopping_bag_outlined,
                         color: Colors.white,
                         size: 25,
