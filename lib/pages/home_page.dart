@@ -1,3 +1,4 @@
+import 'package:figma/pages/shop_detailed_view.dart';
 import 'package:figma/widgets/Ecofash_bar.dart';
 import 'package:figma/widgets/burger_menu.dart';
 import 'package:figma/widgets/widgets.dart';
@@ -13,6 +14,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<String> category = ['All', 'Apparel', 'Dress', 'T-shirt', 'Bag'];
+
+  int selectedIndex = -1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,65 +153,41 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                'All',
-                                style: GoogleFonts.tenorSans(
-                                  textStyle: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w300),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'Apparel',
-                                style: GoogleFonts.tenorSans(
-                                  textStyle: const TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w300),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'Dress',
-                                style: GoogleFonts.tenorSans(
-                                  textStyle: const TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w300),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'Tshirt',
-                                style: GoogleFonts.tenorSans(
-                                  textStyle: const TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w300),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'Bag',
-                                style: GoogleFonts.tenorSans(
-                                  textStyle: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w300),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
+                              Wrap(
+                                direction: Axis.horizontal,
+                                children: List.generate(5, (index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        selectedIndex = index;
+                                      });
+                                    },
+                                    child: Container(
+                                      margin: const EdgeInsets.only(right: 10),
+                                      child: selectedIndex == index
+                                          ? Text(
+                                              category[index],
+                                              style: GoogleFonts.tenorSans(
+                                                textStyle: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 22,
+                                                    fontWeight:
+                                                        FontWeight.w300),
+                                              ),
+                                            )
+                                          : Text(
+                                              category[index],
+                                              style: GoogleFonts.tenorSans(
+                                                textStyle: const TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 22,
+                                                    fontWeight:
+                                                        FontWeight.w300),
+                                              ),
+                                            ),
+                                    ),
+                                  );
+                                }),
                               ),
                             ],
                           ),
@@ -224,17 +204,11 @@ class _HomePageState extends State<HomePage> {
                                 child: Center(
                                   child: Column(
                                     children: [
-                                      const Image(
-                                        image: AssetImage(
-                                            'images/Home_page_new_arrival_1.png'),
-                                      ),
-                                      Text(
-                                        '21WN reversible angora cardigan',
-                                        style: GoogleFonts.tenorSans(),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      Text('\$120',
-                                          style: GoogleFonts.tenorSans())
+                                      GridViews(
+                                          productId: 1,
+                                          name: 'reversible angora cardigan',
+                                          price: 120,
+                                          url: 'Home_page_new_arrival_1.png'),
                                     ],
                                   ),
                                 ),
@@ -244,17 +218,11 @@ class _HomePageState extends State<HomePage> {
                                 child: Center(
                                   child: Column(
                                     children: [
-                                      const Image(
-                                        image: AssetImage(
-                                            'images/Home_page_new_arrival_1.png'),
-                                      ),
-                                      Text(
-                                        '21WN reversible angora cardigan',
-                                        style: GoogleFonts.tenorSans(),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      Text('\$120',
-                                          style: GoogleFonts.tenorSans()),
+                                      GridViews(
+                                          productId: 1,
+                                          name: 'reversible angora cardigan',
+                                          price: 120,
+                                          url: 'Home_page_new_arrival_1.png'),
                                     ],
                                   ),
                                 ),
@@ -271,17 +239,11 @@ class _HomePageState extends State<HomePage> {
                                 child: Center(
                                   child: Column(
                                     children: [
-                                      const Image(
-                                        image: AssetImage(
-                                            'images/Home_page_new_arrival_1.png'),
-                                      ),
-                                      Text(
-                                        '21WN reversible angora cardigan',
-                                        style: GoogleFonts.tenorSans(),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      Text('\$120',
-                                          style: GoogleFonts.tenorSans())
+                                      GridViews(
+                                          productId: 1,
+                                          name: 'reversible angora cardigan',
+                                          price: 120,
+                                          url: 'Home_page_new_arrival_1.png'),
                                     ],
                                   ),
                                 ),
@@ -291,17 +253,11 @@ class _HomePageState extends State<HomePage> {
                                 child: Center(
                                   child: Column(
                                     children: [
-                                      const Image(
-                                        image: AssetImage(
-                                            'images/Home_page_new_arrival_1.png'),
-                                      ),
-                                      Text(
-                                        '21WN reversible angora cardigan',
-                                        style: GoogleFonts.tenorSans(),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      Text('\$120',
-                                          style: GoogleFonts.tenorSans()),
+                                      GridViews(
+                                          productId: 1,
+                                          name: 'reversible angora cardigan',
+                                          price: 120,
+                                          url: 'Home_page_new_arrival_1.png'),
                                     ],
                                   ),
                                 ),
@@ -431,109 +387,157 @@ class _HomePageState extends State<HomePage> {
                             scrollDirection: Axis.horizontal,
                             child: Row(
                               children: [
-                                Container(
-                                  child: Column(
-                                    children: [
-                                      const Image(
-                                        image: AssetImage(
-                                            'images/Home_page_page_view_1.png'),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        'Harris Tweed Three Button Jacket',
-                                        style: GoogleFonts.tenorSans(),
-                                      ),
-                                      Text(
-                                        '\$120',
-                                        style: GoogleFonts.tenorSans(
-                                          textStyle: const TextStyle(
-                                              color: Colors.red),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            ShopDetailedView(
+                                          productId: 1,
                                         ),
-                                      )
-                                    ],
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    child: Column(
+                                      children: [
+                                        const Image(
+                                          image: AssetImage(
+                                              'images/Home_page_page_view_1.png'),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          'Harris Tweed Three Button Jacket',
+                                          style: GoogleFonts.tenorSans(),
+                                        ),
+                                        Text(
+                                          '\$120',
+                                          style: GoogleFonts.tenorSans(
+                                            textStyle: const TextStyle(
+                                                color: Colors.red),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(
                                   width: 20,
                                 ),
-                                Container(
-                                  child: Column(
-                                    children: [
-                                      const Image(
-                                        image: AssetImage(
-                                            'images/Home_page_page_view_2.png'),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        'Harris Tweed Three Button Jacket',
-                                        style: GoogleFonts.tenorSans(),
-                                      ),
-                                      Text(
-                                        '\$120',
-                                        style: GoogleFonts.tenorSans(
-                                          textStyle: const TextStyle(
-                                              color: Colors.red),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            ShopDetailedView(
+                                          productId: 1,
                                         ),
-                                      )
-                                    ],
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    child: Column(
+                                      children: [
+                                        const Image(
+                                          image: AssetImage(
+                                              'images/Home_page_page_view_2.png'),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          'Harris Tweed Three Button Jacket',
+                                          style: GoogleFonts.tenorSans(),
+                                        ),
+                                        Text(
+                                          '\$120',
+                                          style: GoogleFonts.tenorSans(
+                                            textStyle: const TextStyle(
+                                                color: Colors.red),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(
                                   width: 20,
                                 ),
-                                Container(
-                                  child: Column(
-                                    children: [
-                                      const Image(
-                                        image: AssetImage(
-                                            'images/Home_page_page_view_3.png'),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        'Harris Tweed Three Button Jacket',
-                                        style: GoogleFonts.tenorSans(),
-                                      ),
-                                      Text(
-                                        '\$120',
-                                        style: GoogleFonts.tenorSans(
-                                          textStyle: const TextStyle(
-                                              color: Colors.red),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            ShopDetailedView(
+                                          productId: 1,
                                         ),
-                                      )
-                                    ],
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    child: Column(
+                                      children: [
+                                        const Image(
+                                          image: AssetImage(
+                                              'images/Home_page_page_view_3.png'),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          'Harris Tweed Three Button Jacket',
+                                          style: GoogleFonts.tenorSans(),
+                                        ),
+                                        Text(
+                                          '\$120',
+                                          style: GoogleFonts.tenorSans(
+                                            textStyle: const TextStyle(
+                                                color: Colors.red),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(
                                   width: 20,
                                 ),
-                                Container(
-                                  child: Column(
-                                    children: [
-                                      const Image(
-                                        image: AssetImage(
-                                            'images/Home_page_page_view_1.png'),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        '1WN reversible angora cardigan',
-                                        style: GoogleFonts.tenorSans(),
-                                      ),
-                                      Text(
-                                        '\$120',
-                                        style: GoogleFonts.tenorSans(
-                                          textStyle: const TextStyle(
-                                              color: Colors.red),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            ShopDetailedView(
+                                          productId: 1,
                                         ),
-                                      )
-                                    ],
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    child: Column(
+                                      children: [
+                                        const Image(
+                                          image: AssetImage(
+                                              'images/Home_page_page_view_1.png'),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          '1WN reversible angora cardigan',
+                                          style: GoogleFonts.tenorSans(),
+                                        ),
+                                        Text(
+                                          '\$120',
+                                          style: GoogleFonts.tenorSans(
+                                            textStyle: const TextStyle(
+                                                color: Colors.red),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],

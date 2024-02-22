@@ -1,4 +1,5 @@
 import 'package:figma/pages/cart_page.dart';
+import 'package:figma/pages/home_page.dart';
 import 'package:figma/pages/qr_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,10 +11,19 @@ class EcofashBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.black),
-      title: Text(
-        'EcoFash',
-        style: GoogleFonts.zenAntique(
-          textStyle: const TextStyle(color: Colors.black, fontSize: 30),
+      title: GestureDetector(
+        onTap: () {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (BuildContext context) => const HomePage(),
+            ),
+          );
+        },
+        child: Text(
+          'EcoFash',
+          style: GoogleFonts.zenAntique(
+            textStyle: const TextStyle(color: Colors.black, fontSize: 30),
+          ),
         ),
       ),
       centerTitle: true,
