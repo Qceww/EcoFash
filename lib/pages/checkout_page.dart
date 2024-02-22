@@ -3,6 +3,7 @@ import 'package:figma/pages/reward_page.dart';
 import 'package:figma/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class CheckOut extends StatefulWidget {
   const CheckOut({super.key});
@@ -12,6 +13,13 @@ class CheckOut extends StatefulWidget {
 }
 
 class _CheckOut extends State<CheckOut> {
+  AudioPlayer player = AudioPlayer();
+
+  Future<void> playSound() async {
+    String soundPath = "assets/Payment_Success.mp3"; //You don't need to include assets/ because AssetSource assume that you have sound in your assets folder.
+    await player.play(AssetSource(soundPath));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -161,7 +169,8 @@ class _CheckOut extends State<CheckOut> {
         ]),
       )),
       bottomNavigationBar: GestureDetector(
-        onTap: () {
+        onTap: () async {
+          await playSound();
           Navigator.of(context).pushReplacement(MaterialPageRoute(
               builder: (BuildContext context) => const PaymentSuccess()));
         },
