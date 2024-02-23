@@ -1,3 +1,5 @@
+import 'package:figma/classes/user.dart';
+import 'package:figma/functions/functions.dart';
 import 'package:figma/pages/home_page.dart';
 import 'package:figma/pages/signup_page.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,9 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +27,7 @@ class _SignInPageState extends State<SignInPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 50),
-        
+
                 //Logo
                 Text(
                   "EcoFash",
@@ -33,9 +38,9 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                 ),
-        
+
                 const SizedBox(height: 50),
-        
+
                 //Sign Up
                 Text(
                   "Sign In",
@@ -46,38 +51,40 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                 ),
-        
+
                 //divider
                 const Divider(
                   indent: 130,
                   endIndent: 130,
                 ),
-        
+
                 const SizedBox(height: 20),
-        
+
                 //Email
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: TextField(
-                    decoration: InputDecoration(
+                    controller: _emailController,
+                    decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
                       labelText: "Email",
                     ),
                   ),
                 ),
-        
+
                 //Password
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: TextField(
+                    controller: _passwordController,
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
                       labelText: "Password",
                     ),
                   ),
                 ),
-        
+
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 5),
                   child: Row(
@@ -92,23 +99,33 @@ class _SignInPageState extends State<SignInPage> {
                     ],
                   ),
                 ),
-        
+
                 const SizedBox(height: 20.0),
-        
+
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => const HomePage(),
-                      ),
-                    );
+                  onPressed: () async {
+                    final email = _emailController.text;
+                    final password = _passwordController.text;
+
+                    User? user = await loginUser(email, password);
+
+                    if (user is User) {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => const HomePage(),
+                        ),
+                      );
+                    } else {
+                      print("Login Failed");
+                    }
                   },
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
                   child: const Text("Sign In"),
                 ),
-        
+
                 const SizedBox(height: 20.0),
-        
+
                 const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Row(
@@ -138,9 +155,9 @@ class _SignInPageState extends State<SignInPage> {
                     ],
                   ),
                 ),
-        
+
                 const SizedBox(height: 20),
-        
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -149,11 +166,11 @@ class _SignInPageState extends State<SignInPage> {
                     Image.asset("images/Logo_Facebook.png")
                   ],
                 ),
-        
+
                 const SizedBox(
                   height: 90,
                 ),
-        
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
