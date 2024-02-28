@@ -1,6 +1,9 @@
+import 'package:figma/classes/product.dart';
+import 'package:figma/functions/functions.dart';
 import 'package:figma/pages/shop_detailed_view.dart';
 import 'package:figma/widgets/Ecofash_bar.dart';
 import 'package:figma/widgets/burger_menu.dart';
+import 'package:figma/widgets/video_widget.dart';
 import 'package:figma/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +18,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<String> category = ['All', 'Apparel', 'Dress', 'T-shirt', 'Bag'];
+
+  Future<List<Product>?> products = getProduct();
 
   int selectedIndex = -1;
   @override
@@ -45,12 +50,12 @@ class _HomePageState extends State<HomePage> {
                                 textStyle: const TextStyle(
                                     shadows: <Shadow>[
                                       Shadow(
-                                        offset: Offset(5.0, 5.0),
+                                        offset: Offset(0, 0),
                                         blurRadius: 3.0,
                                         color: Color.fromARGB(100, 0, 0, 0),
                                       ),
                                       Shadow(
-                                        offset: Offset(5.0, 5.0),
+                                        offset: Offset(0, 0),
                                         blurRadius: 8.0,
                                         color: Color.fromARGB(100, 0, 0, 0),
                                       ),
@@ -66,12 +71,12 @@ class _HomePageState extends State<HomePage> {
                                 textStyle: const TextStyle(
                                     shadows: <Shadow>[
                                       Shadow(
-                                        offset: Offset(5.0, 5.0),
+                                        offset: Offset(0, 0),
                                         blurRadius: 3.0,
                                         color: Color.fromARGB(100, 0, 0, 0),
                                       ),
                                       Shadow(
-                                        offset: Offset(5.0, 5.0),
+                                        offset: Offset(0, 0),
                                         blurRadius: 8.0,
                                         color: Color.fromARGB(100, 0, 0, 0),
                                       ),
@@ -87,12 +92,12 @@ class _HomePageState extends State<HomePage> {
                                 textStyle: const TextStyle(
                                     shadows: <Shadow>[
                                       Shadow(
-                                        offset: Offset(5.0, 5.0),
+                                        offset: Offset(0, 0),
                                         blurRadius: 3.0,
                                         color: Color.fromARGB(100, 0, 0, 0),
                                       ),
                                       Shadow(
-                                        offset: Offset(5.0, 5.0),
+                                        offset: Offset(0, 0),
                                         blurRadius: 8.0,
                                         color: Color.fromARGB(100, 0, 0, 0),
                                       ),
@@ -195,76 +200,178 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width / 2,
-                                child: Center(
-                                  child: Column(
-                                    children: [
-                                      GridViews(
-                                          productId: 1,
-                                          name: 'reversible angora cardigan',
-                                          price: 120,
-                                          url: 'Home_page_new_arrival_1.png'),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width / 2,
-                                child: Center(
-                                  child: Column(
-                                    children: [
-                                      GridViews(
-                                          productId: 1,
-                                          name: 'reversible angora cardigan',
-                                          price: 120,
-                                          url: 'Home_page_new_arrival_1.png'),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width / 2,
-                                child: Center(
-                                  child: Column(
-                                    children: [
-                                      GridViews(
-                                          productId: 1,
-                                          name: 'reversible angora cardigan',
-                                          price: 120,
-                                          url: 'Home_page_new_arrival_1.png'),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width / 2,
-                                child: Center(
-                                  child: Column(
-                                    children: [
-                                      GridViews(
-                                          productId: 1,
-                                          name: 'reversible angora cardigan',
-                                          price: 120,
-                                          url: 'Home_page_new_arrival_1.png'),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        FutureBuilder(
+                            future: products,
+                            builder: (BuildContext context,
+                                AsyncSnapshot<List<Product>?> snapshot) {
+                              List<Product>? productList = snapshot.data;
+
+                              if (snapshot.hasData) {
+                                // print(productList!.elementAt(0));
+                                // print(productList!.elementAt(1));
+                                // print(productList!.elementAt(2));
+                                // print(productList!.elementAt(3).productId);
+                                return Column(
+                                  children: [
+                                    Container(
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2,
+                                            child: Center(
+                                              child: Column(
+                                                children: [
+                                                  GridViews(
+                                                    productId: productList!.elementAt(4).productId,
+                                                    name: productList!.elementAt(4).productName,
+                                                    price: productList!.elementAt(4).productPrice,
+                                                    url: productList!.elementAt(4).picture1,  
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2,
+                                            child: Center(
+                                              child: Column(
+                                                children: [
+                                                  GridViews(
+                                                      productId: productList?.elementAt(1).productId,
+                                                    name: productList?.elementAt(1).productName,
+                                                    price: productList?.elementAt(1).productPrice,
+                                                    url: productList?.elementAt(1).picture1,),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2,
+                                            child: Center(
+                                              child: Column(
+                                                children: [
+                                                  GridViews(
+                                                      productId: productList?.elementAt(2).productId,
+                                                    name: productList?.elementAt(2).productName,
+                                                    price: productList?.elementAt(2).productPrice,
+                                                    url: productList?.elementAt(2).picture1,),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2,
+                                            child: Center(
+                                              child: Column(
+                                                children: [
+                                                  GridViews(
+                                                      productId: productList?.elementAt(3).productId,
+                                                    name: productList?.elementAt(3).productName,
+                                                    price: productList?.elementAt(3).productPrice,
+                                                    url: productList?.elementAt(3).picture1,),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              } else {
+                                return const CircularProgressIndicator();
+                              }
+                            }),
+                        // Container(
+                        //   child: Row(
+                        //     mainAxisSize: MainAxisSize.max,
+                        //     children: [
+                        //       SizedBox(
+                        //         width: MediaQuery.of(context).size.width / 2,
+                        //         child: Center(
+                        //           child: Column(
+                        //             children: [
+                        //               GridViews(
+                        //                   productId: 1,
+                        //                   name: 'reversible angora cardigan',
+                        //                   price: 120,
+                        //                   url: 'Home_page_new_arrival_1.png'),
+                        //             ],
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       SizedBox(
+                        //         width: MediaQuery.of(context).size.width / 2,
+                        //         child: Center(
+                        //           child: Column(
+                        //             children: [
+                        //               GridViews(
+                        //                   productId: 1,
+                        //                   name: 'reversible angora cardigan',
+                        //                   price: 120,
+                        //                   url: 'Home_page_new_arrival_1.png'),
+                        //             ],
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        // Container(
+                        //   child: Row(
+                        //     mainAxisSize: MainAxisSize.max,
+                        //     children: [
+                        //       SizedBox(
+                        //         width: MediaQuery.of(context).size.width / 2,
+                        //         child: Center(
+                        //           child: Column(
+                        //             children: [
+                        //               GridViews(
+                        //                   productId: 1,
+                        //                   name: 'reversible angora cardigan',
+                        //                   price: 120,
+                        //                   url: 'Home_page_new_arrival_1.png'),
+                        //             ],
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       SizedBox(
+                        //         width: MediaQuery.of(context).size.width / 2,
+                        //         child: Center(
+                        //           child: Column(
+                        //             children: [
+                        //               GridViews(
+                        //                   productId: 1,
+                        //                   name: 'reversible angora cardigan',
+                        //                   price: 120,
+                        //                   url: 'Home_page_new_arrival_1.png'),
+                        //             ],
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                         const SizedBox(
                           height: 30,
                         ),

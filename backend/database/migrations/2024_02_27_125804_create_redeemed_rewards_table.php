@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id('userId');
-            $table->string('firstName');
-            $table->string('lastName');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('password');
+        Schema::create('redeemed_rewards', function (Blueprint $table) {
+            $table->id('redeemId');
+            $table->integer('customerId');
+            $table->integer('rewardId');
+            $table->integer('rewardQuantity');
             $table->timestamps();
+
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('redeemed_rewards');
     }
 };

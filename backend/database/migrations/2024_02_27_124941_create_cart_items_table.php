@@ -13,16 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id('userId');
-            $table->string('firstName');
-            $table->string('lastName');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('password');
+        Schema::create('cart_items', function (Blueprint $table) {
+            $table->id('cartId');
+            $table->integer('customerId');
+            $table->integer('productId');
+            $table->integer('cartQuantity');
+            $table->boolean('isChecked');
             $table->timestamps();
+
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('cart_items');
     }
 };

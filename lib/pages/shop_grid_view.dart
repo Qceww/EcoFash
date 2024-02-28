@@ -1,3 +1,5 @@
+import 'package:figma/classes/product.dart';
+import 'package:figma/functions/functions.dart';
 import 'package:figma/widgets/Ecofash_bar.dart';
 import 'package:figma/widgets/burger_menu.dart';
 import 'package:figma/widgets/widgets.dart';
@@ -30,6 +32,8 @@ class ShopGridView extends StatefulWidget {
 }
 
 class _ShopGridViewState extends State<ShopGridView> {
+  Future<List<Product>?> products = getProduct();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,157 +120,156 @@ class _ShopGridViewState extends State<ShopGridView> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 16),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: Text(
-                        "This Week' Highlights",
-                        style: GoogleFonts.tenorSans(
-                          textStyle: const TextStyle(fontSize: 16),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        GridViews(
-                            productId: 1,
-                            name: 'reversible angora cardigan',
-                            price: 120,
-                            url: 'Home_page_new_arrival_1.png'),
-                        GridViews(
-                            productId: 1,
-                            name: 'reversible angora cardigan',
-                            price: 120,
-                            url: 'Home_page_new_arrival_1.png'),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextGoogle(name: 'Best Seller'),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        GridViews(
-                            productId: 1,
-                            name: 'reversible angora cardigan',
-                            price: 120,
-                            url: 'Home_page_new_arrival_1.png'),
-                        GridViews(
-                            productId: 1,
-                            name: 'reversible angora cardigan',
-                            price: 120,
-                            url: 'Home_page_new_arrival_1.png'),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.white),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: const BorderSide(color: Colors.grey),
+                    FutureBuilder(
+                      future: products,
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        List<Product>? productItems = snapshot.data;
+
+                        if (snapshot.hasData) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                child: Text(
+                                  "This Week' Highlights",
+                                  style: GoogleFonts.tenorSans(
+                                    textStyle: const TextStyle(fontSize: 16),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                          child: Text(
-                            'Show More',
-                            style: GoogleFonts.tenorSans(
-                              textStyle: const TextStyle(
-                                  fontSize: 12, color: Colors.black),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextGoogle(name: 'More For You'),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        GridViews(
-                            productId: 1,
-                            name: 'reversible angora cardigan',
-                            price: 120,
-                            url: 'Home_page_new_arrival_1.png'),
-                        GridViews(
-                            productId: 1,
-                            name: 'reversible angora cardigan',
-                            price: 120,
-                            url: 'Home_page_new_arrival_1.png'),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        GridViews(
-                            productId: 1,
-                            name: 'reversible angora cardigan',
-                            price: 120,
-                            url: 'Home_page_new_arrival_1.png'),
-                        GridViews(
-                            productId: 1,
-                            name: 'reversible angora cardigan',
-                            price: 120,
-                            url: 'Home_page_new_arrival_1.png'),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        GridViews(
-                            productId: 1,
-                            name: 'reversible angora cardigan',
-                            price: 120,
-                            url: 'Home_page_new_arrival_1.png'),
-                        GridViews(
-                            productId: 1,
-                            name: 'reversible angora cardigan',
-                            price: 120,
-                            url: 'Home_page_new_arrival_1.png'),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.white),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: const BorderSide(color: Colors.grey),
+                              const SizedBox(height: 16),
+                              Row(
+                                children: [
+                                  for (int i = 0; i < 2; i++)
+                                    GridViews(
+                                        productId: productItems![i].productId,
+                                        name: productItems![i].productName,
+                                        price: productItems![i].productPrice,
+                                        url: productItems![i].picture1),
+                                ],
                               ),
-                            ),
-                          ),
-                          child: Text(
-                            'Show More',
-                            style: GoogleFonts.tenorSans(
-                              textStyle: const TextStyle(
-                                  fontSize: 12, color: Colors.black),
-                            ),
-                          ),
-                        ),
-                      ],
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              TextGoogle(name: 'Best Seller'),
+                              Row(
+                                children: [
+                                  for (int j = 2; j < 4; j++)
+                                    GridViews(
+                                        productId: productItems![j].productId,
+                                        name: productItems![j].productName,
+                                        price: productItems![j].productPrice,
+                                        url: productItems![j].picture1),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {},
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.white),
+                                      shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18.0),
+                                          side: const BorderSide(
+                                              color: Colors.grey),
+                                        ),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      'Show More',
+                                      style: GoogleFonts.tenorSans(
+                                        textStyle: const TextStyle(
+                                            fontSize: 12, color: Colors.black),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              TextGoogle(name: 'More For You'),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  for (int k = 4; k < 6; k++)
+                                    GridViews(
+                                        productId: productItems![k].productId,
+                                        name: productItems![k].productName,
+                                        price: productItems![k].productPrice,
+                                        url: productItems![k].picture1),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  for (int ii = 6; ii < 8; ii++)
+                                    GridViews(
+                                        productId: productItems![ii].productId,
+                                        name: productItems![ii].productName,
+                                        price: productItems![ii].productPrice,
+                                        url: productItems![ii].picture1),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  for (int ij = 8; ij < 10; ij++)
+                                    GridViews(
+                                        productId: productItems![ij].productId,
+                                        name: productItems![ij].productName,
+                                        price: productItems![ij].productPrice,
+                                        url: productItems![ij].picture1),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {},
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.white),
+                                      shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18.0),
+                                          side: const BorderSide(
+                                              color: Colors.grey),
+                                        ),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      'Show More',
+                                      style: GoogleFonts.tenorSans(
+                                        textStyle: const TextStyle(
+                                            fontSize: 12, color: Colors.black),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        } else {
+                          return const CircularProgressIndicator();
+                        }
+                      },
                     ),
                   ],
                 ),
