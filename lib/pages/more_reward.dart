@@ -5,14 +5,36 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:figma/widgets/Footer.dart';
 import 'package:figma/widgets/more_reward_widget.dart';
 
-class Morereward extends StatefulWidget {
-  const Morereward({Key? key}) : super(key: key);
+class Morereward extends StatelessWidget {
+  Morereward({Key? key}) : super(key: key);
 
-  @override
-  State<Morereward> createState() => _MorerewardState();
-}
+  final List<more_reward_widget> rewards = [
+    more_reward_widget(
+      rewardname: "50% Voucher",
+      rewardprice: "100",
+    ),
+    more_reward_widget(
+      rewardname: "20% Voucher",
+      rewardprice: "30",
+    ),
+    more_reward_widget(
+      rewardname: "23% Voucher",
+      rewardprice: "87",
+    ),
+    more_reward_widget(
+      rewardname: "25% Voucher",
+      rewardprice: "66",
+    ),
+    more_reward_widget(
+      rewardname: "89% Voucher",
+      rewardprice: "50",
+    ),
+    more_reward_widget(
+      rewardname: "20% Voucher",
+      rewardprice: "30",
+    ),
+  ];
 
-class _MorerewardState extends State<Morereward> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,12 +54,16 @@ class _MorerewardState extends State<Morereward> {
                     runSpacing: 15,
                     runAlignment: WrapAlignment.center,
                     children: [
-                      more_reward_widget(),
-                      more_reward_widget(),
-                      more_reward_widget(),
-                      more_reward_widget(),
-                      more_reward_widget(),
-                      more_reward_widget(),
+                      for (var reward in rewards)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 0),
+                          child: Column(
+                            children: [
+                              reward,
+                              SizedBox(height: 10),
+                            ],
+                          ),
+                        ),
                     ],
                   ),
                 ),
