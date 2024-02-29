@@ -1,3 +1,4 @@
+import 'package:figma/pages/address_page.dart';
 import 'package:figma/pages/blog_detailed_view.dart';
 import 'package:figma/pages/cart_page.dart';
 import 'package:figma/pages/home_page.dart';
@@ -10,6 +11,7 @@ import 'package:figma/pages/signin_page.dart';
 import 'package:figma/pages/cart_page.dart';
 import 'package:figma/pages/checkout_page.dart';
 import 'package:figma/pages/paymentSuccess.dart';
+import 'package:figma/widgets/address_widget.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,7 +32,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Figma',
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: const ShopGridView(),
-        );
+        home: AddressPage(),
+    );
   }
 }
