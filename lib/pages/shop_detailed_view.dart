@@ -1,12 +1,15 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:figma/classes/colors.dart';
+import 'package:figma/classes/product.dart';
+import 'package:figma/functions/functions.dart';
 import 'package:figma/widgets/Ecofash_bar.dart';
+import 'package:figma/widgets/Widgets.dart';
 import 'package:figma/widgets/burger_menu.dart';
-import 'package:figma/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ShopDetailedView extends StatefulWidget {
-  int productId;
+  int? productId;
 
   ShopDetailedView({super.key, required this.productId});
 
@@ -20,32 +23,40 @@ class _ShopDetailedView extends State<ShopDetailedView> {
   bool codDropDown = false;
   bool returnDropDown = false;
 
-  Product product = Product(
-      productId: 1,
-      colorId1: 1,
-      colorId2: 2,
-      colorId3: 3,
-      productName: 'MOHAN',
-      productDescription: 'Recycle Boucle Knit Cardigan Pink',
-      productQuantity: 100,
-      productPrice: 120,
-      productImage1: 'images/Home_page_1.png',
-      productImage2: 'images/Home_page_1.png',
-      productImage3: 'images/Home_page_1.png');
+  Future<List<ColorClass>?> colors = getAllColor();
 
-  List<ColorClass> colors = [
-    ColorClass(colorId: 1, colorHex: 'FFF0456'),
-    ColorClass(colorId: 1, colorHex: 'FFF0123F'),
-    ColorClass(colorId: 1, colorHex: 'FFFFF000F'),
-  ];
+  // Product product = Product(
+  //   1,
+  //   'MOHAN',
+  //   100,
+  //   'Recycle Boucle Knit Cardigan Pink',
+  //   2,
+  //   1,
+  //   3,
+  //   'images/Home_page_1.png',
+  //   'images/Home_page_1.png',
+  //   'images/Home_page_1.png',
+  //   120,
+  // );
 
   List<String> sizes = ['S', 'M', 'L'];
 
   int selectedIndex = -1;
   int selectedIndex2 = -1;
   IconData wishlist = Icons.favorite_border;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    // print("asd ${widget.productId!}");
+    List<int?> colorIdnya = [];
+    Future<Product?> product = getDetailedProduct(widget.productId!);
+
     return Scaffold(
       drawer: Navbar(),
       backgroundColor: Colors.white,
@@ -55,15 +66,28 @@ class _ShopDetailedView extends State<ShopDetailedView> {
           child: Center(
             child: Column(
               children: [
-                ProductDetailedView(product: product),
-                Padding(
+                FutureBuilder(
+                  future: product,
+                  builder: (BuildContext context, AsyncSnapshot snapshot1) {
+                    Product? productItem = snapshot1.data;
+
+                    if (snapshot1.hasData) {
+                      colorIdnya.add(productItem!.productColorId1);
+                      colorIdnya.add(productItem!.productColorId2);
+                      colorIdnya.add(productItem!.productColorId3);
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ProductDetailedView(product: productItem!),
+                          Padding(
                   padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
+                  // padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
                   child: Container(
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
                           'Size',
-                          // widget.orderId.toString(),
                           textAlign: TextAlign.left,
                           style: GoogleFonts.tenorSans(
                             textStyle: const TextStyle(
@@ -75,25 +99,55 @@ class _ShopDetailedView extends State<ShopDetailedView> {
                         SizedBox(
                           width: 10.0,
                         ),
-                        Wrap(
-                          direction: Axis.horizontal,
-                          children: List.generate(3, (index) {
-                            return InkWell(
-                              onTap: () {
-                                setState(() {
-                                  selectedIndex = index;
-                                });
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.only(right: 10),
-                                child: selectedIndex == index
-                                    ? ProductColorBorder(
-                                        productColor: colors[index].colorHex)
-                                    : ProductColor(
-                                        productColor: colors[index].colorHex),
-                              ),
-                            );
-                          }),
+                        FutureBuilder(
+                          future: colors,
+                          builder:
+                              (BuildContext context, AsyncSnapshot snapshot2) {
+                            List<ColorClass> colorsItem = snapshot2.data;
+
+                            if(snapshot2.connectionState == ConnectionState.waiting){
+                              return CircularProgressIndicator();
+                            } 
+
+                            late List<ColorClass> selectedColor = [
+                              colorsItem[colorIdnya[0]! - 1],
+                              colorsItem[colorIdnya[1]! - 1],
+                              colorsItem[colorIdnya[2]! - 1]
+                            ];
+
+                            print(selectedColor[0].colorHex!.substring(1));
+                            print(selectedColor[1].colorHex);
+                            print(selectedColor[2].colorHex);
+                            print('test');  
+
+                            if (snapshot2.hasData) {
+                              // return Container();
+                              return Wrap(
+                                direction: Axis.horizontal,
+                                children: List.generate(3, (index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        selectedIndex = index;
+                                      });
+                                    },
+                                    child: Container(
+                                      margin: const EdgeInsets.only(right: 10),
+                                      child: selectedIndex == index
+                                          ? ProductColorBorder(
+                                              productColor: selectedColor[index].colorHex!
+                                                  )
+                                          : ProductColor(
+                                              productColor: selectedColor[index].colorHex!
+                                                  ),
+                                    ),
+                                  );
+                                }),
+                              );
+                            } else {
+                              return const CircularProgressIndicator();
+                            }
+                          },
                         ),
                         Text(
                           'Size',
@@ -130,84 +184,19 @@ class _ShopDetailedView extends State<ShopDetailedView> {
                                   );
                                 }),
                               ),
-                              // Container(
-                              //   width: 20.0,
-                              //   height: 20.0,
-                              //   decoration: BoxDecoration(
-                              //     border: Border.all(
-                              //       color: Colors.black,
-                              //       width: 0.5,
-                              //     ),
-                              //     borderRadius: BorderRadius.circular(10),
-                              //   ),
-                              //   child: Center(
-                              //       child: Text(
-                              //     "S",
-                              //     textAlign: TextAlign.center,
-                              //     style: GoogleFonts.tenorSans(
-                              //       textStyle: const TextStyle(
-                              //           color: Colors.black,
-                              //           fontSize: 14,
-                              //           fontWeight: FontWeight.w300),
-                              //     ),
-                              //   )),
-                              // ),
-                              // SizedBox(
-                              //   width: 8.0,
-                              // ),
-                              // Container(
-                              //   width: 20.0,
-                              //   height: 20.0,
-                              //   decoration: BoxDecoration(
-                              //     border: Border.all(
-                              //       color: Colors.black,
-                              //       width: 0.5,
-                              //     ),
-                              //     borderRadius: BorderRadius.circular(10),
-                              //   ),
-                              //   child: Center(
-                              //       child: Text(
-                              //     "M",
-                              //     textAlign: TextAlign.center,
-                              //     style: GoogleFonts.tenorSans(
-                              //       textStyle: const TextStyle(
-                              //           color: Colors.black,
-                              //           fontSize: 14,
-                              //           fontWeight: FontWeight.w300),
-                              //     ),
-                              //   )),
-                              // ),
-                              // SizedBox(
-                              //   width: 8.0,
-                              // ),
-                              // Container(
-                              //   width: 20.0,
-                              //   height: 20.0,
-                              //   decoration: BoxDecoration(
-                              //     border: Border.all(
-                              //       color: Colors.black,
-                              //       width: 0.5,
-                              //     ),
-                              //     borderRadius: BorderRadius.circular(10),
-                              //   ),
-                              //   child: Center(
-                              //       child: Text(
-                              //     "L",
-                              //     textAlign: TextAlign.center,
-                              //     style: GoogleFonts.tenorSans(
-                              //       textStyle: const TextStyle(
-                              //           color: Colors.black,
-                              //           fontSize: 14,
-                              //           fontWeight: FontWeight.w300),
-                              //     ),
-                              //   )),
-                              // ),
                             ],
                           ),
                         )
                       ],
                     ),
                   ),
+                ),
+                        ],
+                      );
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  },
                 ),
                 ProductInformation(
                     title: 'MATERIALS',
@@ -531,39 +520,13 @@ class _ShopDetailedView extends State<ShopDetailedView> {
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    GridViews(
-                        productId: 1,
-                        name: 'reversible angora cardigan',
-                        price: 120,
-                        url: 'Home_page_new_arrival_1.png'),
-                    GridViews(
-                        productId: 1,
-                        name: 'reversible angora cardigan',
-                        price: 120,
-                        url: 'Home_page_new_arrival_1.png'),
-                  ],
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    GridViews(
-                        productId: 1,
-                        name: 'reversible angora cardigan',
-                        price: 120,
-                        url: 'Home_page_new_arrival_1.png'),
-                    GridViews(
-                        productId: 1,
-                        name: 'reversible angora cardigan',
-                        price: 120,
-                        url: 'Home_page_new_arrival_1.png'),
-                  ],
-                ),
+                // FutureBuilder(
+                //   future: products,
+                //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+                //      ;
+                //   },
+                // ),
+
                 const SizedBox(
                   height: 100.0,
                 ),

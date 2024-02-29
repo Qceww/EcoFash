@@ -1,8 +1,12 @@
+import 'package:figma/classes/colors.dart';
+import 'package:figma/classes/product.dart';
 import 'package:figma/classes/user.dart';
 import 'package:figma/services/http_services.dart';
+import 'package:figma/widgets/widgets.dart';
 
-Future<dynamic> registerUser(firstName, lastName, email, phone, password, confirmPassword) async {
-  if(password != confirmPassword){
+Future<dynamic> registerUser(
+    firstName, lastName, email, phone, password, confirmPassword) async {
+  if (password != confirmPassword) {
     print("Password Wrong");
     return "Password doesn't match";
   }
@@ -11,7 +15,7 @@ Future<dynamic> registerUser(firstName, lastName, email, phone, password, confir
 
   int? request = await createUser(user);
 
-  if(200 == request){
+  if (200 == request) {
     print("User Registered Successfully");
     return user;
   } else {
@@ -25,14 +29,55 @@ Future<dynamic> loginUser(email, password) async {
 
   int? request = await verifyUser(user);
 
-  if(200 == request){
+  if (200 == request) {
     print("User Logged In Successfully");
     return user;
-  }
-
-  else{
+  } else {
     print("Failed To Logged In");
     return null;
   }
+}
 
-} 
+Future<List<Product>?> getProduct() async {
+
+  List<Product>? request = await getProducts();
+
+  if (request != null){
+
+    return request;
+  }
+  else {
+    return null;
+  }
+}
+
+Future<Product?> getDetailedProduct(id) async {
+
+  Product product = Product(id, null, null, null, null, null, null, null, null, null, null);
+
+
+  Product? request = await getDetailedProducts(product);
+
+  if (request != null){
+
+    return request;
+  }
+  else {
+    return null;
+  }
+}
+
+Future<List<ColorClass>?> getAllColor() async {
+
+  List<ColorClass>? request = await getAllColors();
+
+  if (request != null){
+
+    return request;
+  }
+  else {
+    return null;
+  }
+}
+
+

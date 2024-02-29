@@ -15,14 +15,14 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition() : array
     {
         return [
-            'name' => fake()->name(),
+            'firstName' => fake()->name(),
+            'lastName' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'phone' => fake()->randomnumber(7,true),
+            'password' => fake()->password(2,5),
         ];
     }
 

@@ -1,5 +1,4 @@
-import 'dart:async';
-
+import 'package:figma/classes/product.dart';
 import 'package:figma/pages/shop_detailed_view.dart';
 import 'package:figma/pages/shop_grid_view.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +7,10 @@ import 'package:video_player/video_player.dart';
 
 // ignore: must_be_immutable
 class GridViews extends StatefulWidget {
-  int productId;
-  String name;
-  int price;
-  String url;
+  int? productId;
+  String? name;
+  int? price;
+  String? url;
 
   GridViews(
       {super.key,
@@ -32,10 +31,11 @@ class _GridViewsState extends State<GridViews> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        // print(widget.productId);
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (BuildContext context) => ShopDetailedView(
-              productId: widget.productId,
+              productId: widget.productId!,
             ),
           ),
         );
@@ -50,8 +50,7 @@ class _GridViewsState extends State<GridViews> {
                 height: 240,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('images/${widget.url}'),
-                      fit: BoxFit.cover),
+                      image: AssetImage(widget.url!), fit: BoxFit.cover),
                 ),
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(0, 0, 5, 5),
@@ -89,7 +88,7 @@ class _GridViewsState extends State<GridViews> {
                       textAlign: TextAlign.left,
                     ),
                     Text(
-                      widget.name,
+                      widget.name!,
                       style: GoogleFonts.tenorSans(),
                       textAlign: TextAlign.left,
                     ),
@@ -113,79 +112,9 @@ class _GridViewsState extends State<GridViews> {
   }
 }
 
-class BackgroundVideo extends StatefulWidget {
-  @override
-  _BackgroundVideoState createState() => _BackgroundVideoState();
-}
-
-class _BackgroundVideoState extends State<BackgroundVideo> {
-  late VideoPlayerController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = VideoPlayerController.asset("images/Homepage_video_1.mp4")
-      ..initialize().then((_) {
-        _controller.setLooping(true);
-        _controller.play();
-        // Ensure the first frame is shown after the video is initialized
-        setState(() {});
-      });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: _controller.value.aspectRatio,
-      child: VideoPlayer(_controller),
-    );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
-}
-
-class Product {
-  int productId;
-  int colorId1;
-  int colorId2;
-  int colorId3;
-  String productName;
-  String productDescription;
-  int productQuantity;
-  int productPrice;
-  String productImage1;
-  String productImage2;
-  String productImage3;
-
-  Product({
-    required this.productId,
-    required this.colorId1,
-    required this.colorId2,
-    required this.colorId3,
-    required this.productName,
-    required this.productDescription,
-    required this.productQuantity,
-    required this.productPrice,
-    required this.productImage1,
-    required this.productImage2,
-    required this.productImage3,
-  });
-}
-
-class ColorClass {
-  int colorId;
-  String colorHex;
-
-  ColorClass({required this.colorId, required this.colorHex});
-}
-
 class ProductColor extends StatelessWidget {
   String productColor = '';
-  int hexToInteger(String hex) => int.parse(hex, radix: 16);
+  int hexToInteger(String hex) => int.parse(hex.substring(1), radix: 16) + 0xFF000000;
   ProductColor({super.key, required this.productColor});
 
   @override
@@ -203,7 +132,7 @@ class ProductColor extends StatelessWidget {
 
 class ProductColorBorder extends StatelessWidget {
   String productColor = '';
-  int hexToInteger(String hex) => int.parse(hex, radix: 16);
+  int hexToInteger(String hex) => int.parse(hex.substring(1), radix: 16) + 0xFF000000;
   ProductColorBorder({super.key, required this.productColor});
 
   @override
@@ -290,10 +219,10 @@ class ProductDetailedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> images = [
-      product.productImage1,
-      product.productImage2,
-      product.productImage3,
+    List<String?> images = [
+      product.picture1,
+      product.picture2,
+      product.picture3,
     ];
     return Column(
       children: [
@@ -310,7 +239,7 @@ class ProductDetailedView extends StatelessWidget {
                   return Container(
                     margin: EdgeInsets.all(10),
                     child: Image(
-                      image: AssetImage(images[pagePosition]),
+                      image: AssetImage(images[pagePosition]!),
                       fit: BoxFit.cover,
                     ),
                   );
@@ -326,7 +255,7 @@ class ProductDetailedView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  product.productName,
+                  product.productName!,
                   textAlign: TextAlign.left,
                   style: GoogleFonts.tenorSans(
                     textStyle: const TextStyle(
@@ -339,7 +268,7 @@ class ProductDetailedView extends StatelessWidget {
                   height: 6.0,
                 ),
                 Text(
-                  product.productDescription,
+                  product.productDescription!,
                   textAlign: TextAlign.left,
                   style: GoogleFonts.tenorSans(
                     textStyle: const TextStyle(

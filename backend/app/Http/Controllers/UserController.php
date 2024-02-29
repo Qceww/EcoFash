@@ -27,6 +27,6 @@ class UserController extends Controller
             'password' => $request->password
         ])->get(); 
 
-        return $user[0];
+        return $user;
     }
 }
