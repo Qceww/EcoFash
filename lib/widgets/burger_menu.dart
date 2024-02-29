@@ -79,7 +79,7 @@ class Navbar extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (BuildContext context) => const Bloglistview(),
+                  builder: (BuildContext context) => Bloglistview(),
                 ),
               );
             },
@@ -92,7 +92,7 @@ class Navbar extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (BuildContext context) => const Reward(),
+                  builder: (BuildContext context) => Reward(),
                 ),
               );
             },
@@ -103,7 +103,6 @@ class Navbar extends StatelessWidget {
             ),
             title: const Text('Wishlist'),
             onTap: () {
-
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (BuildContext context) => WishlistPage(),
@@ -117,10 +116,11 @@ class Navbar extends StatelessWidget {
             ),
             title: const Text('Order'),
             onTap: () {
-
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (BuildContext context) => OrderPage(customerId: customerId,),
+                  builder: (BuildContext context) => OrderPage(
+                    customerId: customerId,
+                  ),
                 ),
               );
             },

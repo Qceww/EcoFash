@@ -3,42 +3,36 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:figma/widgets/Ecofash_bar.dart';
 import 'package:figma/widgets/burger_menu.dart';
 import 'package:figma/widgets/Blog_List_Widget.dart';
-import 'package:figma/widgets/Tags_Widget.dart';
+// import 'package:figma/widgets/Tags_Widget.dart';
 import 'package:figma/widgets/Footer.dart';
 
-class Bloglistview extends StatefulWidget {
+class Bloglistview extends StatelessWidget {
   const Bloglistview({Key? key}) : super(key: key);
 
   @override
-  State<Bloglistview> createState() => _BloglistviewState();
-}
-
-class _BloglistviewState extends State<Bloglistview> {
-  final List<Map<String, dynamic>> blogEntries = [
-    {
-      'title': 'Blog Title 1',
-      'tags': ['News', 'Fashion'],
-    },
-    {
-      'title': 'Blog Title 2',
-      'tags': ['Fact', 'Tips'],
-    },
-    {
-      'title': 'Blog Title 3',
-      'tags': ['Opinion', 'Fashion'],
-    },
-    {
-      'title': 'Blog Title 4',
-      'tags': ['Review', 'Tips'],
-    },
-    {
-      'title': 'Blog Title 5',
-      'tags': ['Tips', 'Fashion'],
-    },
-  ];
-
-  @override
   Widget build(BuildContext context) {
+    final List<Blog_List_Widget> blogs = [
+      Blog_List_Widget(
+        title: "Blog Title 1",
+        tag1: "Tag 1",
+        tag2: "Tag2",
+      ),
+      Blog_List_Widget(
+        title: "Blog Title 2",
+        tag1: "Tag 1",
+        tag2: "Tag2",
+      ),
+    ];
+
+    final List<String> tags = [
+      'Tag 1',
+      'Tag 2',
+      'Tag 3',
+      'Tag 4',
+      'Tag 5',
+      'Tag 6'
+    ];
+
     return Scaffold(
       backgroundColor: Colors.white,
       drawer: Navbar(),
@@ -72,14 +66,7 @@ class _BloglistviewState extends State<Bloglistview> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            for (var tag in [
-                              'Tag 1',
-                              'Tag 2',
-                              'Tag 3',
-                              'Tag 4',
-                              'Tag 5',
-                              'Tag 6'
-                            ])
+                            for (var tag in tags)
                               Container(
                                 margin:
                                     const EdgeInsets.symmetric(horizontal: 5),
@@ -100,8 +87,7 @@ class _BloglistviewState extends State<Bloglistview> {
                                     tag,
                                     style: GoogleFonts.tenorSans(
                                       textStyle: TextStyle(
-                                        fontSize:
-                                            15, // Adjust the font size as needed
+                                        fontSize: 15,
                                         fontWeight: FontWeight.normal,
                                       ),
                                     ),
@@ -119,35 +105,20 @@ class _BloglistviewState extends State<Bloglistview> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      for (var blog in blogEntries)
-                        Column(
-                          children: [
-                            Blog_List_Widget(blog: blog),
-                            Container(
-                              padding: EdgeInsets.fromLTRB(0, 10, 5, 0),
-                              width: 340,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                      Column(
+                        children: [
+                          for (var blog in blogs)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 0),
+                              child: Column(
                                 children: [
-                                  Tags(blog: blog),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        '4 Days Ago',
-                                        style: GoogleFonts.tenorSans(
-                                          textStyle: const TextStyle(
-                                              color: Colors.grey),
-                                        ),
-                                      ),
-                                    ],
-                                  )
+                                  blog,
+                                  SizedBox(height: 10),
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 30),
-                          ],
-                        ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
