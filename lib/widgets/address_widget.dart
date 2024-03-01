@@ -1,17 +1,6 @@
+import 'package:figma/classes/address.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-class Address {
-  int addressId;
-  String addressName;
-  String addressDetail;
-
-
-  Address(
-      {required this.addressId,
-      required this.addressName,
-      required this.addressDetail});
-}
 
 class AddressDetail extends StatelessWidget {
   Address address;
@@ -39,7 +28,7 @@ class AddressDetail extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0.0),
               child: Text(
-                address.addressName,
+                address.addressName!,
                 style: GoogleFonts.zenAntique(
                   textStyle: const TextStyle(
                     color: Colors.black,

@@ -3,11 +3,15 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Color;
 use App\Models\CartItem;
+use App\Models\Address;
+use App\Models\Reward;
+use App\Models\RedeemedReward;
 
 class DatabaseSeeder extends Seeder
 {
@@ -77,6 +81,46 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
+        $addressArray = [
+            [
+                'customerId' => 1,
+                'addressName' => 'RTB',
+                'addressDetail' => 'B332',
+            ],
+            [
+                'customerId' => 1,
+                'addressName' => 'RTB',
+                'addressDetail' => 'AG09',
+            ],
+        ];
+        $rewardArray = [
+            [
+                'rewardName' => 'Diskon 10',
+                'expiryDate' => Carbon::now()->format('Y-m-d'),
+                'cost' => 20,
+                'location' => 'RTB',
+            ],
+            [
+                'rewardName' => 'Diskon 20',
+                'expiryDate' => Carbon::now()->format('Y-m-d'),
+                'cost' => 20,
+                'location' => 'RTB',
+            ],
+        ];
+        $redeemedArray = [
+            [
+                'customerId' => 1,
+                'rewardId' => 1,
+                'rewardQuantity' => 1,
+            ],
+            [
+                'customerId' => 1,
+                'rewardId' => 2,
+                'rewardQuantity' => 1,
+            ],
+        ];
+
+
         foreach ($colorIdArray as $color) {
             Color::create($color);
         }
@@ -91,6 +135,18 @@ class DatabaseSeeder extends Seeder
 
         foreach ($cartItemArray as $cartItem) {
             CartItem::create($cartItem);
+        }
+
+        foreach ($addressArray as $addressItem) {
+            Address::create($addressItem);
+        }
+
+        foreach ($rewardArray as $rewardItem) {
+            Reward::create($rewardItem);
+        }
+
+        foreach ($redeemedArray as $redeemedItem) {
+            RedeemedReward::create($redeemedItem);
         }
 
         User::factory(5)->create();

@@ -1,7 +1,7 @@
 import 'package:figma/pages/blog_list_view.dart';
 import 'package:figma/pages/home_page.dart';
 import 'package:figma/pages/order_page.dart';
-import 'package:figma/pages/reward.dart';
+import 'package:figma/pages/reward_page.dart';
 import 'package:figma/pages/shop_grid_view.dart';
 import 'package:figma/pages/wishlist_page.dart';
 import 'package:flutter/material.dart';
@@ -92,7 +92,7 @@ class Navbar extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (BuildContext context) => Reward(),
+                  builder: (BuildContext context) => RewardPage(),
                 ),
               );
             },

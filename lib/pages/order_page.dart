@@ -1,6 +1,9 @@
+import 'package:figma/classes/order.dart';
 import 'package:figma/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../widgets/order_widget.dart';
 
 class OrderPage extends StatelessWidget {
   int customerId = -1;

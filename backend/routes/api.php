@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\CartItemController;
+use App\Http\Controllers\AddressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,5 @@ Route::post('/get-allcolor', [ColorController::class, 'getColor']);
 Route::post('/get-cart', [CartItemController::class, 'getCart']);
 Route::post('/update-quantity-cart', [CartItemController::class, 'updateQuantityCart']);
 Route::post('/update-checked-cart', [CartItemController::class, 'updateCheckedCart']);
+Route::post('/delete-cart', [CartItemController::class, 'deleteCart']);
+Route::post('/get-address', [AddressController::class, 'getAddress']);

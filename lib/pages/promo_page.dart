@@ -1,11 +1,23 @@
-import 'package:figma/classes/address.dart';
-import 'package:figma/widgets/address_widget.dart';
+import 'package:figma/classes/reward.dart';
+import 'package:figma/widgets/Reward_Widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AddressPage extends StatelessWidget {
-  late List<Address>? addresses = [];
-  AddressPage({Key? key, required this.addresses}) : super(key: key);
+class RewardPage extends StatelessWidget {
+  int customerId = -1;
+  final List<Reward> redeemedRewards = [
+    Reward(
+        rewardId: 1,
+        rewardName: 'Discount 25%',
+        rewardExpiry: '12/12/2024',
+        rewardLocation: 'AEON Sentul'),
+    Reward(
+        rewardId: 1,
+        rewardName: 'Discount 25%',
+        rewardExpiry: '12/12/2024',
+        rewardLocation: 'AEON Sentul'),
+  ];
+  RewardPage({Key? key, required this.customerId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +47,7 @@ class AddressPage extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: Center(
                       child: Text(
-                        "SAVED ADDRESS",
+                        "ORDER HISTORY",
                         style: GoogleFonts.zenAntique(
                           textStyle: const TextStyle(
                             color: Colors.black,
@@ -51,10 +63,10 @@ class AddressPage extends StatelessWidget {
               SizedBox(height: 20.0),
               Expanded(
                 child: ListView.builder(
-                  itemCount: addresses!.length,
+                  itemCount: redeemedRewards.length,
                   itemBuilder: (context, index) {
-                    final address = addresses![index];
-                    return AddressDetail(address: address);
+                    final reward = redeemedRewards[index];
+                    return RewardDetail(reward: reward, customerId: 1);
                   },
                 ),
               ),

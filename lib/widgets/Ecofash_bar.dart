@@ -49,7 +49,7 @@ class EcofashBar extends StatelessWidget implements PreferredSizeWidget {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (BuildContext context) => const CartPage(),
+                      builder: (BuildContext context) => CartPage(),
                     ),
                   );
                 },

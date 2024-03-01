@@ -1,6 +1,7 @@
 import 'package:figma/classes/cartProduct.dart';
 import 'package:figma/classes/product.dart';
 import 'package:figma/functions/functions.dart';
+import 'package:figma/pages/checkout_page.dart';
 import 'package:figma/services/http_services.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -65,31 +66,25 @@ class CartNoEmpty extends StatefulWidget {
 }
 
 class _CartNoEmptyState extends State<CartNoEmpty> {
-  late Future<List<CartProduct>?> cartProducts;
-  late Future<List<Product>?> products;
-  List<CartProduct>? cartProductsItem;
-  List<Product>? productsItem;
-
   @override
-  void initState() {
-    super.initState();
-    cartProducts = getCart();
-    products = getProduct();
-  }
-
-  @override
+  late Future<List<CartProduct>?> cartProducts = getCart();
+  late Future<List<Product>?> products = getProduct();
+  late List<CartProduct>? cartProductsItem;
+  late List<Product>? productsItem;
+  late List<CartProduct>? checkOutProducts = [];
   Widget build(BuildContext context) {
     // print(cartProducts);
     // print(cartProductsItem);
 
-    void _showDeleteConfirmationDialog(int index) {
+    void _showDeleteConfirmationDialog(int index, int? cartId) {
       setState(() {
+        deleteCart(cartId!);
         cartProductsItem!.removeAt(index);
         if (cartProductsItem!.isEmpty) {
           Navigator.of(context).pop();
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => CartEmpty()),
+            MaterialPageRoute(builder: (context) => const CartEmpty()),
           );
         }
       });
@@ -98,19 +93,24 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
     return FutureBuilder(
       future: cartProducts,
       builder:
-          (BuildContext context, AsyncSnapshot<List<CartProduct>?> snapshot) {
-        // print(snapshot.data);
-        // print(cartProductsItem);
+          (BuildContext context, AsyncSnapshot<List<CartProduct>?> snapshot1) {
+        if (snapshot1.hasData) {
+          cartProductsItem = snapshot1.data;
+          checkOutProducts!.clear();
 
-        if (snapshot.hasData) {
-          cartProductsItem = snapshot.data;
+          for (CartProduct item in cartProductsItem!) {
+            if (item.isChecked == true) {
+              checkOutProducts!.add(item);
+            }
+          }
+
           return FutureBuilder(
             future: products,
-            builder:
-                (BuildContext context, AsyncSnapshot<List<Product>?> snapshot) {
-              productsItem = snapshot.data;
+            builder: (BuildContext context,
+                AsyncSnapshot<List<Product>?> snapshot2) {
+              productsItem = snapshot2.data;
 
-              if (snapshot.hasData) {
+              if (snapshot2.hasData) {
                 double subtotal = 0;
                 for (var product in cartProductsItem!) {
                   if (product.cartQuantity! > 0 && product.isChecked == true) {
@@ -166,7 +166,8 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
                                     });
                                   },
                                   onDelete: () {
-                                    _showDeleteConfirmationDialog(index);
+                                    _showDeleteConfirmationDialog(
+                                        index, cartProduct.cartId);
                                   },
                                 );
                               },
@@ -200,14 +201,62 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
                       ),
                     ),
                   ),
+                  bottomNavigationBar: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (BuildContext context) => CheckOutPage(
+                                checkOutProducts: checkOutProducts!,
+                              )));
+                    },
+                    child: BottomAppBar(
+                      height: 60.0,
+                      color: Colors.black,
+                      child: Container(
+                        height: 60.0,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.shopping_bag_outlined,
+                                    color: Colors.white,
+                                    size: 25,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                                Column(
+                                  children: [
+                                    SizedBox(height: 5),
+                                    Text(
+                                      "BUY NOW",
+                                      textAlign: TextAlign.left,
+                                      style: GoogleFonts.tenorSans(
+                                        textStyle: const TextStyle(
+                                            color: Colors.white, fontSize: 22),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 );
               } else {
-                return const CircularProgressIndicator();
+                return const CartEmpty();
               }
             },
           );
         } else {
-          return const CircularProgressIndicator();
+          return const CartEmpty();
         }
       },
     );
@@ -343,7 +392,7 @@ class _CartItemState extends State<CartItem> {
                       ),
                       Text(
                         '\$${productsItem![widget.cartProduct.productId!].productPrice!}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.orange,
                           fontSize: 20,
                         ),

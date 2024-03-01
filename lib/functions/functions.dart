@@ -1,9 +1,9 @@
+import 'package:figma/classes/address.dart';
 import 'package:figma/classes/cartProduct.dart';
 import 'package:figma/classes/colors.dart';
 import 'package:figma/classes/product.dart';
 import 'package:figma/classes/user.dart';
 import 'package:figma/services/http_services.dart';
-import 'package:figma/widgets/widgets.dart';
 
 User? currentUser;
 
@@ -81,7 +81,6 @@ Future<List<ColorClass>?> getAllColor() async {
 Future<List<CartProduct>?> getCart() async {
   List<CartProduct>? request = await getCarts(1);
   if (request != null) {
-
     return request;
   } else {
     return null;
@@ -100,6 +99,26 @@ Future<int?> updateQuantityCart(CartProduct cartProduct) async {
 
 Future<int?> updateCheckedCart(CartProduct cartProduct) async {
   int? request = await updateQuantityCarts(cartProduct);
+  
+  if (request != null) {
+    return request;
+  } else {
+    return null;
+  }
+}
+
+Future<int?> deleteCart(int cartId) async {
+  int? request = await deleteCarts(cartId);
+  
+  if (request != null) {
+    return request;
+  } else {
+    return null;
+  }
+}
+
+Future<List<Address>?> getAddress(int customerId) async {
+  List<Address>? request = await getAddresses(customerId);
   
   if (request != null) {
     return request;
