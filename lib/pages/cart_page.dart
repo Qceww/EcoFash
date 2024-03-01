@@ -1,5 +1,7 @@
+import 'package:figma/classes/cartProduct.dart';
+import 'package:figma/functions/functions.dart';
 import 'package:figma/pages/checkout_page.dart';
-import 'package:figma/widgets/widgets.dart';
+import 'package:figma/widgets/cart_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -8,33 +10,20 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    late Future<List<CartProduct>?> cartProducts = getCart();
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.grey,
-      // ),
       body: SafeArea(
-        // child: CartEmpty(),
-        // children: [
-        child: CartNoEmpty(),
-        // CartItem(),
-
-        //    Container(
-        //     height: 700,
-        //     padding: EdgeInsets.only(top: 15),
-        //     decoration: BoxDecoration(
-        //       color: Color(0xFFEDECF2),
-        //       borderRadius: BorderRadius.only(
-        //         topLeft: Radius.circular(35),
-        //         topRight: Radius.circular(35),
-
-        //       )
-        //     ),
-        //     child: Column(children: [
-        //       CartItem(),
-        //     ]),
-        //    )
-        // ],
-      ),
+          child: FutureBuilder(
+        future: cartProducts,
+        builder:
+            (BuildContext context, AsyncSnapshot<List<CartProduct>?> snapshot) {
+          if (snapshot.hasData) {
+            return CartNoEmpty();
+          } else {
+            return CartEmpty();
+          }
+        },
+      )),
       bottomNavigationBar: GestureDetector(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(

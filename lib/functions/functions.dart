@@ -1,8 +1,11 @@
+import 'package:figma/classes/cartProduct.dart';
 import 'package:figma/classes/colors.dart';
 import 'package:figma/classes/product.dart';
 import 'package:figma/classes/user.dart';
 import 'package:figma/services/http_services.dart';
 import 'package:figma/widgets/widgets.dart';
+
+User? currentUser;
 
 Future<dynamic> registerUser(
     firstName, lastName, email, phone, password, confirmPassword) async {
@@ -11,7 +14,7 @@ Future<dynamic> registerUser(
     return "Password doesn't match";
   }
 
-  User user = User(firstName, lastName, email, phone, password);
+  User user = User(null, firstName, lastName, email, phone, password);
 
   int? request = await createUser(user);
 
@@ -25,13 +28,16 @@ Future<dynamic> registerUser(
 }
 
 Future<dynamic> loginUser(email, password) async {
-  User user = User(null, null, email, null, password);
+  User user = User(null, null, null, email, null, password);
 
-  int? request = await verifyUser(user);
+  dynamic request = await verifyUser(user);
 
-  if (200 == request) {
-    print("User Logged In Successfully");
-    return user;
+  if (request is User) {
+    // print("ok");  
+
+    User currentUser = User(request.userId, request.firstName, request.lastName,
+        request.email, request.phone, request.password);
+    return currentUser;
   } else {
     print("Failed To Logged In");
     return null;
@@ -39,45 +45,65 @@ Future<dynamic> loginUser(email, password) async {
 }
 
 Future<List<Product>?> getProduct() async {
-
   List<Product>? request = await getProducts();
 
-  if (request != null){
-
+  if (request != null) {
+    // print(request);
     return request;
-  }
-  else {
+  } else {
     return null;
   }
 }
 
 Future<Product?> getDetailedProduct(id) async {
-
-  Product product = Product(id, null, null, null, null, null, null, null, null, null, null);
-
+  Product product =
+      Product(id, null, null, null, null, null, null, null, null, null, null);
 
   Product? request = await getDetailedProducts(product);
 
-  if (request != null){
-
+  if (request != null) {
     return request;
-  }
-  else {
+  } else {
     return null;
   }
 }
 
 Future<List<ColorClass>?> getAllColor() async {
-
   List<ColorClass>? request = await getAllColors();
 
-  if (request != null){
-
+  if (request != null) {
     return request;
-  }
-  else {
+  } else {
     return null;
   }
 }
 
+Future<List<CartProduct>?> getCart() async {
+  List<CartProduct>? request = await getCarts(1);
+  if (request != null) {
 
+    return request;
+  } else {
+    return null;
+  }
+}
+
+Future<int?> updateQuantityCart(CartProduct cartProduct) async {
+  int? request = await updateQuantityCarts(cartProduct);
+  
+  if (request != null) {
+    return request;
+  } else {
+    return null;
+  }
+}
+
+Future<int?> updateCheckedCart(CartProduct cartProduct) async {
+  int? request = await updateQuantityCarts(cartProduct);
+  
+  if (request != null) {
+    return request;
+  } else {
+    return null;
+  }
+}

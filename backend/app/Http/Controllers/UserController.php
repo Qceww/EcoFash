@@ -25,8 +25,8 @@ class UserController extends Controller
         $user = User::where([
             'email' => $request->email,
             'password' => $request->password
-        ])->get(); 
+        ])->first(); 
 
-        return $user;
+        return response()->json($user, 200);    
     }
 }

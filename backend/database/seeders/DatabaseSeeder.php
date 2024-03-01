@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Color;
+use App\Models\CartItem;
 
 class DatabaseSeeder extends Seeder
 {
@@ -67,6 +68,15 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
+        $cartItemArray = [
+            [
+                'customerId' => 1,
+                'productId' => 3,
+                'cartQuantity' => 1,
+                'isChecked' => false,
+            ],
+        ];
+
         foreach ($colorIdArray as $color) {
             Color::create($color);
         }
@@ -77,6 +87,10 @@ class DatabaseSeeder extends Seeder
         
         foreach ($userArray as $user) {
             User::create($user);
+        }
+
+        foreach ($cartItemArray as $cartItem) {
+            CartItem::create($cartItem);
         }
 
         User::factory(5)->create();
