@@ -2,6 +2,7 @@ import 'package:figma/pages/address_page.dart';
 import 'package:figma/pages/blog_detailed_view.dart';
 import 'package:figma/pages/cart_page.dart';
 import 'package:figma/pages/home_page.dart';
+import 'package:figma/pages/more_reward.dart';
 import 'package:figma/pages/order_page.dart';
 import 'package:figma/pages/shop_detailed_view.dart';
 import 'package:figma/pages/shop_grid_view.dart';
@@ -29,10 +30,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Figma',
-        theme: ThemeData(primarySwatch: Colors.blue),
-        home: HomePage(),
+      debugShowCheckedModeBanner: false,
+      title: 'Figma',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: HomePage(),
     );
   }
 }

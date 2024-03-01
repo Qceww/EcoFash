@@ -6,7 +6,20 @@ import 'package:figma/widgets/Reward_Widget.dart';
 import 'package:figma/widgets/Footer.dart';
 
 class Reward extends StatelessWidget {
-  const Reward({Key? key}) : super(key: key);
+  final List<Reward_widget> rewards = [
+    Reward_widget(
+      rewardname: "Lamerei",
+      rewarddescription: "Recycle Boucle Knit",
+      rewardprice: "100",
+    ),
+    Reward_widget(
+      rewardname: "Matthew",
+      rewarddescription: "Anak Bekasi",
+      rewardprice: "69",
+    ),
+  ];
+
+  Reward({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -135,13 +148,20 @@ class Reward extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
-              Reward_widget(),
-              SizedBox(height: 10),
-              Reward_widget(),
-              SizedBox(height: 10),
-              Reward_widget(),
-              SizedBox(height: 10),
-              Reward_widget(),
+              Column(
+                children: [
+                  for (var reward in rewards)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 0),
+                      child: Column(
+                        children: [
+                          reward,
+                          SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
               Footer(),
             ],
           ),

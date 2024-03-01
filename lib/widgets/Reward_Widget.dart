@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Reward_widget extends StatelessWidget {
-  const Reward_widget({
+  String rewardname;
+  String rewarddescription;
+  String rewardprice;
+  Reward_widget({
     super.key,
+    required this.rewardname,
+    required this.rewarddescription,
+    required this.rewardprice,
   });
 
   @override
@@ -45,7 +51,7 @@ class Reward_widget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "LAMEREI",
+                      rewardname.toUpperCase(),
                       style: GoogleFonts.tenorSans(
                         textStyle: const TextStyle(
                           color: Colors.black,
@@ -59,7 +65,7 @@ class Reward_widget extends StatelessWidget {
                     ),
                     SizedBox(height: 5),
                     Text(
-                      "Recycle Boucle Knit",
+                      rewarddescription,
                       style: GoogleFonts.tenorSans(
                         textStyle: const TextStyle(
                           color: Colors.grey,
@@ -71,7 +77,7 @@ class Reward_widget extends StatelessWidget {
                     ),
                     SizedBox(height: 7),
                     Text(
-                      "100 Points",
+                      rewardprice + " Points",
                       style: GoogleFonts.tenorSans(
                         textStyle: const TextStyle(
                           color: Color.fromRGBO(221, 133, 96, 1),
