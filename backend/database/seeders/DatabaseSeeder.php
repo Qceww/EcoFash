@@ -12,6 +12,7 @@ use App\Models\CartItem;
 use App\Models\Address;
 use App\Models\Reward;
 use App\Models\RedeemedReward;
+use App\Models\Wishlist;
 
 class DatabaseSeeder extends Seeder
 {
@@ -120,6 +121,14 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
+        $wishlistArray = [
+            [
+                'wishlistId' => 1,
+                'customerId' => 1,
+                'productId' => 1,
+            ]
+        ];
+
 
         foreach ($colorIdArray as $color) {
             Color::create($color);
@@ -147,6 +156,10 @@ class DatabaseSeeder extends Seeder
 
         foreach ($redeemedArray as $redeemedItem) {
             RedeemedReward::create($redeemedItem);
+        }
+
+        foreach ($wishlistArray as $wishlistItem) {
+            Wishlist::create($wishlistItem);
         }
 
         User::factory(5)->create();

@@ -7,6 +7,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\RedeemedRewardController;
+use App\Http\Controllers\RewardController;
+use App\Http\Controllers\WishlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +32,6 @@ Route::post('/update-quantity-cart', [CartItemController::class, 'updateQuantity
 Route::post('/update-checked-cart', [CartItemController::class, 'updateCheckedCart']);
 Route::post('/delete-cart', [CartItemController::class, 'deleteCart']);
 Route::post('/get-address', [AddressController::class, 'getAddress']);
+Route::post('/get-redeemed-reward', [RedeemedRewardController::class, 'getRedeemedReward']);
+Route::post('/get-reward', [RewardController::class, 'getReward']);
+Route::post('/get-wishlist', [WishlistController::class, 'getWishlist']);

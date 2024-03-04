@@ -1,12 +1,30 @@
 class Reward {
-  int rewardId;
-  String rewardName;
-  dynamic rewardExpiry;
-  String rewardLocation;
+  int? rewardId;
+  String? rewardName;
+  dynamic? rewardExpiry;
+  String? rewardLocation;
 
   Reward(
-      {required this.rewardId,
-      required this.rewardName,
-      required this.rewardExpiry,
-      required this.rewardLocation});
+    this.rewardId,
+    this.rewardName,
+    this.rewardExpiry,
+    this.rewardLocation,
+  );
+
+  Map<String, dynamic> toJson() => {
+        "rewardId": rewardId,
+        "rewardName": rewardName,
+        "rewardExpiry": rewardExpiry,
+        "rewardLocation": rewardLocation,
+      };
+
+  factory Reward.fromJson(Map<String, dynamic> json) {
+    return Reward(
+      json["rewardId"],
+      json["rewardName"],
+      json["rewardExpiry"],
+      json["rewardLocation"],
+    );
+  }
+
 }
