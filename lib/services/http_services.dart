@@ -4,7 +4,10 @@ import 'package:figma/classes/address.dart';
 import 'package:figma/classes/colors.dart';
 import 'package:figma/classes/product.dart';
 import 'package:figma/classes/cartProduct.dart';
+import 'package:figma/classes/redeemedReward.dart';
+import 'package:figma/classes/reward.dart';
 import 'package:figma/classes/user.dart';
+import 'package:figma/classes/wishlist.dart';
 import 'package:http/http.dart' as http;
 
 String url = "http://10.0.2.2:8000/api";
@@ -183,14 +186,68 @@ Future<List<Address>?> getAddresses(customerId) async {
 
     List<Address> addressList =
         (body).map((itemWord) => Address.fromJson(itemWord)).toList();
-    // CartProduct asd;
-    // (body).map((itemWord) => {
-    //     asd = CartProduct.fromJson(itemWord),
-    //     print(asd),
-    //   }).toList();
-
-    // print(cartProductList);
 
     return addressList;
+  }
+}
+
+Future<List<RedeemedReward>?> getRedeemedReward(customerId) async {
+  final response = await http.post(Uri.parse("$url/get-redeemed-reward"),
+      headers: <String, String>{
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: jsonEncode({"customerId": customerId}));
+  // print("Masuk HTTP");
+  if (response.statusCode == 200) {
+    List<dynamic> body = jsonDecode(response.body);
+    // print(userId);
+
+    List<RedeemedReward> promoList =
+        (body).map((itemWord) => RedeemedReward.fromJson(itemWord)).toList();
+
+    return promoList;
+  }
+}
+
+Future<List<Reward>?> getReward() async {
+  final response = await http.post(
+    Uri.parse("$url/get-reward"),
+    headers: <String, String>{
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    },
+  );
+
+  if (response.statusCode == 200) {
+    List<dynamic> body = jsonDecode(response.body);
+
+    // print(body);
+
+    List<Reward> rewardList =
+        (body).map((itemWord) => Reward.fromJson(itemWord)).toList();
+
+    // print((body).map((itemWord) => print(itemWord)));
+
+    return rewardList;
+  }
+}
+
+Future<List<Wishlist>?> getWishlist(customerId) async {
+  final response = await http.post(Uri.parse("$url/get-wishlist"),
+      headers: <String, String>{
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: jsonEncode({"customerId": customerId}));
+  // print("Masuk HTTP");
+  if (response.statusCode == 200) {
+    List<dynamic> body = jsonDecode(response.body);
+    // print(userId);
+
+    List<Wishlist> wishlist =
+        (body).map((itemWord) => Wishlist.fromJson(itemWord)).toList();
+
+    return wishlist;
   }
 }

@@ -2,7 +2,10 @@ import 'package:figma/classes/address.dart';
 import 'package:figma/classes/cartProduct.dart';
 import 'package:figma/classes/colors.dart';
 import 'package:figma/classes/product.dart';
+import 'package:figma/classes/redeemedReward.dart';
+import 'package:figma/classes/reward.dart';
 import 'package:figma/classes/user.dart';
+import 'package:figma/classes/wishlist.dart';
 import 'package:figma/services/http_services.dart';
 
 User? currentUser;
@@ -33,7 +36,7 @@ Future<dynamic> loginUser(email, password) async {
   dynamic request = await verifyUser(user);
 
   if (request is User) {
-    // print("ok");  
+    // print("ok");
 
     User currentUser = User(request.userId, request.firstName, request.lastName,
         request.email, request.phone, request.password);
@@ -89,7 +92,7 @@ Future<List<CartProduct>?> getCart() async {
 
 Future<int?> updateQuantityCart(CartProduct cartProduct) async {
   int? request = await updateQuantityCarts(cartProduct);
-  
+
   if (request != null) {
     return request;
   } else {
@@ -99,7 +102,7 @@ Future<int?> updateQuantityCart(CartProduct cartProduct) async {
 
 Future<int?> updateCheckedCart(CartProduct cartProduct) async {
   int? request = await updateQuantityCarts(cartProduct);
-  
+
   if (request != null) {
     return request;
   } else {
@@ -109,7 +112,7 @@ Future<int?> updateCheckedCart(CartProduct cartProduct) async {
 
 Future<int?> deleteCart(int cartId) async {
   int? request = await deleteCarts(cartId);
-  
+
   if (request != null) {
     return request;
   } else {
@@ -119,7 +122,40 @@ Future<int?> deleteCart(int cartId) async {
 
 Future<List<Address>?> getAddress(int customerId) async {
   List<Address>? request = await getAddresses(customerId);
-  
+
+  if (request != null) {
+    return request;
+  } else {
+    return null;
+  }
+}
+
+Future<List<RedeemedReward>?> getRedeemedRewards(int customerId) async {
+  List<RedeemedReward>? request = await getRedeemedReward(customerId);
+
+  // print(request);
+  if (request != null) {
+    return request;
+  } else {
+    return null;
+  }
+}
+
+Future<List<Reward>?> getRewards() async {
+  List<Reward>? request = await getReward();
+
+  if (request != null) {
+    // print(request);
+    return request;
+  } else {
+    return null;
+  }
+}
+
+Future<List<Wishlist>?> getWishlists(int customerId) async {
+  List<Wishlist>? request = await getWishlist(customerId);
+
+  // print(request);
   if (request != null) {
     return request;
   } else {

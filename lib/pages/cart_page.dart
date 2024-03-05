@@ -26,54 +26,6 @@ class CartPage extends StatelessWidget {
           },
         ),
       ),
-      // bottomNavigationBar: GestureDetector(
-      //   onTap: () {
-      //     Navigator.of(context).push(MaterialPageRoute(
-      //         builder: (BuildContext context) => CheckOutPage(
-      //               checkOutProducts: checkOutProducts!,
-      //             )));
-      //   },
-      //   child: BottomAppBar(
-      //     height: 60.0,
-      //     color: Colors.black,
-      //     child: Container(
-      //       height: 60.0,
-      //       child: Column(
-      //         mainAxisAlignment: MainAxisAlignment.center,
-      //         children: [
-      //           Row(
-      //             mainAxisAlignment: MainAxisAlignment.center,
-      //             children: [
-      //               IconButton(
-      //                 icon: const Icon(
-      //                   Icons.shopping_bag_outlined,
-      //                   color: Colors.white,
-      //                   size: 25,
-      //                 ),
-      //                 onPressed: () {
-      //                   Navigator.pop(context);
-      //                 },
-      //               ),
-      //               Column(
-      //                 children: [
-      //                   SizedBox(height: 5),
-      //                   Text(
-      //                     "BUY NOW",
-      //                     textAlign: TextAlign.left,
-      //                     style: GoogleFonts.tenorSans(
-      //                       textStyle: const TextStyle(
-      //                           color: Colors.white, fontSize: 22),
-      //                     ),
-      //                   ),
-      //                 ],
-      //               ),
-      //             ],
-      //           ),
-      //         ],
-      //       ),
-      //     ),
-      //   ),
-      // ),
     );
   }
 }
