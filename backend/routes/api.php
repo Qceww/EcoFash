@@ -10,6 +10,8 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\RedeemedRewardController;
 use App\Http\Controllers\RewardController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,11 @@ Route::post('/update-quantity-cart', [CartItemController::class, 'updateQuantity
 Route::post('/update-checked-cart', [CartItemController::class, 'updateCheckedCart']);
 Route::post('/delete-cart', [CartItemController::class, 'deleteCart']);
 Route::post('/get-address', [AddressController::class, 'getAddress']);
+Route::post('/get-detailed-address', [AddressController::class, 'getDetailedAddress']);
 Route::post('/get-redeemed-reward', [RedeemedRewardController::class, 'getRedeemedReward']);
 Route::post('/get-reward', [RewardController::class, 'getReward']);
 Route::post('/get-wishlist', [WishlistController::class, 'getWishlist']);
+Route::post('/create-order', [OrderController::class, 'createOrder']);
+Route::post('/create-order-item', [OrderItemController::class, 'createOrderItem']);
+Route::post('/get-order', [OrderController::class, 'getOrder']);
+Route::post('/get-order-item', [OrderItemController::class, 'getOrderItem']);

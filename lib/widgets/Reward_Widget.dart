@@ -1,4 +1,6 @@
 import 'package:figma/classes/reward.dart';
+import 'package:figma/functions/functions.dart';
+import 'package:figma/pages/checkout_page.dart';
 import 'package:figma/pages/reward_detail_page.dart';
 import 'package:figma/pages/reward_page.dart';
 import 'package:flutter/material.dart';
@@ -101,7 +103,7 @@ class Reward_widget extends StatelessWidget {
   }
 }
 
-class RewardDetail extends StatelessWidget {
+class RewardDetail extends StatefulWidget {
   Reward reward;
   int customerId;
 
@@ -109,59 +111,78 @@ class RewardDetail extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<RewardDetail> createState() => _RewardDetailState();
+}
+
+class _RewardDetailState extends State<RewardDetail> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.875,
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 235, 232, 232),
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0.0),
-                child: Text(
-                  "${reward.rewardName}",
-                  style: GoogleFonts.zenAntique(
-                    textStyle: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w200,
+    int promoApplied = 0;
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          putPromo(widget.reward);
+        });
+        Navigator.of(context).pop(context);
+      },
+      child: Padding(
+          padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.875,
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 235, 232, 232),
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0.0),
+                  child: Text(
+                    "${widget.reward.rewardName}",
+                    style: GoogleFonts.zenAntique(
+                      textStyle: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w200,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10.0, 4.0, 10.0, 4.0),
-                child: Text(
-                  "Expiry Date : ${reward.rewardExpiry}",
-                  style: GoogleFonts.zenAntique(
-                    textStyle: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w200,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10.0, 4.0, 10.0, 4.0),
+                  child: Text(
+                    "Expiry Date : ${widget.reward.rewardExpiry}",
+                    style: GoogleFonts.zenAntique(
+                      textStyle: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w200,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10.0, 4.0, 10.0, 20.0),
-                child: Text(
-                  "Location : ${reward.rewardLocation}",
-                  style: GoogleFonts.zenAntique(
-                    textStyle: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w200,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10.0, 4.0, 10.0, 20.0),
+                  child: Text(
+                    "Location : ${widget.reward.rewardLocation}",
+                    style: GoogleFonts.zenAntique(
+                      textStyle: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w200,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ));
+              ],
+            ),
+          )),
+    );
   }
 }

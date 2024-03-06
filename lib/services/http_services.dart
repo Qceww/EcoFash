@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:figma/classes/address.dart';
 import 'package:figma/classes/colors.dart';
+import 'package:figma/classes/order.dart';
+import 'package:figma/classes/orderItem.dart';
 import 'package:figma/classes/product.dart';
 import 'package:figma/classes/cartProduct.dart';
 import 'package:figma/classes/redeemedReward.dart';
@@ -40,10 +42,6 @@ Future<User?> verifyUser(user) async {
   );
 
   if (response.statusCode == 200) {
-    // print(response.body);
-
-    // print(User.fromJson(jsonDecode(response.body)));
-
     return User.fromJson(jsonDecode(response.body));
   }
   return null;
@@ -61,12 +59,8 @@ Future<List<Product>?> getProducts() async {
   if (response.statusCode == 200) {
     List<dynamic> body = jsonDecode(response.body);
 
-    // print(body);
-
     List<Product> productList =
         (body).map((itemWord) => Product.fromJson(itemWord)).toList();
-
-    // print((body).map((itemWord) => print(itemWord)));
 
     return productList;
   }
@@ -112,21 +106,11 @@ Future<List<CartProduct>?> getCarts(userId) async {
       },
       body: jsonEncode({"customerId": userId}));
 
-  // print(response.body.isEmpty);
-
   if (response.statusCode == 200 && response.body.isNotEmpty) {
     List<dynamic> body = jsonDecode(response.body);
-    // print(userId);
 
     List<CartProduct> cartProductList =
         (body).map((itemWord) => CartProduct.fromJson(itemWord)).toList();
-    // CartProduct asd;
-    // (body).map((itemWord) => {
-    //     asd = CartProduct.fromJson(itemWord),
-    //     print(asd),
-    //   }).toList();
-
-    // print(cartProductList);
 
     return cartProductList;
   }
@@ -182,12 +166,24 @@ Future<List<Address>?> getAddresses(customerId) async {
 
   if (response.statusCode == 200) {
     List<dynamic> body = jsonDecode(response.body);
-    // print(userId);
 
     List<Address> addressList =
         (body).map((itemWord) => Address.fromJson(itemWord)).toList();
 
     return addressList;
+  }
+}
+
+Future<Address?> getDetailedAddresses(addressId) async {
+  final response = await http.post(Uri.parse("$url/get-detailed-address"),
+      headers: <String, String>{
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: jsonEncode({"addressId": addressId}));
+
+  if (response.statusCode == 200) {
+    return Address.fromJson(jsonDecode(response.body));
   }
 }
 
@@ -198,10 +194,8 @@ Future<List<RedeemedReward>?> getRedeemedReward(customerId) async {
         "Accept": "application/json",
       },
       body: jsonEncode({"customerId": customerId}));
-  // print("Masuk HTTP");
   if (response.statusCode == 200) {
     List<dynamic> body = jsonDecode(response.body);
-    // print(userId);
 
     List<RedeemedReward> promoList =
         (body).map((itemWord) => RedeemedReward.fromJson(itemWord)).toList();
@@ -222,12 +216,8 @@ Future<List<Reward>?> getReward() async {
   if (response.statusCode == 200) {
     List<dynamic> body = jsonDecode(response.body);
 
-    // print(body);
-
     List<Reward> rewardList =
         (body).map((itemWord) => Reward.fromJson(itemWord)).toList();
-
-    // print((body).map((itemWord) => print(itemWord)));
 
     return rewardList;
   }
@@ -240,14 +230,73 @@ Future<List<Wishlist>?> getWishlist(customerId) async {
         "Accept": "application/json",
       },
       body: jsonEncode({"customerId": customerId}));
-  // print("Masuk HTTP");
   if (response.statusCode == 200) {
     List<dynamic> body = jsonDecode(response.body);
-    // print(userId);
 
     List<Wishlist> wishlist =
         (body).map((itemWord) => Wishlist.fromJson(itemWord)).toList();
 
     return wishlist;
+  }
+}
+
+Future<int?> createOrders(Order order) async {
+  final response = await http.post(Uri.parse("$url/create-order"),
+      headers: <String, String>{
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: jsonEncode(order));
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  }
+
+  return 400;
+}
+
+Future<int?> createOrderItems(OrderItem orderItem) async {
+  final response = await http.post(Uri.parse("$url/create-order-item"),
+      headers: <String, String>{
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: jsonEncode(orderItem));
+  if (response.statusCode == 200) {
+    return 200;
+  }
+
+  return 400;
+}
+
+Future<List<Order>?> getOrders(customerId) async {
+  final response = await http.post(Uri.parse("$url/get-order"),
+      headers: <String, String>{
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: jsonEncode({"customerId": customerId}));
+  if (response.statusCode == 200) {
+    List<dynamic> body = jsonDecode(response.body);
+    List<Order> order =
+        (body).map((itemWord) => Order.fromJson(itemWord)).toList();
+
+    return order;
+  }
+}
+
+Future<List<OrderItem>?> getOrderItems(orderId) async {
+  final response = await http.post(Uri.parse("$url/get-order-item"),
+      headers: <String, String>{
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: jsonEncode({"orderId": orderId}));
+  if (response.statusCode == 200) {
+    List<dynamic> body = jsonDecode(response.body);
+
+    List<OrderItem> orderItem =
+        (body).map((itemWord) => OrderItem.fromJson(itemWord)).toList();
+
+    return orderItem;
   }
 }

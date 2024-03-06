@@ -1,7 +1,22 @@
 // ignore: file_names
 class OrderItem {
-  String productName;
-  int quantity;
+  int orderId;
+  int productId;
+  int orderQuantity;
 
-  OrderItem({required this.productName, required this.quantity});
+  OrderItem(this.orderId, this.productId, this.orderQuantity);
+
+  Map<String, dynamic> toJson() => {
+        "orderId": orderId,
+        "productId": productId,
+        "orderQuantity": orderQuantity,
+      };
+
+  factory OrderItem.fromJson(Map<String, dynamic> json) {
+    return OrderItem(
+      json["orderId"],
+      json["productId"],
+      json["orderQuantity"],
+    );
+  }
 }

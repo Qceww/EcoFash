@@ -5,15 +5,23 @@ import 'package:figma/widgets/Reward_Widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class RewardPage extends StatelessWidget {
+class RewardPage extends StatefulWidget {
   RewardPage({Key? key}) : super(key: key);
 
+  @override
+  State<RewardPage> createState() => _RewardPageState();
+}
+
+class _RewardPageState extends State<RewardPage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+  
   late Future<List<Reward>?> rewardList = getRewards();
+
   late Future<List<RedeemedReward>?> redeemedRewardList = getRedeemedRewards(1);
-  late List<Reward>? rewards = [];
-  late List<RedeemedReward>? redeemedRewards = [];
-  late Map<int, Reward> rewardMap = {};
-  late List<Reward> promoList = [];
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -21,6 +29,10 @@ class RewardPage extends StatelessWidget {
       builder: (BuildContext context,
           AsyncSnapshot<List<RedeemedReward>?> snapshot) {
         if (snapshot.hasData) {
+          late List<Reward>? rewards = [];
+          late List<RedeemedReward>? redeemedRewards = [];
+          late Map<int, Reward> rewardMap = {};
+          late List<Reward> promoList = [];
           redeemedRewards = snapshot.data;
           return FutureBuilder(
             future: rewardList,
@@ -33,12 +45,15 @@ class RewardPage extends StatelessWidget {
                   rewardMap[reward!.rewardId!] = reward;
                 }
 
+
+                promoList = [];
                 for (RedeemedReward item in redeemedRewards!) {
                   // Check if rewardId exists in the rewardMap
                   if (rewardMap.containsKey(item.rewardId)) {
                     promoList.add(rewardMap[item.rewardId]!);
                   }
                 }
+
 
                 return Scaffold(
                   body: SafeArea(
@@ -66,7 +81,7 @@ class RewardPage extends StatelessWidget {
                                 width: MediaQuery.of(context).size.width * 0.8,
                                 child: Center(
                                   child: Text(
-                                    "YOUR PROMOx",
+                                    "YOUR PROMO",
                                     style: GoogleFonts.zenAntique(
                                       textStyle: const TextStyle(
                                         color: Colors.black,
@@ -101,7 +116,6 @@ class RewardPage extends StatelessWidget {
             },
           );
         } else {
-          print("asda");
           return const CircularProgressIndicator();
         }
       },

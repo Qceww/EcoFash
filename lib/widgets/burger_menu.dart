@@ -118,9 +118,7 @@ class Navbar extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (BuildContext context) => OrderPage(
-                    customerId: customerId,
-                  ),
+                  builder: (BuildContext context) => OrderPage(),
                 ),
               );
             },

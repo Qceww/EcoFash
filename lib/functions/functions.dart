@@ -1,14 +1,19 @@
 import 'package:figma/classes/address.dart';
 import 'package:figma/classes/cartProduct.dart';
 import 'package:figma/classes/colors.dart';
+import 'package:figma/classes/order.dart';
+import 'package:figma/classes/orderItem.dart';
 import 'package:figma/classes/product.dart';
 import 'package:figma/classes/redeemedReward.dart';
 import 'package:figma/classes/reward.dart';
 import 'package:figma/classes/user.dart';
 import 'package:figma/classes/wishlist.dart';
 import 'package:figma/services/http_services.dart';
+import 'package:figma/widgets/Reward_Widget.dart';
 
 User? currentUser;
+Reward? reward;
+Address? addressNow;
 
 Future<dynamic> registerUser(
     firstName, lastName, email, phone, password, confirmPassword) async {
@@ -17,7 +22,7 @@ Future<dynamic> registerUser(
     return "Password doesn't match";
   }
 
-  User user = User(null, firstName, lastName, email, phone, password);
+  User user = User(null, firstName, lastName, email, phone, password, 0);
 
   int? request = await createUser(user);
 
@@ -31,7 +36,7 @@ Future<dynamic> registerUser(
 }
 
 Future<dynamic> loginUser(email, password) async {
-  User user = User(null, null, null, email, null, password);
+  User user = User(null, null, null, email, null, password, 0);
 
   dynamic request = await verifyUser(user);
 
@@ -39,7 +44,7 @@ Future<dynamic> loginUser(email, password) async {
     // print("ok");
 
     User currentUser = User(request.userId, request.firstName, request.lastName,
-        request.email, request.phone, request.password);
+        request.email, request.phone, request.password, request.memberPoint);
     return currentUser;
   } else {
     print("Failed To Logged In");
@@ -130,10 +135,19 @@ Future<List<Address>?> getAddress(int customerId) async {
   }
 }
 
+Future<Address?> getDetailedAddress(int addressId) async {
+  Address? request = await getDetailedAddresses(addressId);
+
+  if (request != null) {
+    return request;
+  } else {
+    return null;
+  }
+}
+
 Future<List<RedeemedReward>?> getRedeemedRewards(int customerId) async {
   List<RedeemedReward>? request = await getRedeemedReward(customerId);
 
-  // print(request);
   if (request != null) {
     return request;
   } else {
@@ -156,6 +170,74 @@ Future<List<Wishlist>?> getWishlists(int customerId) async {
   List<Wishlist>? request = await getWishlist(customerId);
 
   // print(request);
+  if (request != null) {
+    return request;
+  } else {
+    return null;
+  }
+}
+
+Reward? putPromo(Reward? promo) {
+  reward = promo;
+  if (reward != null) {
+    return reward;
+  }
+  return null;
+}
+
+Reward? getPromo() {
+  return reward;
+}
+
+void removePromo() {
+  reward = null;
+}
+
+Address? putAddressNow(Address? address) {
+  addressNow = address;
+  if (addressNow != null) {
+    return addressNow;
+  }
+  return null;
+}
+
+Address? getAddressNow() {
+  return addressNow;
+}
+
+void removeAddressNow() {
+  addressNow = null;
+}
+
+Future<int?> createOrder(Order order) async {
+  int? request = await createOrders(order);
+  if (request == 400) {
+    return null;
+  } else {
+    return request;
+  }
+}
+
+Future<int?> createOrderItem(OrderItem orderItem) async {
+  int? request = await createOrderItems(orderItem);
+  if (request == 400) {
+    return null;
+  } else {
+    return 200;
+  }
+}
+
+Future<List<Order>?> getOrder(int customerId) async {
+  List<Order>? request = await getOrders(customerId);
+  if (request != null) {
+    return request;
+  } else {
+    return null;
+  }
+}
+
+Future<List<OrderItem>?> getOrderItem(int orderId) async {
+  List<OrderItem>? request = await getOrderItems(orderId);
   if (request != null) {
     return request;
   } else {

@@ -1,9 +1,16 @@
+import 'dart:async';
+
 import 'package:figma/classes/address.dart';
 import 'package:figma/classes/cartProduct.dart';
+import 'package:figma/classes/order.dart';
+import 'package:figma/classes/orderItem.dart';
+import 'package:figma/classes/reward.dart';
 import 'package:figma/functions/functions.dart';
 import 'package:figma/pages/address_page.dart';
 import 'package:figma/pages/paymentSuccess.dart';
 import 'package:figma/pages/promo_page.dart';
+import 'package:figma/services/http_services.dart';
+import 'package:figma/widgets/cart_widget.dart';
 import 'package:figma/widgets/checkout_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,14 +30,30 @@ class _CheckOutPage extends State<CheckOutPage> {
 
   Future<void> playSound() async {
     String soundPath = "Success_Payment.mp3";
-    // await player.play(AssetSource(soundPath));
     player.play(AssetSource(soundPath));
   }
 
   @override
+  void initState() {
+    super.initState();
+    removePromo();
+    removeAddressNow();
+  }
+
+  @override
   List<Address>? addressListItem = [];
+
   late Future<List<Address>?> addressList = getAddress(1);
+  Reward? reward;
+  Address? addressNow;
+  late int? createRequest;
+  late Future<int?> createOrderItemRequest;
+  late Future<int?> removeCartItemRequest;
   Widget build(BuildContext context) {
+    reward = getPromo();
+    addressNow = getAddressNow();
+    String applied = "Promo Applied";
+    String notApplied = "Apply voucher before you check out";
     return FutureBuilder(
       future: addressList,
       builder: (BuildContext context, AsyncSnapshot<List<Address>?> snapshot) {
@@ -90,7 +113,10 @@ class _CheckOutPage extends State<CheckOutPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                addressListItem![0].addressName!,
+                                // reward != null ? applied : notApplied,
+                                addressNow == null
+                                    ? addressListItem![0].addressName!
+                                    : addressNow!.addressName!,
                                 textAlign: TextAlign.left,
                                 style: GoogleFonts.tenorSans(
                                   textStyle: const TextStyle(
@@ -100,7 +126,9 @@ class _CheckOutPage extends State<CheckOutPage> {
                                 ),
                               ),
                               Text(
-                                addressListItem![0].addressDetail!,
+                                addressNow == null
+                                    ? addressListItem![0].addressDetail!
+                                    : addressNow!.addressDetail!,
                                 textAlign: TextAlign.left,
                                 style: GoogleFonts.tenorSans(
                                   textStyle: const TextStyle(
@@ -121,9 +149,18 @@ class _CheckOutPage extends State<CheckOutPage> {
                       Spacer(),
                       GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  AddressPage(addresses: addressListItem)));
+                          setState(() {
+                            Timer.run(() {
+                              addressNow = getAddressNow();
+                            });
+                          });
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      AddressPage(addresses: addressListItem)))
+                              .then((value) {
+                            setState(() {});
+                          });
                         },
                         child: const Image(
                             image:
@@ -171,7 +208,7 @@ class _CheckOutPage extends State<CheckOutPage> {
                   child: Row(
                     children: [
                       Text(
-                        "Apply voucher before you check out",
+                        reward != null ? applied : notApplied,
                         textAlign: TextAlign.left,
                         style: GoogleFonts.tenorSans(
                           textStyle:
@@ -181,9 +218,19 @@ class _CheckOutPage extends State<CheckOutPage> {
                       const Spacer(),
                       GestureDetector(
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    RewardPage()));
+                            setState(() {
+                              Timer.run(() {
+                                reward = getPromo();
+                              });
+                              removePromo();
+                            });
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        RewardPage()))
+                                .then((value) {
+                              setState(() {});
+                            });
                           },
                           child: const Image(
                               image: AssetImage(
@@ -198,15 +245,36 @@ class _CheckOutPage extends State<CheckOutPage> {
                 ),
                 CheckOutDetail(
                   checkOutProducts: widget.checkOutProducts,
+                  reward: reward,
                 ),
               ]),
             )),
             bottomNavigationBar: GestureDetector(
-              onTap: () {
-                playSound();
-
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (BuildContext context) => const PaymentSuccess()));
+              onTap: () async {
+                DateTime dateNow = DateTime.now();
+                DateTime dateClear =
+                    DateTime(dateNow.year, dateNow.month, dateNow.day + 3);
+                Order order = Order(
+                    null,
+                    currentUser!.userId,
+                    addressNow!.addressId,
+                    dateClear.toString(),
+                    "shipping",
+                    null);
+                createRequest = await createOrder(order);
+                if (createRequest != null) {
+                  for (CartProduct item in widget.checkOutProducts) {
+                    {
+                      createOrderItemRequest = createOrderItem(OrderItem(
+                          createRequest!, item.productId!, item.cartQuantity!));
+                      removeCartItemRequest = deleteCart(item.cartId!);
+                    }
+                  }
+                  playSound();
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          const PaymentSuccess()));
+                }
               },
               child: BottomAppBar(
                 height: 60.0,

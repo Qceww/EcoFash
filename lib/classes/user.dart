@@ -5,8 +5,10 @@ class User {
   String? email;
   String? phone;
   String? password;
+  int? memberPoint;
 
-  User(this.userId, this.firstName, this.lastName, this.email, this.phone, this.password);
+  User(this.userId, this.firstName, this.lastName, this.email, this.phone,
+      this.password, this.memberPoint);
 
   Map<String, dynamic> toJson() => {
         "userId": userId,
@@ -15,15 +17,11 @@ class User {
         "email": email,
         "phone": phone,
         "password": password,
+        "memberPoint": memberPoint,
       };
 
   factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-      json["userId"],
-      json["firstName"], 
-      json["lastName"], 
-      json["email"], 
-      json["phone"],
-      json["password"]);
+    return User(json["userId"], json["firstName"], json["lastName"],
+        json["email"], json["phone"], json["password"], json["memberPoint"]);
   }
 }

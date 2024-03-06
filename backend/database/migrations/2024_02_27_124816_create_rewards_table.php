@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('rewardName');
             $table->date('expiryDate');
             $table->integer('cost');
+            $table->integer('discount');
             $table->string('location');
             $table->timestamps();
 

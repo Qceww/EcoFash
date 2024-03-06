@@ -13,6 +13,8 @@ use App\Models\Address;
 use App\Models\Reward;
 use App\Models\RedeemedReward;
 use App\Models\Wishlist;
+use App\Models\Order;
+use App\Models\OrderItem;
 
 class DatabaseSeeder extends Seeder
 {
@@ -70,6 +72,7 @@ class DatabaseSeeder extends Seeder
                 'email' => 'mf@gmail.com',
                 'phone' => '12345678',
                 'password' => 'MF',
+                'memberPoint' => 200,
             ],
         ];
 
@@ -99,12 +102,14 @@ class DatabaseSeeder extends Seeder
                 'rewardName' => 'Diskon 10',
                 'expiryDate' => Carbon::now()->format('Y-m-d'),
                 'cost' => 20,
+                'discount' => 20,
                 'location' => 'RTB',
             ],
             [
                 'rewardName' => 'Diskon 20',
                 'expiryDate' => Carbon::now()->format('Y-m-d'),
                 'cost' => 20,
+                'discount' => 20,
                 'location' => 'RTB',
             ],
         ];
@@ -129,6 +134,22 @@ class DatabaseSeeder extends Seeder
             ]
         ];
 
+        $orderArray = [
+            [
+                'customerId' => 1,
+                'addressId' => 1,
+                'estimatedDate' => '2023-10-12',
+                'orderStatus' => "shipping",
+            ]
+        ];
+
+        $orderItemArray = [
+            [
+                'orderId' => 1,
+                'productId' => 3,
+                'orderQuantity' => 3
+            ]
+        ];
 
         foreach ($colorIdArray as $color) {
             Color::create($color);
@@ -160,6 +181,14 @@ class DatabaseSeeder extends Seeder
 
         foreach ($wishlistArray as $wishlistItem) {
             Wishlist::create($wishlistItem);
+        }
+
+        foreach ($orderArray as $orderItem) {
+            Order::create($orderItem);
+        }
+
+        foreach ($orderItemArray as $orderItemItem) {
+            OrderItem::create($orderItemItem);
         }
 
         User::factory(5)->create();

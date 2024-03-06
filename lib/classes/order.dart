@@ -1,14 +1,31 @@
 class Order {
-  int orderId;
-  String recipientName;
-  String recipientAddress;
-  dynamic createdDate;
-  String status;
+  int? orderId;
+  int? customerId;
+  int? addressId;
+  dynamic? estimatedDate;
+  String? orderStatus;
+  dynamic? createdDate;
 
-  Order(
-      {required this.orderId,
-      required this.recipientName,
-      required this.recipientAddress,
-      required this.createdDate,
-      required this.status});
+  Order(this.orderId, this.customerId, this.addressId, this.estimatedDate,
+      this.orderStatus, this.createdDate);
+
+  Map<String, dynamic> toJson() => {
+        "orderId": orderId,
+        "customerId": customerId,
+        "addressId": addressId,
+        "estimatedDate": estimatedDate,
+        "orderStatus": orderStatus,
+        "createdDate": createdDate,
+      };
+
+  factory Order.fromJson(Map<String, dynamic> json) {
+    return Order(
+      json["orderId"],
+      json["customerId"],
+      json["addressId"],
+      json["estimatedDate"],
+      json["orderStatus"],
+      json["createdDate"],
+    );
+  }
 }

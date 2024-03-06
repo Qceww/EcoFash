@@ -94,6 +94,13 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
       future: cartProducts,
       builder:
           (BuildContext context, AsyncSnapshot<List<CartProduct>?> snapshot1) {
+        if (snapshot1.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Colors.deepPurpleAccent,
+            ),
+          );
+        }
         if (snapshot1.hasData) {
           cartProductsItem = snapshot1.data;
           checkOutProducts!.clear();
@@ -201,16 +208,16 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
                       ),
                     ),
                   ),
-                  bottomNavigationBar: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (BuildContext context) => CheckOutPage(
-                                checkOutProducts: checkOutProducts!,
-                              )));
-                    },
-                    child: BottomAppBar(
-                      height: 60.0,
-                      color: Colors.black,
+                  bottomNavigationBar: BottomAppBar(
+                    height: 60.0,
+                    color: Colors.black,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (BuildContext context) => CheckOutPage(
+                                  checkOutProducts: checkOutProducts!,
+                                )));
+                      },
                       child: Container(
                         height: 60.0,
                         child: Column(
@@ -225,9 +232,7 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
                                     color: Colors.white,
                                     size: 25,
                                   ),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
+                                  onPressed: () {},
                                 ),
                                 Column(
                                   children: [
@@ -251,11 +256,17 @@ class _CartNoEmptyState extends State<CartNoEmpty> {
                   ),
                 );
               } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
                 return const CartEmpty();
               }
             },
           );
         } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
           return const CartEmpty();
         }
       },
@@ -321,83 +332,88 @@ class _CartItemState extends State<CartItem> {
                     fit: BoxFit.fill,
                   ),
                   SizedBox(width: 8),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        productsItem![widget.cartProduct.productId!]
-                            .productName!,
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      SizedBox(height: 5),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        child: Text(
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
                           productsItem![widget.cartProduct.productId!]
-                              .productDescription!,
-                          style: TextStyle(color: Colors.grey, fontSize: 13),
+                              .productName!,
+                          style: TextStyle(fontSize: 20),
                         ),
-                      ),
-                      SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              if (widget.cartProduct.cartQuantity! > 0) {
-                                widget.onQuantityChanged(
-                                    widget.cartProduct.cartQuantity! - 1);
-                                if (widget.cartProduct.cartQuantity! == 0) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: Text('Remove Item'),
-                                        content: Text(
-                                            'Are you sure you want to remove this item from the cart?'),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Text('Cancel'),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                              widget.onDelete();
-                                            },
-                                            child: Text('OK'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
+                        SizedBox(height: 5),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          child: Text(
+                            productsItem![widget.cartProduct.productId!]
+                                .productDescription!,
+                            style: TextStyle(color: Colors.grey, fontSize: 13),
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                if (widget.cartProduct.cartQuantity! > 0) {
+                                  widget.onQuantityChanged(
+                                      widget.cartProduct.cartQuantity! - 1);
+                                  if (widget.cartProduct.cartQuantity! == 0) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text('Remove Item'),
+                                          content: Text(
+                                              'Are you sure you want to remove this item from the cart?'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text('Cancel'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                                widget.onDelete();
+                                              },
+                                              child: Text('OK'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }
                                 }
-                              }
-                            },
-                            child: Image(image: AssetImage('images/minus.png')),
-                          ),
-                          SizedBox(width: 5),
-                          Text(widget.cartProduct.cartQuantity!.toString()),
-                          SizedBox(width: 5),
-                          GestureDetector(
-                            onTap: () {
-                              widget.onQuantityChanged(
-                                  widget.cartProduct.cartQuantity! + 1);
-                            },
-                            child: Image(image: AssetImage('images/Plus.png')),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        '\$${productsItem![widget.cartProduct.productId!].productPrice!}',
-                        style: const TextStyle(
-                          color: Colors.orange,
-                          fontSize: 20,
+                              },
+                              child:
+                                  Image(image: AssetImage('images/minus.png')),
+                            ),
+                            SizedBox(width: 5),
+                            Text(widget.cartProduct.cartQuantity!.toString()),
+                            SizedBox(width: 5),
+                            GestureDetector(
+                              onTap: () {
+                                widget.onQuantityChanged(
+                                    widget.cartProduct.cartQuantity! + 1);
+                              },
+                              child:
+                                  Image(image: AssetImage('images/Plus.png')),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
+                        Text(
+                          '\$${productsItem![widget.cartProduct.productId!].productPrice!}',
+                          style: const TextStyle(
+                            color: Colors.orange,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

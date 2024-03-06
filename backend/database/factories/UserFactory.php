@@ -23,6 +23,7 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->randomnumber(7,true),
             'password' => fake()->password(2,5),
+            'memberPoint' => fake()->numberBetween(100,200),
         ];
     }
 

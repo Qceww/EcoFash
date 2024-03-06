@@ -18,4 +18,12 @@ class AddressController extends Controller
         return count($address) == 0 ? null : response()->json($address, 200);          
         // return $request;
     }
+
+    public function getDetailedAddress(Request $request){
+
+
+        $address = Address::where('addressId', $request->addressId)->first();
+
+        return $address;
+    }
 }

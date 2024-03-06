@@ -14,7 +14,7 @@ class AddressPage extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Row(
                 children: [
                   Container(
@@ -24,13 +24,13 @@ class AddressPage extends StatelessWidget {
                         // Handle closing the cart
                         Navigator.of(context).pop();
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_sharp,
                         size: 30,
                       ),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: Center(
@@ -48,7 +48,7 @@ class AddressPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               Expanded(
                 child: ListView.builder(
                   itemCount: addresses!.length,

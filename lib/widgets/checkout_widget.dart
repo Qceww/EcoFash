@@ -1,11 +1,15 @@
 import 'package:figma/classes/cartProduct.dart';
 import 'package:figma/classes/product.dart';
+import 'package:figma/classes/reward.dart';
 import 'package:figma/functions/functions.dart';
 import 'package:flutter/material.dart';
 
 class CheckOutDetail extends StatefulWidget {
   List<CartProduct> checkOutProducts;
-  CheckOutDetail({Key? key, required this.checkOutProducts}) : super(key: key);
+  Reward? reward;
+  CheckOutDetail(
+      {Key? key, required this.checkOutProducts, required this.reward})
+      : super(key: key);
 
   @override
   State<CheckOutDetail> createState() => _CheckOutDetailState();
@@ -17,6 +21,9 @@ class _CheckOutDetailState extends State<CheckOutDetail> {
 
   @override
   Widget build(BuildContext context) {
+    dynamic diskonTemp = 0;
+    dynamic discount = 0;
+    dynamic subtotal = 0;
     double total = 0;
     print(widget.checkOutProducts.length);
 
@@ -25,15 +32,21 @@ class _CheckOutDetailState extends State<CheckOutDetail> {
       builder: (BuildContext context, AsyncSnapshot<List<Product>?> snapshot) {
         if (snapshot.hasData) {
           productsItem = snapshot.data;
+          diskonTemp = (reward?.rewardCost ?? 0);
 
           for (var product in widget.checkOutProducts) {
             total += (productsItem![product.productId!].productPrice! *
                 product.cartQuantity!);
           }
-
+          if (diskonTemp == null) {
+            discount = 0;
+          } else {
+            discount = total * (diskonTemp * 0.01);
+          }
+          subtotal = total - (total * (diskonTemp * 0.01));
           return SingleChildScrollView(
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.3,
+              height: MediaQuery.of(context).size.height * 0.39,
               child: Column(children: [
                 Expanded(
                   child: ListView.builder(
@@ -58,10 +71,44 @@ class _CheckOutDetailState extends State<CheckOutDetail> {
                     children: [
                       const Text(
                         'TOTAL',
-                        style: TextStyle(fontSize: 25),
+                        style: TextStyle(fontSize: 18),
                       ),
                       Text(
                         '\$${total.toStringAsFixed(2)}',
+                        style:
+                            const TextStyle(color: Colors.orange, fontSize: 18),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Discount',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      Text(
+                        '\$${discount.toStringAsFixed(2)}',
+                        style:
+                            const TextStyle(color: Colors.orange, fontSize: 18),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Subtotal',
+                        style: TextStyle(fontSize: 25),
+                      ),
+                      Text(
+                        '\$${subtotal.toStringAsFixed(2)}',
                         style:
                             const TextStyle(color: Colors.orange, fontSize: 25),
                       )

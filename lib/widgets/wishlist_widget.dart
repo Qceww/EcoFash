@@ -98,16 +98,23 @@ class WishlistItems extends StatelessWidget {
         future: products,
         builder:
             (BuildContext context, AsyncSnapshot<List<Product>?> snapshot) {
-          productItems = snapshot.data;
           if (snapshot.hasData) {
+            productItems = snapshot.data;
             return FutureBuilder(
                 future: wishlist,
                 builder: (BuildContext context,
                     AsyncSnapshot<List<Wishlist>?> snapshot) {
                   wishlistItems = snapshot.data;
 
+                  if (productItems == null) {
+                    productMap = {};
+                  }
+                  if (wishlistItems == null) {
+                    wishlistItems = [];
+                  }
+
                   for (Product product in productItems!) {
-                    productMap[product!.productId!] = product;
+                    productMap[product.productId!] = product;
                   }
 
                   for (Wishlist item in wishlistItems!) {
@@ -147,7 +154,9 @@ class WishlistItems extends StatelessWidget {
                             const Image(
                               image: AssetImage('images/Home_page_garis.png'),
                             ),
-                            SizedBox(height: 20,),
+                            SizedBox(
+                              height: 20,
+                            ),
                             Expanded(
                               child: ListView.builder(
                                 itemCount: wishlistProducts.length,

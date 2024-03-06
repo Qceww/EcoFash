@@ -20,7 +20,7 @@ class Address {
 
   factory Address.fromJson(Map<String, dynamic> json) {
     return Address(
-      json["cartId"],
+      json["addressId"],
       json["customerId"],
       json["addressName"],
       json["addressDetail"],
