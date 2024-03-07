@@ -21,11 +21,12 @@ class OrderDetail extends StatelessWidget {
     }
   }
 
-  @override
   late Future<Address?> address = getDetailedAddress(order.addressId!);
+  late Future<List<OrderItem>?> orderItems = getOrderItem(order.orderId!);
   Future<List<Product>?> product = getProduct();
+
+  @override
   Widget build(BuildContext context) {
-    Future<List<OrderItem>?> orderItems = getOrderItem(order.orderId!);
     return FutureBuilder(
       future: address,
       builder: (BuildContext context, AsyncSnapshot snapshot1) {
@@ -101,7 +102,8 @@ class OrderDetail extends StatelessWidget {
                                               ),
                                               SizedBox(height: 20.0),
                                               Text(
-                                                "Recipient Name: ${currentUser!.firstName} ${currentUser!.lastName}",
+                                                // "Recipient Name: ${currentUser!.firstName} ${currentUser!.lastName}",
+                                                "Recipient Name: Hosannia Momita",
                                                 style: GoogleFonts.zenAntique(
                                                   textStyle: const TextStyle(
                                                     color: Colors.black,
@@ -112,7 +114,7 @@ class OrderDetail extends StatelessWidget {
                                               ),
                                               SizedBox(height: 10.0),
                                               Text(
-                                                "Recipient Address:${addressItem!.addressName}",
+                                                "Recipient Address:${addressItem.addressDetail}",
                                                 style: GoogleFonts.zenAntique(
                                                   textStyle: const TextStyle(
                                                     color: Colors.black,
@@ -143,48 +145,43 @@ class OrderDetail extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-                                              Expanded(
-                                                child: ListView.builder(
-                                                  shrinkWrap: true,
-                                                  itemCount:
-                                                      orderItemsItem?.length,
-                                                  itemBuilder:
-                                                      (context, index) {
-                                                    final orderItem =
-                                                        orderItemsItem![index];
-                                                    return Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          vertical: 4.0),
-                                                      child: Row(
-                                                        children: [
-                                                          const Icon(
-                                                              Icons.circle,
-                                                              size: 7.5,
+                                              ListView.builder(
+                                                shrinkWrap: true,
+                                                itemCount:
+                                                    orderItemsItem!.length,
+                                                itemBuilder: (context, index) {
+                                                  final orderItem =
+                                                      orderItemsItem[index];
+                                                  return Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        vertical: 4.0),
+                                                    child: Row(
+                                                      children: [
+                                                        Icon(Icons.circle,
+                                                            size: 7.5,
+                                                            color:
+                                                                Colors.black),
+                                                        SizedBox(width: 5),
+                                                        Text(
+                                                          "${productItem[orderItem.productId - 1].productName} - ${orderItem.orderQuantity} Pcs",
+                                                          style: GoogleFonts
+                                                              .zenAntique(
+                                                            textStyle:
+                                                                const TextStyle(
                                                               color:
-                                                                  Colors.black),
-                                                          const SizedBox(
-                                                              width: 5),
-                                                          Text(
-                                                            "${productItem[orderItem.productId].productName} - ${orderItem.orderQuantity} Pcs",
-                                                            style: GoogleFonts
-                                                                .zenAntique(
-                                                              textStyle:
-                                                                  const TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w200,
-                                                              ),
+                                                                  Colors.black,
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w200,
                                                             ),
                                                           ),
-                                                        ],
-                                                      ),
-                                                    );
-                                                  },
-                                                ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
                                               ),
                                             ],
                                           ),
@@ -196,6 +193,80 @@ class OrderDetail extends StatelessWidget {
                               },
                             );
                           },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.875,
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 235, 232, 232),
+                              borderRadius: BorderRadius.circular(20.0),
+                              border: Border.all(
+                                color: _getBorderColor(order
+                                    .orderStatus!), // Apply border color based on status
+                                width: 2.0,
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                      10.0, 20.0, 10.0, 0.0),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "ORDER",
+                                        style: GoogleFonts.zenAntique(
+                                          textStyle: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w200,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 10.0),
+                                      Text(
+                                        "${order.orderId}",
+                                        style: GoogleFonts.zenAntique(
+                                          textStyle: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w200,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                      10.0, 4.0, 10.0, 4.0),
+                                  child: Text(
+                                    "Recipient Address : ${addressItem.addressDetail}",
+                                    style: GoogleFonts.zenAntique(
+                                      textStyle: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w200,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                      10.0, 4.0, 10.0, 20.0),
+                                  child: Text(
+                                    "Expected Received Date : ${order.estimatedDate}",
+                                    style: GoogleFonts.zenAntique(
+                                      textStyle: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w200,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       );
                     } else {
@@ -212,6 +283,7 @@ class OrderDetail extends StatelessWidget {
         }
       },
     );
+
     // return Padding(
     //   padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
     //   child: GestureDetector(
