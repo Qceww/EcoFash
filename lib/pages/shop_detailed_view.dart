@@ -25,20 +25,6 @@ class _ShopDetailedView extends State<ShopDetailedView> {
 
   Future<List<ColorClass>?> colors = getAllColor();
 
-  // Product product = Product(
-  //   1,
-  //   'MOHAN',
-  //   100,
-  //   'Recycle Boucle Knit Cardigan Pink',
-  //   2,
-  //   1,
-  //   3,
-  //   'images/Home_page_1.png',
-  //   'images/Home_page_1.png',
-  //   'images/Home_page_1.png',
-  //   120,
-  // );
-
   List<String> sizes = ['S', 'M', 'L'];
 
   int selectedIndex = -1;

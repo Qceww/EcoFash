@@ -1,4 +1,5 @@
 import 'package:figma/classes/address.dart';
+import 'package:figma/classes/blog.dart';
 import 'package:figma/classes/cartProduct.dart';
 import 'package:figma/classes/colors.dart';
 import 'package:figma/classes/order.dart';
@@ -9,7 +10,6 @@ import 'package:figma/classes/reward.dart';
 import 'package:figma/classes/user.dart';
 import 'package:figma/classes/wishlist.dart';
 import 'package:figma/services/http_services.dart';
-import 'package:figma/widgets/Reward_Widget.dart';
 
 User? currentUser;
 Reward? reward;
@@ -238,6 +238,39 @@ Future<List<Order>?> getOrder(int customerId) async {
 
 Future<List<OrderItem>?> getOrderItem(int orderId) async {
   List<OrderItem>? request = await getOrderItems(orderId);
+  if (request != null) {
+    return request;
+  } else {
+    return null;
+  }
+}
+
+Future<List<Blog>?> getBlog() async {
+  List<Blog>? request = await getBlogs();
+
+  if (request != null) {
+    // print(request);
+    return request;
+  } else {
+    return null;
+  }
+}
+
+Future<Blog?> getDetailedBlog(id) async {
+  Blog blog = Blog(id, null, null, null, null, null, null, null);
+
+  Blog? request = await getDetailedBlogs(blog);
+
+  if (request != null) {
+    return request;
+  } else {
+    return null;
+  }
+}
+
+Future<int?> updateQuantityProduct(Product product) async {
+  int? request = await updateQuantityProducts(product);
+
   if (request != null) {
     return request;
   } else {

@@ -1,14 +1,18 @@
+import 'package:figma/classes/blog.dart';
+import 'package:figma/functions/functions.dart';
 import 'package:figma/pages/blog_detailed_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Blog_List_Widget extends StatelessWidget {
+  int id;
   String title;
   String tag1;
   String tag2;
 
   Blog_List_Widget({
     super.key,
+    required this.id,
     required this.title,
     required this.tag1,
     required this.tag2,
@@ -20,7 +24,7 @@ class Blog_List_Widget extends StatelessWidget {
       onTap: () {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (BuildContext context) => const Blogdetailedview(),
+            builder: (BuildContext context) => Blogdetailedview(id: id),
           ),
         );
       },

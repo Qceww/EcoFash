@@ -15,6 +15,7 @@ use App\Models\RedeemedReward;
 use App\Models\Wishlist;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Blog;
 
 class DatabaseSeeder extends Seeder
 {
@@ -151,6 +152,26 @@ class DatabaseSeeder extends Seeder
             ]
         ];
 
+        $blogArray = [
+            [
+                'blogName' => "2021 Style Guide: The Biggest Fall Trends",	
+                'blogDescription' => "You guys know how much I love mixing high and low-end.",
+                'picture' => "images/Blog_grid_view_1.png",	
+                'authorName' => "OpenFashion",
+                'tag1' => "Fashion",
+                'tag2' => "Trending"
+            ],
+            [
+                'blogName' => "The Biggest Fall Trends: Fast Fashion",	
+                'blogDescription' => "You guys know how much I love mixing high and low-end.",
+                'picture' => "images/Blog_grid_view_1.png",	
+                'authorName' => "OpenFashion",
+                'tag1' => "Fashion",
+                'tag2' => "Trending"
+            ]
+        ];
+
+
         foreach ($colorIdArray as $color) {
             Color::create($color);
         }
@@ -189,6 +210,10 @@ class DatabaseSeeder extends Seeder
 
         foreach ($orderItemArray as $orderItemItem) {
             OrderItem::create($orderItemItem);
+        }
+
+        foreach ($blogArray as $blogItem) {
+            Blog::create($blogItem);
         }
 
         User::factory(5)->create();

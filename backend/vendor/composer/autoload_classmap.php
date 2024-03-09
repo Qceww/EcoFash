@@ -19,6 +19,7 @@ return array(
     'App\\Http\\Controllers\\RedeemedRewardController' => $baseDir . '/app/Http/Controllers/RedeemedRewardController.php',
     'App\\Http\\Controllers\\RewardController' => $baseDir . '/app/Http/Controllers/RewardController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
+    'App\\Http\\Controllers\\WishlistController' => $baseDir . '/app/Http/Controllers/WishlistController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',

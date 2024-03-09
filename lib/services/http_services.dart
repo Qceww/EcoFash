@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:figma/classes/address.dart';
+import 'package:figma/classes/blog.dart';
 import 'package:figma/classes/colors.dart';
 import 'package:figma/classes/order.dart';
 import 'package:figma/classes/orderItem.dart';
@@ -298,5 +299,50 @@ Future<List<OrderItem>?> getOrderItems(orderId) async {
         (body).map((itemWord) => OrderItem.fromJson(itemWord)).toList();
 
     return orderItem;
+  }
+}
+
+Future<List<Blog>?> getBlogs() async {
+  final response = await http.post(
+    Uri.parse("$url/get-blogs"),
+    headers: <String, String>{
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    },
+  );
+
+  if (response.statusCode == 200) {
+    List<dynamic> body = jsonDecode(response.body);
+
+    List<Blog> blogList =
+        (body).map((itemWord) => Blog.fromJson(itemWord)).toList();
+
+    return blogList;
+  }
+}
+
+Future<Blog?> getDetailedBlogs(blog) async {
+  final response = await http.post(Uri.parse("$url/get-detailed-blog"),
+      headers: <String, String>{
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: jsonEncode(blog));
+
+  if (response.statusCode == 200) {
+    return Blog.fromJson(jsonDecode(response.body));
+  }
+}
+
+Future<int?> updateQuantityProducts(product) async {
+  final response = await http.post(Uri.parse("$url/update-quantity-product"),
+      headers: <String, String>{
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: jsonEncode(product));
+
+  if (response.statusCode == 200) {
+    return 200;
   }
 }
