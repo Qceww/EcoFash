@@ -1,11 +1,10 @@
 import 'dart:io';
-import 'dart:math';
-import 'package:flutter/foundation.dart';
+
+import 'package:figma/pages/shop_detailed_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'dart:async';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRScanner extends StatefulWidget {
@@ -17,11 +16,10 @@ class QRScanner extends StatefulWidget {
 
 class QRScannerState extends State<QRScanner> {
   Barcode? result;
+  late int productId;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
-  // In order to get hot reload to work we need to pause the camera if the platform
-  // is android, or resume the camera if the platform is iOS.
   @override
   void reassemble() {
     super.reassemble();
@@ -36,24 +34,22 @@ class QRScannerState extends State<QRScanner> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          _buildQrView(context), // Place the QR scanner as the background
+          _buildQrView(context),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              // Display the result if a barcode is scanned
               if (result != null)
                 Padding(
                   padding: EdgeInsets.all(16.0),
                   child: Text(
-                    'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}',
+                    'Barcode Type: ${result!.format}   Data: ${result!.code}',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
-
               Container(
-                  width: MediaQuery.of(context).size.width,
-                  // color: Colors.amber,
-                  child: Column(children: [
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  children: [
                     Row(
                       children: [
                         Padding(
@@ -88,7 +84,9 @@ class QRScannerState extends State<QRScanner> {
                         ),
                       ),
                     ),
-                  ]))
+                  ],
+                ),
+              )
             ],
           ),
         ],
@@ -97,13 +95,10 @@ class QRScannerState extends State<QRScanner> {
   }
 
   Widget _buildQrView(BuildContext context) {
-    // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
             MediaQuery.of(context).size.height < 400)
         ? 150.0
         : 300.0;
-    // To ensure the Scanner view is properly sizes after rotation
-    // we need to listen for Flutter SizeChanged notification and update controller
     return QRView(
       key: qrKey,
       onQRViewCreated: _onQRViewCreated,
@@ -124,15 +119,24 @@ class QRScannerState extends State<QRScanner> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        productId = result!.code as int;
+        if (result != null) {
+          // Navigate to another page when QR code result is not null
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ShopDetailedView(productId: productId ?? 1),
+            ),
+          );
+        }
       });
     });
   }
 
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
-    log('${DateTime.now().toIso8601String()}_onPermissionSet $p' as num);
     if (!p) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('no Permission')),
+        const SnackBar(content: Text('No Permission')),
       );
     }
   }

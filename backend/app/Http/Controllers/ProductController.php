@@ -23,4 +23,17 @@ class ProductController extends Controller
 
         return $product;
     }
+
+    public function updateQuantityProduct(Request $request){
+
+        $product = Product::where('productId', $request->productId)->first(); // Retrieve the product
+        if ($product) {
+            $currentQuantity = $product->productQuantity;
+            $product= Product::where('productId', $request->productId)->update(['productQuantity' => ($currentQuantity - $request->productQuantity)]);
+        }
+
+
+        return response()->json(200);
+        // return $request;
+    }
 }

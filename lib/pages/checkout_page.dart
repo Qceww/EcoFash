@@ -4,13 +4,12 @@ import 'package:figma/classes/address.dart';
 import 'package:figma/classes/cartProduct.dart';
 import 'package:figma/classes/order.dart';
 import 'package:figma/classes/orderItem.dart';
+import 'package:figma/classes/product.dart';
 import 'package:figma/classes/reward.dart';
 import 'package:figma/functions/functions.dart';
 import 'package:figma/pages/address_page.dart';
 import 'package:figma/pages/paymentSuccess.dart';
 import 'package:figma/pages/promo_page.dart';
-import 'package:figma/services/http_services.dart';
-import 'package:figma/widgets/cart_widget.dart';
 import 'package:figma/widgets/checkout_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -49,6 +48,7 @@ class _CheckOutPage extends State<CheckOutPage> {
   late int? createRequest;
   late Future<int?> createOrderItemRequest;
   late Future<int?> removeCartItemRequest;
+  late Future<int?> updateProductQuantityRequest;
   Widget build(BuildContext context) {
     reward = getPromo();
     addressNow = getAddressNow();
@@ -256,11 +256,19 @@ class _CheckOutPage extends State<CheckOutPage> {
                     DateTime(dateNow.year, dateNow.month, dateNow.day + 3);
                 Order order = Order(
                     null,
-                    currentUser!.userId,
+                    1,
                     addressNow!.addressId,
                     dateClear.toString(),
                     "shipping",
                     null);
+                print("Masuk Create KOK4");
+                // Order(
+                //     null,
+                //     currentUser!.userId,
+                //     addressNow!.addressId,
+                //     dateClear.toString(),
+                //     "shipping",
+                //     null);
                 createRequest = await createOrder(order);
                 if (createRequest != null) {
                   for (CartProduct item in widget.checkOutProducts) {
@@ -268,6 +276,20 @@ class _CheckOutPage extends State<CheckOutPage> {
                       createOrderItemRequest = createOrderItem(OrderItem(
                           createRequest!, item.productId!, item.cartQuantity!));
                       removeCartItemRequest = deleteCart(item.cartId!);
+                      Product product = Product(
+                          item.productId,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          null,
+                          item.cartQuantity);
+                      updateProductQuantityRequest =
+                          updateQuantityProduct(product);
                     }
                   }
                   playSound();
