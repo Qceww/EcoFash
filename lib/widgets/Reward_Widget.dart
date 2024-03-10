@@ -9,12 +9,15 @@ import 'package:google_fonts/google_fonts.dart';
 class Reward_widget extends StatelessWidget {
   String rewardname;
   String rewarddescription;
-  String rewardprice;
+  int rewardprice;
+  String rewardExpiry;
+
   Reward_widget({
     super.key,
     required this.rewardname,
     required this.rewarddescription,
     required this.rewardprice,
+    required this.rewardExpiry,
   });
 
   @override
@@ -23,7 +26,8 @@ class Reward_widget extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (BuildContext context) => const RewardDetailPage(),
+            builder: (BuildContext context) =>
+                RewardDetailPage(rewardname, rewardprice, rewardExpiry),
           ),
         );
       },
@@ -40,7 +44,7 @@ class Reward_widget extends StatelessWidget {
               Container(
                 height: 120,
                 width: 100,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage('images/Reward_image.png')),
@@ -81,7 +85,7 @@ class Reward_widget extends StatelessWidget {
                     ),
                     SizedBox(height: 7),
                     Text(
-                      rewardprice + " Points",
+                      "$rewardprice Point(s)",
                       style: GoogleFonts.tenorSans(
                         textStyle: const TextStyle(
                           color: Color.fromRGBO(221, 133, 96, 1),

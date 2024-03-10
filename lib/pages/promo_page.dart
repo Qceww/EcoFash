@@ -1,7 +1,7 @@
 import 'package:figma/classes/redeemedReward.dart';
 import 'package:figma/classes/reward.dart';
 import 'package:figma/functions/functions.dart';
-import 'package:figma/widgets/Reward_Widget.dart';
+import 'package:figma/widgets/reward_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,7 +17,7 @@ class _RewardPageState extends State<RewardPage> {
   void initState() {
     super.initState();
   }
-  
+
   late Future<List<Reward>?> rewardList = getRewards();
 
   late Future<List<RedeemedReward>?> redeemedRewardList = getRedeemedRewards(1);
@@ -45,7 +45,6 @@ class _RewardPageState extends State<RewardPage> {
                   rewardMap[reward!.rewardId!] = reward;
                 }
 
-
                 promoList = [];
                 for (RedeemedReward item in redeemedRewards!) {
                   // Check if rewardId exists in the rewardMap
@@ -53,7 +52,6 @@ class _RewardPageState extends State<RewardPage> {
                     promoList.add(rewardMap[item.rewardId]!);
                   }
                 }
-
 
                 return Scaffold(
                   body: SafeArea(

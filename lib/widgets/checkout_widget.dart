@@ -192,31 +192,35 @@ class CheckOutItem extends StatelessWidget {
               fit: BoxFit.fill,
             ),
             const SizedBox(width: 8),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  product.productName!,
-                  style: const TextStyle(fontSize: 20),
-                ),
-                const SizedBox(height: 5),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  child: Text(
-                    product.productDescription!,
-                    style: const TextStyle(color: Colors.grey, fontSize: 13),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    product.productName!,
+                    style: const TextStyle(
+                        fontSize: 20, overflow: TextOverflow.ellipsis),
+                    softWrap: true,
                   ),
-                ),
-                const SizedBox(height: 5),
-                Text('$quantity Pc(s)'),
-                Text(
-                  '\$${product.productPrice!}',
-                  style: const TextStyle(
-                    color: Colors.orange,
-                    fontSize: 20,
+                  const SizedBox(height: 5),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: Text(
+                      product.productDescription!,
+                      style: const TextStyle(color: Colors.grey, fontSize: 13),
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 5),
+                  Text('$quantity Pc(s)'),
+                  Text(
+                    '\$${product.productPrice!}',
+                    style: const TextStyle(
+                      color: Colors.orange,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

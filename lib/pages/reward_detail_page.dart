@@ -1,13 +1,14 @@
-import 'package:figma/widgets/Ecofash_bar.dart';
-import 'package:figma/widgets/burger_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:figma/widgets/Footer.dart';
-import 'package:figma/widgets/Widgets.dart';
 import 'package:figma/widgets/reward_detail_widget.dart';
 
 class RewardDetailPage extends StatefulWidget {
-  const RewardDetailPage({super.key});
+  String rewardName;
+  String rewardExpiry;
+  int rewardCost;
+  RewardDetailPage(this.rewardName, this.rewardCost, this.rewardExpiry,
+      {super.key});
 
   @override
   State<RewardDetailPage> createState() => _RewardDetailPageState();
@@ -25,7 +26,7 @@ class _RewardDetailPageState extends State<RewardDetailPage> {
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround  ,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   // clipBehavior: Clip.none,
                   children: [
                     GestureDetector(
@@ -43,21 +44,21 @@ class _RewardDetailPageState extends State<RewardDetailPage> {
                             color: Colors.black,
                             fontSize: 24,
                             fontWeight: FontWeight.w500,
-                            letterSpacing: 5),  
+                            letterSpacing: 5),
                       ),
                     ),
-                      const Opacity(
-                        opacity: 0,
-                        child: Image(
-                          image: AssetImage("images/Backward_arrow.png"),
-                        ),
+                    const Opacity(
+                      opacity: 0,
+                      child: Image(
+                        image: AssetImage("images/Backward_arrow.png"),
                       ),
+                    ),
                   ],
                 ),
               ),
               Container(
                 height: 200,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage("images/Reward_image.png"),
                     fit: BoxFit.contain,
@@ -73,7 +74,7 @@ class _RewardDetailPageState extends State<RewardDetailPage> {
                     direction: Axis.vertical,
                     children: [
                       Text(
-                        "Lorem ipsum dolor sit amet",
+                        widget.rewardName,
                         style: GoogleFonts.tenorSans(
                           textStyle: const TextStyle(
                             color: Colors.black,
@@ -83,7 +84,7 @@ class _RewardDetailPageState extends State<RewardDetailPage> {
                         ),
                       ),
                       Text(
-                        "Valid Until DD/MM/YYYY",
+                        "Valid Until ${widget.rewardExpiry}",
                         style: GoogleFonts.tenorSans(
                           textStyle: const TextStyle(
                             color: Colors.black,
@@ -102,7 +103,7 @@ class _RewardDetailPageState extends State<RewardDetailPage> {
                         height: 15,
                       ),
                       Text(
-                        "XXX Point",
+                        "${widget.rewardCost} Point",
                         style: GoogleFonts.tenorSans(
                           textStyle: const TextStyle(
                             color: Color.fromRGBO(221, 133, 96, 1),
@@ -145,20 +146,25 @@ class _RewardDetailPageState extends State<RewardDetailPage> {
                           borderRadius: BorderRadius.circular(15),
                         ),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "EXCHANGE",
-                            style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                                color: Colors.white70,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "EXCHANGE",
+                              style: GoogleFonts.poppins(
+                                textStyle: const TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

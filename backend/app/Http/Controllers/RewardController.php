@@ -9,7 +9,7 @@ class RewardController extends Controller
 {
     public function getReward(Request $request){
 
-        $reward= Reward::get(); 
+        $reward= Reward::all(); 
 
         return response()->json($reward, 200);
     }
