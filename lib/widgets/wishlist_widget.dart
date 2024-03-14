@@ -88,7 +88,7 @@ class WishlistItems extends StatelessWidget {
 
   @override
   late Future<List<Product>?> products = getProduct();
-  late Future<List<Wishlist>?> wishlist = getWishlists(1);
+  late Future<List<Wishlist>?> wishlist = getWishlists(currentUser!.userId!);
   late List<Product>? productItems;
   late List<Wishlist>? wishlistItems;
   late Map<int, Product> productMap = {};

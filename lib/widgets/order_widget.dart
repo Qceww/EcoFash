@@ -102,8 +102,8 @@ class OrderDetail extends StatelessWidget {
                                               ),
                                               SizedBox(height: 20.0),
                                               Text(
-                                                // "Recipient Name: ${currentUser!.firstName} ${currentUser!.lastName}",
-                                                "Recipient Name: Hosannia Momita",
+                                                "Recipient Name: ${currentUser!.firstName} ${currentUser!.lastName}",
+                                                // "Recipient Name: Hosannia Momita",
                                                 style: GoogleFonts.zenAntique(
                                                   textStyle: const TextStyle(
                                                     color: Colors.black,
@@ -125,7 +125,8 @@ class OrderDetail extends StatelessWidget {
                                               ),
                                               SizedBox(height: 10.0),
                                               Text(
-                                                "Expected Received Date: ${order.createdDate}",
+                                                // "Expected Received Date: ${order.createdDate.toString().substring(0, 10)}",
+                                                "Expected Received Date: ${order.estimatedDate}",
                                                 style: GoogleFonts.zenAntique(
                                                   textStyle: const TextStyle(
                                                     color: Colors.black,
@@ -164,7 +165,7 @@ class OrderDetail extends StatelessWidget {
                                                                 Colors.black),
                                                         SizedBox(width: 5),
                                                         Text(
-                                                          "${productItem[orderItem.productId - 1].productName} - ${orderItem.orderQuantity} Pcs",
+                                                          "${productItem[orderItem.productId].productName} - ${orderItem.orderQuantity} Pcs",
                                                           style: GoogleFonts
                                                               .zenAntique(
                                                             textStyle:

@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> {
   int selectedIndex = -1;
   @override
   Widget build(BuildContext context) {
+    print(currentUser?.userId);
     return Scaffold(
       drawer: Navbar(),
       appBar: const EcofashBar(),
@@ -226,10 +227,18 @@ class _HomePageState extends State<HomePage> {
                                               child: Column(
                                                 children: [
                                                   GridViews(
-                                                    productId: productList!.elementAt(4).productId,
-                                                    name: productList!.elementAt(4).productName,
-                                                    price: productList!.elementAt(4).productPrice,
-                                                    url: productList!.elementAt(4).picture1,  
+                                                    productId: productList!
+                                                        .elementAt(4)
+                                                        .productId,
+                                                    name: productList!
+                                                        .elementAt(4)
+                                                        .productName,
+                                                    price: productList!
+                                                        .elementAt(4)
+                                                        .productPrice,
+                                                    url: productList!
+                                                        .elementAt(4)
+                                                        .picture1,
                                                   )
                                                 ],
                                               ),
@@ -244,10 +253,19 @@ class _HomePageState extends State<HomePage> {
                                               child: Column(
                                                 children: [
                                                   GridViews(
-                                                      productId: productList?.elementAt(1).productId,
-                                                    name: productList?.elementAt(1).productName,
-                                                    price: productList?.elementAt(1).productPrice,
-                                                    url: productList?.elementAt(1).picture1,),
+                                                    productId: productList
+                                                        ?.elementAt(1)
+                                                        .productId,
+                                                    name: productList
+                                                        ?.elementAt(1)
+                                                        .productName,
+                                                    price: productList
+                                                        ?.elementAt(1)
+                                                        .productPrice,
+                                                    url: productList
+                                                        ?.elementAt(1)
+                                                        .picture1,
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -268,10 +286,19 @@ class _HomePageState extends State<HomePage> {
                                               child: Column(
                                                 children: [
                                                   GridViews(
-                                                      productId: productList?.elementAt(2).productId,
-                                                    name: productList?.elementAt(2).productName,
-                                                    price: productList?.elementAt(2).productPrice,
-                                                    url: productList?.elementAt(2).picture1,),
+                                                    productId: productList
+                                                        ?.elementAt(2)
+                                                        .productId,
+                                                    name: productList
+                                                        ?.elementAt(2)
+                                                        .productName,
+                                                    price: productList
+                                                        ?.elementAt(2)
+                                                        .productPrice,
+                                                    url: productList
+                                                        ?.elementAt(2)
+                                                        .picture1,
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -285,10 +312,19 @@ class _HomePageState extends State<HomePage> {
                                               child: Column(
                                                 children: [
                                                   GridViews(
-                                                      productId: productList?.elementAt(3).productId,
-                                                    name: productList?.elementAt(3).productName,
-                                                    price: productList?.elementAt(3).productPrice,
-                                                    url: productList?.elementAt(3).picture1,),
+                                                    productId: productList
+                                                        ?.elementAt(3)
+                                                        .productId,
+                                                    name: productList
+                                                        ?.elementAt(3)
+                                                        .productName,
+                                                    price: productList
+                                                        ?.elementAt(3)
+                                                        .productPrice,
+                                                    url: productList
+                                                        ?.elementAt(3)
+                                                        .picture1,
+                                                  ),
                                                 ],
                                               ),
                                             ),

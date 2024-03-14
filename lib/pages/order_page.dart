@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../widgets/order_widget.dart';
 
 class OrderPage extends StatelessWidget {
-  Future<List<Order>?> orderItems = getOrder(1);
+  Future<List<Order>?> orderItems = getOrder(currentUser!.userId!);
   OrderPage({Key? key}) : super(key: key);
 
   @override

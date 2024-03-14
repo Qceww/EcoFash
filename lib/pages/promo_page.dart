@@ -20,7 +20,8 @@ class _RewardPageState extends State<RewardPage> {
 
   late Future<List<Reward>?> rewardList = getRewards();
 
-  late Future<List<RedeemedReward>?> redeemedRewardList = getRedeemedRewards(1);
+  late Future<List<RedeemedReward>?> redeemedRewardList =
+      getRedeemedRewards(currentUser!.userId!);
 
   @override
   Widget build(BuildContext context) {

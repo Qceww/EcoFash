@@ -15,7 +15,7 @@ class Order {
         "addressId": addressId,
         "estimatedDate": estimatedDate,
         "orderStatus": orderStatus,
-        "createdDate": createdDate,
+        "created_at": createdDate,
       };
 
   factory Order.fromJson(Map<String, dynamic> json) {
@@ -25,7 +25,7 @@ class Order {
       json["addressId"],
       json["estimatedDate"],
       json["orderStatus"],
-      json["createdDate"],
+      json["created_at"],
     );
   }
 }

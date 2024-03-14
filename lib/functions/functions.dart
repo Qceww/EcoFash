@@ -43,8 +43,11 @@ Future<dynamic> loginUser(email, password) async {
   if (request is User) {
     // print("ok");
 
-    User currentUser = User(request.userId, request.firstName, request.lastName,
+    currentUser = User(request.userId, request.firstName, request.lastName,
         request.email, request.phone, request.password, request.memberPoint);
+
+    print("current User: $currentUser");
+    print("Id: ${currentUser!.userId}");
     return currentUser;
   } else {
     print("Failed To Logged In");

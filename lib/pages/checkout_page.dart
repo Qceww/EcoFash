@@ -42,7 +42,7 @@ class _CheckOutPage extends State<CheckOutPage> {
   @override
   List<Address>? addressListItem = [];
 
-  late Future<List<Address>?> addressList = getAddress(1);
+  late Future<List<Address>?> addressList = getAddress(currentUser!.userId!);
   Reward? reward;
   Address? addressNow;
   late int? createRequest;
@@ -256,7 +256,7 @@ class _CheckOutPage extends State<CheckOutPage> {
                     DateTime(dateNow.year, dateNow.month, dateNow.day + 3);
                 Order order = Order(
                     null,
-                    1,
+                    currentUser!.userId,
                     addressNow!.addressId,
                     dateClear.toString(),
                     "shipping",
@@ -277,7 +277,7 @@ class _CheckOutPage extends State<CheckOutPage> {
                           createRequest!, item.productId!, item.cartQuantity!));
                       removeCartItemRequest = deleteCart(item.cartId!);
                       Product product = Product(
-                          item.productId,
+                          item.productId! + 1,
                           null,
                           null,
                           null,

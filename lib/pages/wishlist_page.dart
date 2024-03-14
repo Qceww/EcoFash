@@ -8,7 +8,7 @@ class WishlistPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<List<Wishlist>?>? wishlist = getWishlists(1);
+    Future<List<Wishlist>?>? wishlist = getWishlists(currentUser!.userId!);
     return Scaffold(
       body: SafeArea(
         child: FutureBuilder(

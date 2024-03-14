@@ -83,7 +83,7 @@ class RewardPage extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "XXX Point",
+                                      "${currentUser!.memberPoint!} Point",
                                       style: GoogleFonts.tenorSans(
                                         textStyle: const TextStyle(
                                           color:
