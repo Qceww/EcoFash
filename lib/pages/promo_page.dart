@@ -12,6 +12,11 @@ class RewardPage extends StatefulWidget {
   State<RewardPage> createState() => _RewardPageState();
 }
 
+@override
+void initState() {
+  loginUser(currentUser!.email!, currentUser!.password!);
+}
+
 class _RewardPageState extends State<RewardPage> {
   @override
   void initState() {

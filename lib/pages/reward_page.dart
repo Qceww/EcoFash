@@ -8,23 +8,21 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:figma/widgets/reward_widget.dart';
 import 'package:figma/widgets/Footer.dart';
 
-class RewardPage extends StatelessWidget {
-  // final List<Reward_widget> rewards = [
-  //   Reward_widget(
-  //     rewardname: "Lamerei",
-  //     rewarddescription: "Recycle Boucle Knit",
-  //     rewardprice: "100",
-  //   ),
-  //   Reward_widget(
-  //     rewardname: "Matthew",
-  //     rewarddescription: "Anak Bekasi",
-  //     rewardprice: "69",
-  //   ),
-  // ];
-
-  Future<List<Reward>?> rewardList = getRewards();
-
+class RewardPage extends StatefulWidget {
   RewardPage({Key? key}) : super(key: key);
+
+  @override
+  State<RewardPage> createState() => _RewardPageState();
+}
+
+@override
+void initState() {
+  loginUser(currentUser!.email!, currentUser!.password!);
+}
+
+class _RewardPageState extends State<RewardPage> {
+  // final List<Reward_widget> rewards = [
+  Future<List<Reward>?> rewardList = getRewards();
 
   @override
   Widget build(BuildContext context) {

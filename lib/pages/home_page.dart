@@ -16,6 +16,11 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+@override
+void initState() {
+  loginUser(currentUser!.email!, currentUser!.password!);
+}
+
 class _HomePageState extends State<HomePage> {
   List<String> category = ['All', 'Apparel', 'Dress', 'T-shirt', 'Bag'];
 

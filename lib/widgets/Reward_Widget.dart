@@ -6,7 +6,7 @@ import 'package:figma/pages/reward_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Reward_widget extends StatelessWidget {
+class Reward_widget extends StatefulWidget {
   int rewardId;
   String rewardname;
   String rewarddescription;
@@ -22,14 +22,23 @@ class Reward_widget extends StatelessWidget {
     required this.rewardExpiry,
   });
 
+  void initState() {
+    loginUser(currentUser!.email!, currentUser!.password!);
+  }
+
+  @override
+  State<Reward_widget> createState() => _Reward_widgetState();
+}
+
+class _Reward_widgetState extends State<Reward_widget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
+        Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (BuildContext context) => RewardDetailPage(
-                rewardId, rewardname, rewardprice, rewardExpiry),
+            builder: (BuildContext context) => RewardDetailPage(widget.rewardId,
+                widget.rewardname, widget.rewardprice, widget.rewardExpiry),
           ),
         );
       },
@@ -61,7 +70,7 @@ class Reward_widget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      rewardname.toUpperCase(),
+                      widget.rewardname.toUpperCase(),
                       style: GoogleFonts.tenorSans(
                         textStyle: const TextStyle(
                           color: Colors.black,
@@ -75,7 +84,7 @@ class Reward_widget extends StatelessWidget {
                     ),
                     SizedBox(height: 5),
                     Text(
-                      rewarddescription,
+                      widget.rewarddescription,
                       style: GoogleFonts.tenorSans(
                         textStyle: const TextStyle(
                           color: Colors.grey,
@@ -87,7 +96,7 @@ class Reward_widget extends StatelessWidget {
                     ),
                     SizedBox(height: 7),
                     Text(
-                      "$rewardprice Point(s)",
+                      "${widget.rewardprice} Point(s)",
                       style: GoogleFonts.tenorSans(
                         textStyle: const TextStyle(
                           color: Color.fromRGBO(221, 133, 96, 1),

@@ -17,6 +17,11 @@ class ShopDetailedView extends StatefulWidget {
   State<ShopDetailedView> createState() => _ShopDetailedView();
 }
 
+@override
+void initState() {
+  loginUser(currentUser!.email!, currentUser!.password!);
+}
+
 class _ShopDetailedView extends State<ShopDetailedView> {
   String added = 'ADD TO BASKET';
   bool shippingDropDown = false;
@@ -66,117 +71,127 @@ class _ShopDetailedView extends State<ShopDetailedView> {
                         children: [
                           ProductDetailedView(product: productItem!),
                           Padding(
-                  padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
-                  // padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Size',
-                          textAlign: TextAlign.left,
-                          style: GoogleFonts.tenorSans(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        FutureBuilder(
-                          future: colors,
-                          builder:
-                              (BuildContext context, AsyncSnapshot snapshot2) {
-                            List<ColorClass> colorsItem = snapshot2.data;
-
-                            if(snapshot2.connectionState == ConnectionState.waiting){
-                              return CircularProgressIndicator();
-                            } 
-
-                            late List<ColorClass> selectedColor = [
-                              colorsItem[colorIdnya[0]! - 1],
-                              colorsItem[colorIdnya[1]! - 1],
-                              colorsItem[colorIdnya[2]! - 1]
-                            ];
-
-                            print(selectedColor[0].colorHex!.substring(1));
-                            print(selectedColor[1].colorHex);
-                            print(selectedColor[2].colorHex);
-                            print('test');  
-
-                            if (snapshot2.hasData) {
-                              // return Container();
-                              return Wrap(
-                                direction: Axis.horizontal,
-                                children: List.generate(3, (index) {
-                                  return InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        selectedIndex = index;
-                                      });
-                                    },
-                                    child: Container(
-                                      margin: const EdgeInsets.only(right: 10),
-                                      child: selectedIndex == index
-                                          ? ProductColorBorder(
-                                              productColor: selectedColor[index].colorHex!
-                                                  )
-                                          : ProductColor(
-                                              productColor: selectedColor[index].colorHex!
-                                                  ),
+                            padding: const EdgeInsets.fromLTRB(
+                                20.0, 20.0, 20.0, 0.0),
+                            // padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+                            child: Container(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Size',
+                                    textAlign: TextAlign.left,
+                                    style: GoogleFonts.tenorSans(
+                                      textStyle: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w300),
                                     ),
-                                  );
-                                }),
-                              );
-                            } else {
-                              return const CircularProgressIndicator();
-                            }
-                          },
-                        ),
-                        Text(
-                          'Size',
-                          textAlign: TextAlign.left,
-                          style: GoogleFonts.tenorSans(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        Container(
-                          child: Row(
-                            children: [
-                              Wrap(
-                                direction: Axis.horizontal,
-                                children: List.generate(3, (index2) {
-                                  return InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        selectedIndex2 = index2;
-                                      });
+                                  ),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  FutureBuilder(
+                                    future: colors,
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot snapshot2) {
+                                      List<ColorClass> colorsItem =
+                                          snapshot2.data;
+
+                                      if (snapshot2.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return CircularProgressIndicator();
+                                      }
+
+                                      late List<ColorClass> selectedColor = [
+                                        colorsItem[colorIdnya[0]! - 1],
+                                        colorsItem[colorIdnya[1]! - 1],
+                                        colorsItem[colorIdnya[2]! - 1]
+                                      ];
+
+                                      print(selectedColor[0]
+                                          .colorHex!
+                                          .substring(1));
+                                      print(selectedColor[1].colorHex);
+                                      print(selectedColor[2].colorHex);
+                                      print('test');
+
+                                      if (snapshot2.hasData) {
+                                        // return Container();
+                                        return Wrap(
+                                          direction: Axis.horizontal,
+                                          children: List.generate(3, (index) {
+                                            return InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  selectedIndex = index;
+                                                });
+                                              },
+                                              child: Container(
+                                                margin: const EdgeInsets.only(
+                                                    right: 10),
+                                                child: selectedIndex == index
+                                                    ? ProductColorBorder(
+                                                        productColor:
+                                                            selectedColor[index]
+                                                                .colorHex!)
+                                                    : ProductColor(
+                                                        productColor:
+                                                            selectedColor[index]
+                                                                .colorHex!),
+                                              ),
+                                            );
+                                          }),
+                                        );
+                                      } else {
+                                        return const CircularProgressIndicator();
+                                      }
                                     },
-                                    child: Container(
-                                      margin: const EdgeInsets.only(right: 10),
-                                      child: selectedIndex2 == index2
-                                          ? ProductSizeSelected(
-                                              Size: sizes[index2])
-                                          : ProductSize(Size: sizes[index2]),
+                                  ),
+                                  Text(
+                                    'Size',
+                                    textAlign: TextAlign.left,
+                                    style: GoogleFonts.tenorSans(
+                                      textStyle: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w300),
                                     ),
-                                  );
-                                }),
+                                  ),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Container(
+                                    child: Row(
+                                      children: [
+                                        Wrap(
+                                          direction: Axis.horizontal,
+                                          children: List.generate(3, (index2) {
+                                            return InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  selectedIndex2 = index2;
+                                                });
+                                              },
+                                              child: Container(
+                                                margin: const EdgeInsets.only(
+                                                    right: 10),
+                                                child: selectedIndex2 == index2
+                                                    ? ProductSizeSelected(
+                                                        Size: sizes[index2])
+                                                    : ProductSize(
+                                                        Size: sizes[index2]),
+                                              ),
+                                            );
+                                          }),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
                         ],
                       );
                     } else {

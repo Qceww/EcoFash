@@ -1,5 +1,6 @@
 import 'package:figma/classes/redeemedReward.dart';
 import 'package:figma/functions/functions.dart';
+import 'package:figma/pages/reward_page.dart';
 import 'package:figma/services/http_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -18,6 +19,11 @@ class RewardDetailPage extends StatefulWidget {
 
   @override
   State<RewardDetailPage> createState() => _RewardDetailPageState();
+}
+
+@override
+void initState() {
+  loginUser(currentUser!.email!, currentUser!.password!);
 }
 
 Future<List<RedeemedReward>?> redeem = getRedeemedReward(currentUser!.userId!);
@@ -44,7 +50,10 @@ class _RewardDetailPageState extends State<RewardDetailPage> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              Navigator.of(context).pop();
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          RewardPage()));
                             },
                             child: const Image(
                               image: AssetImage("images/Backward_arrow.png"),
@@ -183,8 +192,12 @@ class _RewardDetailPageState extends State<RewardDetailPage> {
                                 } else {
                                   print("Member point insufficient");
                                 }
-
-                                Navigator.of(context).pop();
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            RewardPage()));
+                                loginUser(currentUser!.email!,
+                                    currentUser!.password!);
                               },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
