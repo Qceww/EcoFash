@@ -280,3 +280,28 @@ Future<int?> updateQuantityProduct(Product product) async {
     return null;
   }
 }
+
+Future<RedeemedReward?> exchangeNewReward(
+    int customerId, int rewardId, int rewardCost) async {
+  print("Masuk Function");
+  RedeemedReward? request =
+      await exchangeNewRewards(customerId, rewardId, rewardCost);
+  print("Kelar Function");
+
+  if (request != null) {
+    print("Masuk If");
+    return request;
+  } else {
+    return null;
+  }
+}
+
+Future<int?> exchangeReward(int redeemId, int rewardCost) async {
+  int? request = await exchangeRewards(redeemId, rewardCost);
+
+  if (request != null) {
+    return request;
+  } else {
+    return null;
+  }
+}

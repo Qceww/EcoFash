@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Reward_widget extends StatelessWidget {
+  int rewardId;
   String rewardname;
   String rewarddescription;
   int rewardprice;
@@ -14,6 +15,7 @@ class Reward_widget extends StatelessWidget {
 
   Reward_widget({
     super.key,
+    required this.rewardId,
     required this.rewardname,
     required this.rewarddescription,
     required this.rewardprice,
@@ -26,8 +28,8 @@ class Reward_widget extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (BuildContext context) =>
-                RewardDetailPage(rewardname, rewardprice, rewardExpiry),
+            builder: (BuildContext context) => RewardDetailPage(
+                rewardId, rewardname, rewardprice, rewardExpiry),
           ),
         );
       },

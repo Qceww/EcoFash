@@ -46,3 +46,5 @@ Route::post('/get-order', [OrderController::class, 'getOrder']);
 Route::post('/get-order-item', [OrderItemController::class, 'getOrderItem']);
 Route::post('/get-blogs', [BlogController::class, 'getBlogs']);
 Route::post('/get-detailed-blog', [BlogController::class, 'getDetailedBlog']);
+Route::post('/exchange-new-reward', [RedeemedRewardController::class, 'exchangeNewReward']);
+Route::post('/exchange-reward', [RedeemedRewardController::class, 'exchangeReward']);

@@ -38,6 +38,7 @@ class RewardPage extends StatelessWidget {
           rewards = [];
           for (Reward rewardItem in rewardListItem!) {
             rewards.add(Reward_widget(
+              rewardId: rewardItem.rewardId!,
               rewardname: rewardItem.rewardName!,
               rewarddescription: rewardItem.rewardLocation!,
               rewardprice: rewardItem.rewardCost!,

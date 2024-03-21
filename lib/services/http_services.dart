@@ -346,3 +346,35 @@ Future<int?> updateQuantityProducts(product) async {
     return 200;
   }
 }
+
+Future<RedeemedReward?> exchangeNewRewards(
+    customerId, rewardId, rewardCost) async {
+  final response = await http.post(Uri.parse("$url/exchange-new-reward"),
+      headers: <String, String>{
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: jsonEncode({
+        "customerId": customerId,
+        "rewardId": rewardId,
+        "rewardQuantity": 1,
+        "rewardCost": rewardCost
+      }));
+
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  }
+}
+
+Future<int?> exchangeRewards(redeemId, rewardCost) async {
+  final response = await http.post(Uri.parse("$url/exchange-reward"),
+      headers: <String, String>{
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: jsonEncode({"redeemId": redeemId, "rewardCost": rewardCost}));
+
+  if (response.statusCode == 200) {
+    return 200;
+  }
+}
